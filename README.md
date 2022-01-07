@@ -14,7 +14,7 @@ What you get at the end:
 - A (hopefully) bugless mcp 1.8.9 workspace with optifine pre-installed.
 
 ## IntelliJ
-[Setting up MCP 1.8.9 with Optifine in IntelliJ]()
+[Setup, run and export MCP 1.8.9 with Optifine in IntelliJ](https://youtu.be/hHBO6sp6NiI)
 
 ## Eclipse
 idk i dont use eclipse
