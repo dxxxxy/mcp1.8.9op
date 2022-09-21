@@ -1,2 +1,2 @@
 #!/bin/bash
-python runtime/reformat.py "$@"
+python2 runtime/reformat.py "$@"

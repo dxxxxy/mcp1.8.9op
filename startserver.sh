@@ -1,2 +1,2 @@
 #!/bin/bash
-python runtime/startserver.py "$@"
+python2 runtime/startserver.py "$@"
