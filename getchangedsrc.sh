@@ -1,2 +1,2 @@
 #!/bin/bash
-python runtime/getchangedsrc.py "$@"
+python2 runtime/getchangedsrc.py "$@"
