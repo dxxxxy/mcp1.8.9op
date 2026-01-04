@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 public class NBTTagIntArray extends NBTBase
 {
-    /** The array of saved integers */
     private int[] intArray;
 
     NBTTagIntArray()
@@ -19,9 +18,6 @@ public class NBTTagIntArray extends NBTBase
         this.intArray = p_i45132_1_;
     }
 
-    /**
-     * Write the actual data contents of the tag, implemented in NBT extension classes
-     */
     void write(DataOutput output) throws IOException
     {
         output.writeInt(this.intArray.length);
@@ -45,9 +41,6 @@ public class NBTTagIntArray extends NBTBase
         }
     }
 
-    /**
-     * Gets the type byte for the tag.
-     */
     public byte getId()
     {
         return (byte)11;
@@ -65,9 +58,6 @@ public class NBTTagIntArray extends NBTBase
         return s + "]";
     }
 
-    /**
-     * Creates a clone of the tag.
-     */
     public NBTBase copy()
     {
         int[] aint = new int[this.intArray.length];

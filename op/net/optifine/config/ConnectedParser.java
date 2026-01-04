@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import net.optifine.ConnectedProperties;
+import net.optifine.util.EntityUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.properties.IProperty;
@@ -24,8 +28,6 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.optifine.ConnectedProperties;
-import net.optifine.util.EntityUtils;
 
 public class ConnectedParser
 {
@@ -428,9 +430,9 @@ public class ConnectedParser
 
     public static Comparable getPropertyValue(String value, Collection propertyValues)
     {
-        for (Object comparable0 : propertyValues)
+        for (Object o : propertyValues)
         {
-            Comparable comparable = (Comparable) comparable0;
+            Comparable comparable = (Comparable) o;
             if (getValueName(comparable).equals(value))
             {
                 return comparable;
@@ -453,33 +455,29 @@ public class ConnectedParser
         }
     }
 
-    public static Comparable parseValue(String str, Class cls)
-    {
-        if (cls == String.class)
-        {
+
+    public static Comparable parseValue(String str, Class<?> cls) {
+        if (cls == String.class) {
             return str;
         }
-        else if (cls == Boolean.class)
-        {
+        if (cls == Boolean.class) {
             return Boolean.valueOf(str);
         }
-        else if (cls == Float.class)
-        {
+        if (cls == Float.class) {
             return Float.valueOf(str);
         }
-        else if (cls == Double.class)
-        {
+        if (cls == Double.class) {
             return Double.valueOf(str);
         }
-        else if (cls == Integer.class)
-        {
+        if (cls == Integer.class) {
             return Integer.valueOf(str);
         }
-        else
-        {
-            return cls == Long.class ? Long.valueOf(str) : null;
+        if (cls == Long.class) {
+            return Long.valueOf(str);
         }
+        return null;
     }
+
 
     public boolean matchState(IBlockState bs, Map<IProperty, List<Comparable>> mapPropValues)
     {

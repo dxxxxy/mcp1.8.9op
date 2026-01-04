@@ -13,9 +13,6 @@ public class ItemWritableBook extends Item
         this.setMaxStackSize(1);
     }
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
     public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
     {
         playerIn.displayGUIBook(itemStackIn);
@@ -23,9 +20,6 @@ public class ItemWritableBook extends Item
         return itemStackIn;
     }
 
-    /**
-     * this method returns true if the book's NBT Tag List "pages" is valid
-     */
     public static boolean isNBTValid(NBTTagCompound nbt)
     {
         if (nbt == null)

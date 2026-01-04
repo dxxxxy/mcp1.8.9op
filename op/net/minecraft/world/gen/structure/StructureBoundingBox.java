@@ -8,22 +8,11 @@ import net.minecraft.util.Vec3i;
 
 public class StructureBoundingBox
 {
-    /** The first x coordinate of a bounding box. */
     public int minX;
-
-    /** The first y coordinate of a bounding box. */
     public int minY;
-
-    /** The first z coordinate of a bounding box. */
     public int minZ;
-
-    /** The second x coordinate of a bounding box. */
     public int maxX;
-
-    /** The second y coordinate of a bounding box. */
     public int maxY;
-
-    /** The second z coordinate of a bounding box. */
     public int maxZ;
 
     public StructureBoundingBox()
@@ -43,18 +32,11 @@ public class StructureBoundingBox
         }
     }
 
-    /**
-     * returns a new StructureBoundingBox with MAX values
-     */
     public static StructureBoundingBox getNewBoundingBox()
     {
         return new StructureBoundingBox(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
     }
 
-    /**
-     * Create a bounding box with the specified dimensions and rotate it. Used to project a possible new component
-     * Bounding Box - to check if it would cut anything already spawned
-     */
     public static StructureBoundingBox getComponentToAddBoundingBox(int p_175897_0_, int p_175897_1_, int p_175897_2_, int p_175897_3_, int p_175897_4_, int p_175897_5_, int p_175897_6_, int p_175897_7_, int p_175897_8_, EnumFacing p_175897_9_)
     {
         switch (p_175897_9_)
@@ -121,25 +103,16 @@ public class StructureBoundingBox
         this.maxY = 512;
     }
 
-    /**
-     * Discover if bounding box can fit within the current bounding box object.
-     */
     public boolean intersectsWith(StructureBoundingBox structurebb)
     {
         return this.maxX >= structurebb.minX && this.minX <= structurebb.maxX && this.maxZ >= structurebb.minZ && this.minZ <= structurebb.maxZ && this.maxY >= structurebb.minY && this.minY <= structurebb.maxY;
     }
 
-    /**
-     * Discover if a coordinate is inside the bounding box area.
-     */
     public boolean intersectsWith(int minXIn, int minZIn, int maxXIn, int maxZIn)
     {
         return this.maxX >= minXIn && this.minX <= maxXIn && this.maxZ >= minZIn && this.minZ <= maxZIn;
     }
 
-    /**
-     * Expands a bounding box's dimensions to include the supplied bounding box.
-     */
     public void expandTo(StructureBoundingBox sbb)
     {
         this.minX = Math.min(this.minX, sbb.minX);
@@ -150,9 +123,6 @@ public class StructureBoundingBox
         this.maxZ = Math.max(this.maxZ, sbb.maxZ);
     }
 
-    /**
-     * Offsets the current bounding box by the specified coordinates. Args: x, y, z
-     */
     public void offset(int x, int y, int z)
     {
         this.minX += x;
@@ -163,9 +133,6 @@ public class StructureBoundingBox
         this.maxZ += z;
     }
 
-    /**
-     * Checks if given Vec3i is inside of StructureBoundingBox
-     */
     public boolean isVecInside(Vec3i vec)
     {
         return vec.getX() >= this.minX && vec.getX() <= this.maxX && vec.getZ() >= this.minZ && vec.getZ() <= this.maxZ && vec.getY() >= this.minY && vec.getY() <= this.maxY;
@@ -176,25 +143,16 @@ public class StructureBoundingBox
         return new Vec3i(this.maxX - this.minX, this.maxY - this.minY, this.maxZ - this.minZ);
     }
 
-    /**
-     * Get dimension of the bounding box in the x direction.
-     */
     public int getXSize()
     {
         return this.maxX - this.minX + 1;
     }
 
-    /**
-     * Get dimension of the bounding box in the y direction.
-     */
     public int getYSize()
     {
         return this.maxY - this.minY + 1;
     }
 
-    /**
-     * Get dimension of the bounding box in the z direction.
-     */
     public int getZSize()
     {
         return this.maxZ - this.minZ + 1;

@@ -36,23 +36,12 @@ import paulscode.sound.libraries.LibraryLWJGLOpenAL;
 
 public class SoundManager
 {
-    /** The marker used for logging */
     private static final Marker LOG_MARKER = MarkerManager.getMarker("SOUNDS");
     private static final Logger logger = LogManager.getLogger();
-
-    /** A reference to the sound handler. */
     private final SoundHandler sndHandler;
-
-    /** Reference to the GameSettings object. */
     private final GameSettings options;
-
-    /** A reference to the sound system. */
     private SoundManager.SoundSystemStarterThread sndSystem;
-
-    /** Set to true when the SoundManager has been initialised. */
     private boolean loaded;
-
-    /** A counter for how long the sound manager has been running */
     private int playTime = 0;
     private final Map<String, ISound> playingSounds = HashBiMap.<String, ISound>create();
     private final Map<ISound, String> invPlayingSounds;
@@ -90,9 +79,6 @@ public class SoundManager
         this.loadSoundSystem();
     }
 
-    /**
-     * Tries to add the paulscode library and the relevant codecs. If it fails, the master volume  will be set to zero.
-     */
     private synchronized void loadSoundSystem()
     {
         if (!this.loaded)
@@ -144,17 +130,11 @@ public class SoundManager
         }
     }
 
-    /**
-     * Returns the sound level (between 0.0 and 1.0) for a category, but 1.0 for the master sound category
-     */
     private float getSoundCategoryVolume(SoundCategory category)
     {
         return category != null && category != SoundCategory.MASTER ? this.options.getSoundLevel(category) : 1.0F;
     }
 
-    /**
-     * Adjusts volume for currently playing sounds in this category
-     */
     public void setSoundCategoryVolume(SoundCategory category, float volume)
     {
         if (this.loaded)
@@ -183,9 +163,6 @@ public class SoundManager
         }
     }
 
-    /**
-     * Cleans up the Sound System
-     */
     public void unloadSoundSystem()
     {
         if (this.loaded)
@@ -196,9 +173,6 @@ public class SoundManager
         }
     }
 
-    /**
-     * Stops all currently playing sounds
-     */
     public void stopAllSounds()
     {
         if (this.loaded)
@@ -303,9 +277,6 @@ public class SoundManager
         }
     }
 
-    /**
-     * Returns true if the sound is playing or still within time
-     */
     public boolean isSoundPlaying(ISound sound)
     {
         if (!this.loaded)
@@ -413,25 +384,16 @@ public class SoundManager
         }
     }
 
-    /**
-     * Normalizes pitch from parameters and clamps to [0.5, 2.0]
-     */
     private float getNormalizedPitch(ISound sound, SoundPoolEntry entry)
     {
         return (float)MathHelper.clamp_double((double)sound.getPitch() * entry.getPitch(), 0.5D, 2.0D);
     }
 
-    /**
-     * Normalizes volume level from parameters.  Range [0.0, 1.0]
-     */
     private float getNormalizedVolume(ISound sound, SoundPoolEntry entry, SoundCategory category)
     {
         return (float)MathHelper.clamp_double((double)sound.getVolume() * entry.getVolume(), 0.0D, 1.0D) * this.getSoundCategoryVolume(category);
     }
 
-    /**
-     * Pauses all currently playing sounds
-     */
     public void pauseAllSounds()
     {
         for (String s : this.playingSounds.keySet())
@@ -441,9 +403,6 @@ public class SoundManager
         }
     }
 
-    /**
-     * Resumes playing all currently playing sounds (after pauseAllSounds)
-     */
     public void resumeAllSounds()
     {
         for (String s : this.playingSounds.keySet())
@@ -453,9 +412,6 @@ public class SoundManager
         }
     }
 
-    /**
-     * Adds a sound to play in n tick
-     */
     public void playDelayedSound(ISound sound, int delay)
     {
         this.delayedSounds.put(sound, Integer.valueOf(this.playTime + delay));
@@ -491,9 +447,6 @@ public class SoundManager
         }
     }
 
-    /**
-     * Sets the listener of sounds
-     */
     public void setListener(EntityPlayer player, float p_148615_2_)
     {
         if (this.loaded && player != null)

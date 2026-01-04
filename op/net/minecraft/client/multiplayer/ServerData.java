@@ -8,31 +8,15 @@ public class ServerData
 {
     public String serverName;
     public String serverIP;
-
-    /**
-     * the string indicating number of players on and capacity of the server that is shown on the server browser (i.e.
-     * "5/20" meaning 5 slots used out of 20 slots total)
-     */
     public String populationInfo;
-
-    /**
-     * (better variable name would be 'hostname') server name as displayed in the server browser's second line (grey
-     * text)
-     */
     public String serverMOTD;
-
-    /** last server ping that showed up in the server browser */
     public long pingToServer;
     public int version = 47;
-
-    /** Game version for this server. */
     public String gameVersion = "1.8.9";
     public boolean field_78841_f;
     public String playerList;
     private ServerData.ServerResourceMode resourceMode = ServerData.ServerResourceMode.PROMPT;
     private String serverIcon;
-
-    /** True if the server is a LAN server */
     private boolean lanServer;
 
     public ServerData(String name, String ip, boolean isLan)
@@ -42,9 +26,6 @@ public class ServerData
         this.lanServer = isLan;
     }
 
-    /**
-     * Returns an NBTTagCompound with the server's name, IP and maybe acceptTextures.
-     */
     public NBTTagCompound getNBTCompound()
     {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
@@ -78,9 +59,6 @@ public class ServerData
         this.resourceMode = mode;
     }
 
-    /**
-     * Takes an NBTTagCompound with 'name' and 'ip' keys, returns a ServerData instance.
-     */
     public static ServerData getServerDataFromNBTCompound(NBTTagCompound nbtCompound)
     {
         ServerData serverdata = new ServerData(nbtCompound.getString("name"), nbtCompound.getString("ip"), false);
@@ -109,9 +87,6 @@ public class ServerData
         return serverdata;
     }
 
-    /**
-     * Returns the base-64 encoded representation of the server's icon, or null if not available
-     */
     public String getBase64EncodedIconData()
     {
         return this.serverIcon;
@@ -122,9 +97,6 @@ public class ServerData
         this.serverIcon = icon;
     }
 
-    /**
-     * Return true if the server is a LAN server
-     */
     public boolean isOnLAN()
     {
         return this.lanServer;

@@ -16,16 +16,11 @@ import net.minecraft.world.World;
 
 public class ContainerEnchantment extends Container
 {
-    /** SlotEnchantmentTable object with ItemStack to be enchanted */
     public IInventory tableInventory;
-
-    /** current world (for bookshelf counting) */
     private World worldPointer;
     private BlockPos position;
     private Random rand;
     public int xpSeed;
-
-    /** 3-member array storing the enchantment levels of each slot */
     public int[] enchantLevels;
     public int[] enchantmentIds;
 
@@ -99,9 +94,6 @@ public class ContainerEnchantment extends Container
         listener.sendProgressBarUpdate(this, 6, this.enchantmentIds[2]);
     }
 
-    /**
-     * Looks for changes made in the container, sends them to every listener.
-     */
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
@@ -139,9 +131,6 @@ public class ContainerEnchantment extends Container
         }
     }
 
-    /**
-     * Callback for when the crafting matrix is changed.
-     */
     public void onCraftMatrixChanged(IInventory inventoryIn)
     {
         if (inventoryIn == this.tableInventory)
@@ -237,9 +226,6 @@ public class ContainerEnchantment extends Container
         }
     }
 
-    /**
-     * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
-     */
     public boolean enchantItem(EntityPlayer playerIn, int id)
     {
         ItemStack itemstack = this.tableInventory.getStackInSlot(0);
@@ -324,9 +310,6 @@ public class ContainerEnchantment extends Container
         return itemstack == null ? 0 : itemstack.stackSize;
     }
 
-    /**
-     * Called when the container is closed.
-     */
     public void onContainerClosed(EntityPlayer playerIn)
     {
         super.onContainerClosed(playerIn);
@@ -350,9 +333,6 @@ public class ContainerEnchantment extends Container
         return this.worldPointer.getBlockState(this.position).getBlock() != Blocks.enchanting_table ? false : playerIn.getDistanceSq((double)this.position.getX() + 0.5D, (double)this.position.getY() + 0.5D, (double)this.position.getZ() + 0.5D) <= 64.0D;
     }
 
-    /**
-     * Take a stack from the specified inventory slot.
-     */
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
         ItemStack itemstack = null;

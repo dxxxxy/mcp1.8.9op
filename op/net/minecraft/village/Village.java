@@ -27,21 +27,12 @@ public class Village
 {
     private World worldObj;
     private final List<VillageDoorInfo> villageDoorInfoList = Lists.<VillageDoorInfo>newArrayList();
-
-    /**
-     * This is the sum of all door coordinates and used to calculate the actual village center by dividing by the number
-     * of doors.
-     */
     private BlockPos centerHelper = BlockPos.ORIGIN;
-
-    /** This is the actual village center. */
     private BlockPos center = BlockPos.ORIGIN;
     private int villageRadius;
     private int lastAddDoorTimestamp;
     private int tickCounter;
     private int numVillagers;
-
-    /** Timestamp of tick count when villager last bred */
     private int noBreedTicks;
     private TreeMap<String, Integer> playerReputation = new TreeMap();
     private List<Village.VillageAggressor> villageAgressors = Lists.<Village.VillageAggressor>newArrayList();
@@ -61,9 +52,6 @@ public class Village
         this.worldObj = worldIn;
     }
 
-    /**
-     * Called periodically by VillageCollection
-     */
     public void tick(int p_75560_1_)
     {
         this.tickCounter = p_75560_1_;
@@ -167,10 +155,6 @@ public class Village
         return this.villageRadius;
     }
 
-    /**
-     * Actually get num village door info entries, but that boils down to number of doors. Called by
-     * EntityAIVillagerMate and VillageSiege
-     */
     public int getNumVillageDoors()
     {
         return this.villageDoorInfoList.size();
@@ -215,9 +199,6 @@ public class Village
         return villagedoorinfo;
     }
 
-    /**
-     * Returns {@link net.minecraft.village.VillageDoorInfo VillageDoorInfo} from given block position
-     */
     public VillageDoorInfo getDoorInfo(BlockPos pos)
     {
         VillageDoorInfo villagedoorinfo = null;
@@ -246,9 +227,6 @@ public class Village
         return villagedoorinfo;
     }
 
-    /**
-     * if door not existed in this village, null will be returned
-     */
     public VillageDoorInfo getExistedDoor(BlockPos doorBlock)
     {
         if (this.center.distanceSq(doorBlock) > (double)(this.villageRadius * this.villageRadius))
@@ -277,9 +255,6 @@ public class Village
         this.lastAddDoorTimestamp = doorInfo.getInsidePosY();
     }
 
-    /**
-     * Returns true, if there is not a single village door left. Called by VillageCollection
-     */
     public boolean isAnnihilated()
     {
         return this.villageDoorInfoList.isEmpty();
@@ -420,18 +395,12 @@ public class Village
         }
     }
 
-    /**
-     * Return the village reputation for a player
-     */
     public int getReputationForPlayer(String p_82684_1_)
     {
         Integer integer = (Integer)this.playerReputation.get(p_82684_1_);
         return integer != null ? integer.intValue() : 0;
     }
 
-    /**
-     * Set the village reputation for a player.
-     */
     public int setReputationForPlayer(String p_82688_1_, int p_82688_2_)
     {
         int i = this.getReputationForPlayer(p_82688_1_);
@@ -440,17 +409,11 @@ public class Village
         return j;
     }
 
-    /**
-     * Return whether this player has a too low reputation with this village.
-     */
     public boolean isPlayerReputationTooLow(String p_82687_1_)
     {
         return this.getReputationForPlayer(p_82687_1_) <= -15;
     }
 
-    /**
-     * Read this village's data from NBT.
-     */
     public void readVillageDataFromNBT(NBTTagCompound compound)
     {
         this.numVillagers = compound.getInteger("PopSize");
@@ -493,9 +456,6 @@ public class Village
         }
     }
 
-    /**
-     * Write this village's data to NBT.
-     */
     public void writeVillageDataToNBT(NBTTagCompound compound)
     {
         compound.setInteger("PopSize", this.numVillagers);
@@ -544,17 +504,11 @@ public class Village
         compound.setTag("Players", nbttaglist1);
     }
 
-    /**
-     * Prevent villager breeding for a fixed interval of time
-     */
     public void endMatingSeason()
     {
         this.noBreedTicks = this.tickCounter;
     }
 
-    /**
-     * Return whether villagers mating refractory period has passed
-     */
     public boolean isMatingSeason()
     {
         return this.noBreedTicks == 0 || this.tickCounter - this.noBreedTicks >= 3600;

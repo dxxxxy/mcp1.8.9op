@@ -21,25 +21,16 @@ public class C18PacketSpectate implements Packet<INetHandlerPlayServer>
         this.id = id;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.id = buf.readUuid();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeUuid(this.id);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayServer handler)
     {
         handler.handleSpectate(this);

@@ -10,8 +10,6 @@ import net.minecraft.world.World;
 public class ItemSeeds extends Item
 {
     private Block crops;
-
-    /** BlockID of the block the seeds can be planted on. */
     private Block soilBlockID;
 
     public ItemSeeds(Block crops, Block soil)
@@ -21,9 +19,6 @@ public class ItemSeeds extends Item
         this.setCreativeTab(CreativeTabs.tabMaterials);
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (side != EnumFacing.UP)

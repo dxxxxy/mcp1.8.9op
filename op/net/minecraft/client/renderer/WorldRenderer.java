@@ -33,8 +33,6 @@ public class WorldRenderer
     public int vertexCount;
     private VertexFormatElement vertexFormatElement;
     private int vertexFormatIndex;
-
-    /** None */
     private boolean noColor;
     public int drawMode;
     private double xOffset;
@@ -422,9 +420,6 @@ public class WorldRenderer
         }
     }
 
-    /**
-     * Takes in the pass the call list is being requested for. Args: renderPass
-     */
     public int getColorIndex(int p_78909_1_)
     {
         return ((this.vertexCount - p_78909_1_) * this.vertexFormat.getNextOffset() + this.vertexFormat.getColorOffset()) / 4;
@@ -491,9 +486,6 @@ public class WorldRenderer
         }
     }
 
-    /**
-     * Disabels color processing.
-     */
     public void noColor()
     {
         this.noColor = true;

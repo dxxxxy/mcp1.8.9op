@@ -15,9 +15,6 @@ public class EntityExplodeFX extends EntityFX
         this.particleMaxAge = (int)(16.0D / ((double)this.rand.nextFloat() * 0.8D + 0.2D)) + 2;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;

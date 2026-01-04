@@ -108,35 +108,25 @@ import net.optifine.shaders.Shaders;
 
 public class RenderManager
 {
-    private Map<Class , Render> entityRenderMap = Maps.newHashMap();
+    private Map<Class, Render> entityRenderMap = Maps.newHashMap();
     private Map<String, RenderPlayer> skinMap = Maps.<String, RenderPlayer>newHashMap();
     private RenderPlayer playerRenderer;
-
-    /** Renders fonts */
     private FontRenderer textRenderer;
     private double renderPosX;
     private double renderPosY;
     private double renderPosZ;
     public TextureManager renderEngine;
-
-    /** Reference to the World object. */
     public World worldObj;
-
-    /** Rendermanager's variable for the player */
     public Entity livingPlayer;
     public Entity pointedEntity;
     public float playerViewY;
     public float playerViewX;
-
-    /** Reference to the GameSettings object. */
     public GameSettings options;
     public double viewerPosX;
     public double viewerPosY;
     public double viewerPosZ;
     private boolean renderOutlines = false;
     private boolean renderShadow = true;
-
-    /** whether bounding box should be rendered or not */
     private boolean debugBoundingBox = false;
     public Render renderRender = null;
 
@@ -280,7 +270,7 @@ public class RenderManager
             this.playerViewX = livingPlayerIn.prevRotationPitch + (livingPlayerIn.rotationPitch - livingPlayerIn.prevRotationPitch) * partialTicks;
         }
 
-        if (optionsIn.showDebugInfo == 2)
+        if (optionsIn.thirdPersonView == 2)
         {
             this.playerViewY += 180.0F;
         }
@@ -450,15 +440,6 @@ public class RenderManager
         }
     }
 
-    /**
-     * Renders the bounding box around an entity when F3+B is pressed
-     *
-     * @param x X position where to render the debug bounding box
-     * @param y Y position where to render the debug bounding box
-     * @param z Z position where to render the debug bounding box
-     * @param entityYaw The entity yaw
-     * @param partialTicks The partials ticks
-     */
     private void renderDebugBoundingBox(Entity entityIn, double x, double y, double z, float entityYaw, float partialTicks)
     {
         if (!Shaders.isShadowPass)
@@ -494,9 +475,6 @@ public class RenderManager
         }
     }
 
-    /**
-     * World sets this RenderManager's worldObj to the world provided
-     */
     public void set(World worldIn)
     {
         this.worldObj = worldIn;
@@ -510,9 +488,6 @@ public class RenderManager
         return d0 * d0 + d1 * d1 + d2 * d2;
     }
 
-    /**
-     * Returns the font renderer
-     */
     public FontRenderer getFontRenderer()
     {
         return this.textRenderer;

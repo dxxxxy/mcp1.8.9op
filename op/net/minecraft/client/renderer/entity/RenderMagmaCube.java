@@ -14,18 +14,11 @@ public class RenderMagmaCube extends RenderLiving<EntityMagmaCube>
         super(renderManagerIn, new ModelMagmaCube(), 0.25F);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityMagmaCube entity)
     {
         return magmaCubeTextures;
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityMagmaCube entitylivingbaseIn, float partialTickTime)
     {
         int i = entitylivingbaseIn.getSlimeSize();

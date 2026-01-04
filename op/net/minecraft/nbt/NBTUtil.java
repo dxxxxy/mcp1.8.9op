@@ -7,9 +7,6 @@ import net.minecraft.util.StringUtils;
 
 public final class NBTUtil
 {
-    /**
-     * Reads and returns a GameProfile that has been saved to the passed in NBTTagCompound
-     */
     public static GameProfile readGameProfileFromNBT(NBTTagCompound compound)
     {
         String s = null;
@@ -73,9 +70,6 @@ public final class NBTUtil
         }
     }
 
-    /**
-     * Writes a GameProfile to an NBTTagCompound.
-     */
     public static NBTTagCompound writeGameProfile(NBTTagCompound tagCompound, GameProfile profile)
     {
         if (!StringUtils.isNullOrEmpty(profile.getName()))

@@ -12,10 +12,6 @@ public class ItemSoup extends ItemFood
         this.setMaxStackSize(1);
     }
 
-    /**
-     * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
-     * the Item before the action is complete.
-     */
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
     {
         super.onItemUseFinish(stack, worldIn, playerIn);

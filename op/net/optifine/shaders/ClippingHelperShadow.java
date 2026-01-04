@@ -12,9 +12,6 @@ public class ClippingHelperShadow extends ClippingHelper
     float[] matInvMP = new float[16];
     float[] vecIntersection = new float[4];
 
-    /**
-     * Returns true if the box is inside all 6 clipping planes, otherwise returns false.
-     */
     public boolean isBoxInFrustum(double x1, double y1, double z1, double x2, double y2, double z2)
     {
         for (int i = 0; i < this.shadowClipPlaneCount; ++i)

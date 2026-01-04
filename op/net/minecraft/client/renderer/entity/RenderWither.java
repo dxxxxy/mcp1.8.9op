@@ -18,28 +18,18 @@ public class RenderWither extends RenderLiving<EntityWither>
         this.addLayer(new LayerWitherAura(this));
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityWither entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         BossStatus.setBossStatus(entity, true);
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityWither entity)
     {
         int i = entity.getInvulTime();
         return i > 0 && (i > 80 || i / 5 % 2 != 1) ? invulnerableWitherTextures : witherTextures;
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityWither entitylivingbaseIn, float partialTickTime)
     {
         float f = 2.0F;

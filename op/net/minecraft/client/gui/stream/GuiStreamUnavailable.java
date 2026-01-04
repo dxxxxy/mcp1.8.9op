@@ -45,10 +45,6 @@ public class GuiStreamUnavailable extends GuiScreen
         this.field_152327_i = p_i46311_3_;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         if (this.field_152323_r.isEmpty())
@@ -77,16 +73,10 @@ public class GuiStreamUnavailable extends GuiScreen
         }
     }
 
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
     public void onGuiClosed()
     {
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
@@ -103,10 +93,6 @@ public class GuiStreamUnavailable extends GuiScreen
     }
 
     @SuppressWarnings("incomplete-switch")
-
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.enabled)

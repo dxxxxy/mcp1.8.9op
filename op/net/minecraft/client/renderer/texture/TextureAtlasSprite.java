@@ -150,82 +150,52 @@ public class TextureAtlasSprite
         this.animationIndex = atlasSpirit.animationIndex;
     }
 
-    /**
-     * Returns the X position of this icon on its texture sheet, in pixels.
-     */
     public int getOriginX()
     {
         return this.originX;
     }
 
-    /**
-     * Returns the Y position of this icon on its texture sheet, in pixels.
-     */
     public int getOriginY()
     {
         return this.originY;
     }
 
-    /**
-     * Returns the width of the icon, in pixels.
-     */
     public int getIconWidth()
     {
         return this.width;
     }
 
-    /**
-     * Returns the height of the icon, in pixels.
-     */
     public int getIconHeight()
     {
         return this.height;
     }
 
-    /**
-     * Returns the minimum U coordinate to use when rendering with this icon.
-     */
     public float getMinU()
     {
         return this.minU;
     }
 
-    /**
-     * Returns the maximum U coordinate to use when rendering with this icon.
-     */
     public float getMaxU()
     {
         return this.maxU;
     }
 
-    /**
-     * Gets a U coordinate on the icon. 0 returns uMin and 16 returns uMax. Other arguments return in-between values.
-     */
     public float getInterpolatedU(double u)
     {
         float f = this.maxU - this.minU;
         return this.minU + f * (float)u / 16.0F;
     }
 
-    /**
-     * Returns the minimum V coordinate to use when rendering with this icon.
-     */
     public float getMinV()
     {
         return this.minV;
     }
 
-    /**
-     * Returns the maximum V coordinate to use when rendering with this icon.
-     */
     public float getMaxV()
     {
         return this.maxV;
     }
 
-    /**
-     * Gets a V coordinate on the icon. 0 returns vMin and 16 returns vMax. Other arguments return in-between values.
-     */
     public float getInterpolatedV(double v)
     {
         float f = this.maxV - this.minV;

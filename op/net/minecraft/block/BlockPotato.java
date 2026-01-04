@@ -19,9 +19,6 @@ public class BlockPotato extends BlockCrops
         return Items.potato;
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);

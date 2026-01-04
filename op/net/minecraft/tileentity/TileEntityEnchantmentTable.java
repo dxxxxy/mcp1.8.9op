@@ -48,9 +48,6 @@ public class TileEntityEnchantmentTable extends TileEntity implements ITickable,
         }
     }
 
-    /**
-     * Like the old updateEntity(), except more generic.
-     */
     public void update()
     {
         this.bookSpreadPrev = this.bookSpread;
@@ -128,17 +125,11 @@ public class TileEntityEnchantmentTable extends TileEntity implements ITickable,
         this.pageFlip += this.field_145929_l;
     }
 
-    /**
-     * Get the name of this object. For players this returns their username
-     */
     public String getName()
     {
         return this.hasCustomName() ? this.customName : "container.enchant";
     }
 
-    /**
-     * Returns true if this thing is named
-     */
     public boolean hasCustomName()
     {
         return this.customName != null && this.customName.length() > 0;
@@ -149,9 +140,6 @@ public class TileEntityEnchantmentTable extends TileEntity implements ITickable,
         this.customName = customNameIn;
     }
 
-    /**
-     * Get the formatted ChatComponent that will be used for the sender's username in chat
-     */
     public IChatComponent getDisplayName()
     {
         return (IChatComponent)(this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName(), new Object[0]));

@@ -34,8 +34,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     private static final Logger logger = LogManager.getLogger();
     private Map<ChunkCoordIntPair, NBTTagCompound> chunksToRemove = new ConcurrentHashMap();
     private Set<ChunkCoordIntPair> pendingAnvilChunksCoordinates = Collections.<ChunkCoordIntPair>newSetFromMap(new ConcurrentHashMap());
-
-    /** Save directory for chunks using the Anvil format */
     private final File chunkSaveLocation;
     private boolean field_183014_e = false;
 
@@ -44,9 +42,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         this.chunkSaveLocation = chunkSaveLocationIn;
     }
 
-    /**
-     * Loads the specified(XZ) chunk into the specified world.
-     */
     public Chunk loadChunk(World worldIn, int x, int z) throws IOException
     {
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(x, z);
@@ -67,9 +62,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         return this.checkedReadChunkFromNBT(worldIn, x, z, nbttagcompound);
     }
 
-    /**
-     * Wraps readChunkFromNBT. Checks the coordinates and several NBT tags.
-     */
     protected Chunk checkedReadChunkFromNBT(World worldIn, int x, int z, NBTTagCompound p_75822_4_)
     {
         if (!p_75822_4_.hasKey("Level", 10))
@@ -131,9 +123,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         ThreadedFileIOBase.getThreadedIOInstance().queueIO(this);
     }
 
-    /**
-     * Returns a boolean stating if the write was unsuccessful.
-     */
     public boolean writeNextIO()
     {
         if (this.chunksToRemove.isEmpty())
@@ -185,25 +174,14 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         dataoutputstream.close();
     }
 
-    /**
-     * Save extra data associated with this Chunk not normally saved during autosave, only during chunk unload.
-     * Currently unused.
-     */
     public void saveExtraChunkData(World worldIn, Chunk chunkIn) throws IOException
     {
     }
 
-    /**
-     * Called every World.tick()
-     */
     public void chunkTick()
     {
     }
 
-    /**
-     * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
-     * unused.
-     */
     public void saveExtraData()
     {
         try
@@ -224,10 +202,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         }
     }
 
-    /**
-     * Writes the Chunk passed as an argument to the NBTTagCompound also passed, using the World argument to retrieve
-     * the Chunk's last update time.
-     */
     private void writeChunkToNBT(Chunk chunkIn, World worldIn, NBTTagCompound p_75820_3_)
     {
         p_75820_3_.setByte("V", (byte)1);
@@ -350,10 +324,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         }
     }
 
-    /**
-     * Reads the data stored in the passed NBTTagCompound and creates a Chunk with that data in the passed World.
-     * Returns the created Chunk.
-     */
     private Chunk readChunkFromNBT(World worldIn, NBTTagCompound p_75823_2_)
     {
         int i = p_75823_2_.getInteger("xPos");

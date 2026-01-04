@@ -9,16 +9,10 @@ public abstract class GuiListExtended extends GuiSlot
         super(mcIn, widthIn, heightIn, topIn, bottomIn, slotHeightIn);
     }
 
-    /**
-     * The element in the slot that was clicked, boolean for whether it was double clicked or not
-     */
     protected void elementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY)
     {
     }
 
-    /**
-     * Returns true if the element passed in is currently selected
-     */
     protected boolean isSelected(int slotIndex)
     {
         return false;
@@ -77,9 +71,6 @@ public abstract class GuiListExtended extends GuiSlot
         return false;
     }
 
-    /**
-     * Gets the IGuiListEntry object for the given index
-     */
     public abstract GuiListExtended.IGuiListEntry getListEntry(int index);
 
     public interface IGuiListEntry

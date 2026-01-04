@@ -5,16 +5,11 @@ import net.minecraft.util.BlockPos;
 
 public class NextTickListEntry implements Comparable<NextTickListEntry>
 {
-    /** The id number for the next tick entry */
     private static long nextTickEntryID;
     private final Block block;
     public final BlockPos position;
-
-    /** Time this tick is scheduled to occur at */
     public long scheduledTime;
     public int priority;
-
-    /** The id of the tick entry */
     private long tickEntryID;
 
     public NextTickListEntry(BlockPos positionIn, Block blockIn)
@@ -42,9 +37,6 @@ public class NextTickListEntry implements Comparable<NextTickListEntry>
         return this.position.hashCode();
     }
 
-    /**
-     * Sets the scheduled time for this tick entry
-     */
     public NextTickListEntry setScheduledTime(long scheduledTimeIn)
     {
         this.scheduledTime = scheduledTimeIn;

@@ -40,9 +40,6 @@ public class EntityBreakingFX extends EntityFX
         return 1;
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         float f = ((float)this.particleTextureIndexX + this.particleTextureJitterX / 4.0F) / 16.0F;

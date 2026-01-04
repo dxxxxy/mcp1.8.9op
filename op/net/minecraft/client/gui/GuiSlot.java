@@ -13,49 +13,22 @@ public abstract class GuiSlot
     protected final Minecraft mc;
     protected int width;
     protected int height;
-
-    /** The top of the slot container. Affects the overlays and scrolling. */
     protected int top;
-
-    /** The bottom of the slot container. Affects the overlays and scrolling. */
     protected int bottom;
     protected int right;
     protected int left;
-
-    /** The height of a slot. */
     protected final int slotHeight;
-
-    /** The buttonID of the button used to scroll up */
     private int scrollUpButtonID;
-
-    /** The buttonID of the button used to scroll down */
     private int scrollDownButtonID;
     protected int mouseX;
     protected int mouseY;
     protected boolean field_148163_i = true;
-
-    /** Where the mouse was in the window when you first clicked to scroll */
     protected int initialClickY = -2;
-
-    /**
-     * What to multiply the amount you moved your mouse by (used for slowing down scrolling when over the items and not
-     * on the scroll bar)
-     */
     protected float scrollMultiplier;
-
-    /** How far down this slot has been scrolled */
     protected float amountScrolled;
-
-    /** The element in the list that was selected */
     protected int selectedElement = -1;
-
-    /** The time when this button was last clicked. */
     protected long lastClicked;
     protected boolean field_178041_q = true;
-
-    /**
-     * Set to true if a selected element in this gui will show an outline box
-     */
     protected boolean showSelectionBox = true;
     protected boolean hasListHeader;
     protected int headerPadding;
@@ -88,10 +61,6 @@ public abstract class GuiSlot
         this.showSelectionBox = showSelectionBoxIn;
     }
 
-    /**
-     * Sets hasListHeader and headerHeight. Params: hasListHeader, headerHeight. If hasListHeader is false headerHeight
-     * is set to 0.
-     */
     protected void setHasListHeader(boolean hasListHeaderIn, int headerPaddingIn)
     {
         this.hasListHeader = hasListHeaderIn;
@@ -105,19 +74,10 @@ public abstract class GuiSlot
 
     protected abstract int getSize();
 
-    /**
-     * The element in the slot that was clicked, boolean for whether it was double clicked or not
-     */
     protected abstract void elementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY);
 
-    /**
-     * Returns true if the element passed in is currently selected
-     */
     protected abstract boolean isSelected(int slotIndex);
 
-    /**
-     * Return the height of the content being scrolled
-     */
     protected int getContentHeight()
     {
         return this.getSize() * this.slotHeight + this.headerPadding;
@@ -131,9 +91,6 @@ public abstract class GuiSlot
 
     protected abstract void drawSlot(int entryID, int p_180791_2_, int p_180791_3_, int p_180791_4_, int mouseXIn, int mouseYIn);
 
-    /**
-     * Handles drawing a list's header row.
-     */
     protected void drawListHeader(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)
     {
     }
@@ -155,18 +112,12 @@ public abstract class GuiSlot
         return p_148124_1_ < this.getScrollBarX() && p_148124_1_ >= i && p_148124_1_ <= j && l >= 0 && k >= 0 && l < this.getSize() ? l : -1;
     }
 
-    /**
-     * Registers the IDs that can be used for the scrollbar's up/down buttons.
-     */
     public void registerScrollButtons(int scrollUpButtonIDIn, int scrollDownButtonIDIn)
     {
         this.scrollUpButtonID = scrollUpButtonIDIn;
         this.scrollDownButtonID = scrollDownButtonIDIn;
     }
 
-    /**
-     * Stop the thing from scrolling out of bounds
-     */
     protected void bindAmountScrolled()
     {
         this.amountScrolled = MathHelper.clamp_float(this.amountScrolled, 0.0F, (float)this.func_148135_f());
@@ -177,9 +128,6 @@ public abstract class GuiSlot
         return Math.max(0, this.getContentHeight() - (this.bottom - this.top - 4));
     }
 
-    /**
-     * Returns the amountScrolled field as an integer.
-     */
     public int getAmountScrolled()
     {
         return (int)this.amountScrolled;
@@ -190,9 +138,6 @@ public abstract class GuiSlot
         return p_148141_1_ >= this.top && p_148141_1_ <= this.bottom && this.mouseX >= this.left && this.mouseX <= this.right;
     }
 
-    /**
-     * Scrolls the slot by the given amount. A positive value scrolls down, and a negative value scrolls up.
-     */
     public void scrollBy(int amount)
     {
         this.amountScrolled += (float)amount;
@@ -431,17 +376,11 @@ public abstract class GuiSlot
         return this.enabled;
     }
 
-    /**
-     * Gets the width of the list
-     */
     public int getListWidth()
     {
         return 220;
     }
 
-    /**
-     * Draws the selection box around the selected slot element.
-     */
     protected void drawSelectionBox(int p_148120_1_, int p_148120_2_, int mouseXIn, int mouseYIn)
     {
         int i = this.getSize();
@@ -489,9 +428,6 @@ public abstract class GuiSlot
         return this.width / 2 + 124;
     }
 
-    /**
-     * Overlays the background to hide scrolled items
-     */
     protected void overlayBackground(int startY, int endY, int startAlpha, int endAlpha)
     {
         Tessellator tessellator = Tessellator.getInstance();
@@ -507,9 +443,6 @@ public abstract class GuiSlot
         tessellator.draw();
     }
 
-    /**
-     * Sets the left and right bounds of the slot. Param is the left bound, right is calculated as left + width.
-     */
     public void setSlotXBoundsFromLeft(int leftIn)
     {
         this.left = leftIn;

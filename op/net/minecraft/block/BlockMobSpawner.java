@@ -17,33 +17,21 @@ public class BlockMobSpawner extends BlockContainer
         super(Material.rock);
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityMobSpawner();
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return null;
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return 0;
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
@@ -51,17 +39,11 @@ public class BlockMobSpawner extends BlockContainer
         this.dropXpOnBlockBreak(worldIn, pos, i);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
-     */
     public int getRenderType()
     {
         return 3;

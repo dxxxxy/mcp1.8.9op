@@ -53,25 +53,16 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate
         return state.withProperty(POWER, Integer.valueOf(strength));
     }
 
-    /**
-     * How many world ticks before ticking
-     */
     public int tickRate(World worldIn)
     {
         return 10;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(POWER, Integer.valueOf(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Integer)state.getValue(POWER)).intValue();

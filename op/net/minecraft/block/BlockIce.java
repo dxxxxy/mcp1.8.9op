@@ -63,9 +63,6 @@ public class BlockIce extends BlockBreakable
         }
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return 0;

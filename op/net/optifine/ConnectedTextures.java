@@ -2357,11 +2357,11 @@ public class ConnectedTextures
 
         for (int i = 0; i < list.size(); ++i)
         {
-            List list2 = (List)list.get(i);
+            List sublist = (List)list.get(i);
 
-            if (list2 != null)
+            if (sublist != null)
             {
-                ConnectedProperties[] aconnectedproperties1 = (ConnectedProperties[])((ConnectedProperties[])list2.toArray(new ConnectedProperties[list2.size()]));
+                ConnectedProperties[] aconnectedproperties1 = (ConnectedProperties[])((ConnectedProperties[])sublist.toArray(new ConnectedProperties[sublist.size()]));
                 aconnectedproperties[i] = aconnectedproperties1;
             }
         }
@@ -2418,22 +2418,22 @@ public class ConnectedTextures
         }
     }
 
-    private static void addToList(ConnectedProperties cp, List list, int id)
+    private static void addToList(ConnectedProperties cp, List lists, int id)
     {
-        while (id >= list.size())
+        while (id >= lists.size())
         {
-            list.add(null);
+            lists.add(null);
         }
 
-        List list1 = (List)list.get(id);
+        List list = (List)lists.get(id);
 
-        if (list1 == null)
+        if (list == null)
         {
-            list1 = new ArrayList();
-            list.set(id, list1);
+            list = new ArrayList();
+            lists.set(id, list);
         }
 
-        list1.add(cp);
+        list.add(cp);
     }
 
     private static String[] getDefaultCtmPaths()

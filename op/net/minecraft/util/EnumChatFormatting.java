@@ -33,27 +33,11 @@ public enum EnumChatFormatting
     RESET("RESET", 'r', -1);
 
     private static final Map<String, EnumChatFormatting> nameMapping = Maps.<String, EnumChatFormatting>newHashMap();
-
-    /**
-     * Matches formatting codes that indicate that the client should treat the following text as bold, recolored,
-     * obfuscated, etc.
-     */
     private static final Pattern formattingCodePattern = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
-
-    /** The name of this color/formatting */
     private final String name;
-
-    /** The formatting code that produces this format. */
     private final char formattingCode;
     private final boolean fancyStyling;
-
-    /**
-     * The control string (section sign + formatting code) that can be inserted into client-side text to display
-     * subsequent text in this format.
-     */
     private final String controlString;
-
-    /** The numerical index that represents this color */
     private final int colorIndex;
 
     private static String func_175745_c(String p_175745_0_)
@@ -80,33 +64,21 @@ public enum EnumChatFormatting
         this.controlString = "\u00a7" + formattingCodeIn;
     }
 
-    /**
-     * Returns the numerical color index that represents this formatting
-     */
     public int getColorIndex()
     {
         return this.colorIndex;
     }
 
-    /**
-     * False if this is just changing the color or resetting; true otherwise.
-     */
     public boolean isFancyStyling()
     {
         return this.fancyStyling;
     }
 
-    /**
-     * Checks if this is a color code.
-     */
     public boolean isColor()
     {
         return !this.fancyStyling && this != RESET;
     }
 
-    /**
-     * Gets the friendly name of this value.
-     */
     public String getFriendlyName()
     {
         return this.name().toLowerCase();
@@ -117,17 +89,11 @@ public enum EnumChatFormatting
         return this.controlString;
     }
 
-    /**
-     * Returns a copy of the given string, with formatting codes stripped away.
-     */
     public static String getTextWithoutFormattingCodes(String text)
     {
         return text == null ? null : formattingCodePattern.matcher(text).replaceAll("");
     }
 
-    /**
-     * Gets a value by its friendly name; null if the given name does not map to a defined value.
-     */
     public static EnumChatFormatting getValueByName(String friendlyName)
     {
         return friendlyName == null ? null : (EnumChatFormatting)nameMapping.get(func_175745_c(friendlyName));

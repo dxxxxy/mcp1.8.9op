@@ -20,19 +20,12 @@ public abstract class TileEntity
     private static final Logger logger = LogManager.getLogger();
     private static Map < String, Class <? extends TileEntity >> nameToClassMap = Maps. < String, Class <? extends TileEntity >> newHashMap();
     private static Map < Class <? extends TileEntity > , String > classToNameMap = Maps. < Class <? extends TileEntity > , String > newHashMap();
-
-    /** the instance of the world the tile entity is in. */
     protected World worldObj;
     protected BlockPos pos = BlockPos.ORIGIN;
     protected boolean tileEntityInvalid;
     private int blockMetadata = -1;
-
-    /** the Block type that this TileEntity is contained within */
     protected Block blockType;
 
-    /**
-     * Adds a new two-way mapping between the class and its string name in both hashmaps.
-     */
     private static void addMapping(Class <? extends TileEntity > cl, String id)
     {
         if (nameToClassMap.containsKey(id))
@@ -46,25 +39,16 @@ public abstract class TileEntity
         }
     }
 
-    /**
-     * Returns the worldObj for this tileEntity.
-     */
     public World getWorld()
     {
         return this.worldObj;
     }
 
-    /**
-     * Sets the worldObj for this tileEntity.
-     */
     public void setWorldObj(World worldIn)
     {
         this.worldObj = worldIn;
     }
 
-    /**
-     * Returns true if the worldObj isn't null.
-     */
     public boolean hasWorldObj()
     {
         return this.worldObj != null;
@@ -92,9 +76,6 @@ public abstract class TileEntity
         }
     }
 
-    /**
-     * Creates a new entity and loads its data from the specified NBT.
-     */
     public static TileEntity createAndLoadEntity(NBTTagCompound nbt)
     {
         TileEntity tileentity = null;
@@ -136,10 +117,6 @@ public abstract class TileEntity
         return this.blockMetadata;
     }
 
-    /**
-     * For tile entities, ensures the chunk containing the tile entity is saved to disk later - the game won't think it
-     * hasn't changed and skip it.
-     */
     public void markDirty()
     {
         if (this.worldObj != null)
@@ -155,9 +132,6 @@ public abstract class TileEntity
         }
     }
 
-    /**
-     * Returns the square of the distance between this entity and the passed in coordinates.
-     */
     public double getDistanceSq(double x, double y, double z)
     {
         double d0 = (double)this.pos.getX() + 0.5D - x;
@@ -176,9 +150,6 @@ public abstract class TileEntity
         return this.pos;
     }
 
-    /**
-     * Gets the block type at the location of this entity (client-only).
-     */
     public Block getBlockType()
     {
         if (this.blockType == null)
@@ -189,10 +160,6 @@ public abstract class TileEntity
         return this.blockType;
     }
 
-    /**
-     * Allows for a specialized description packet to be created. This is often used to sync tile entity data from the
-     * server to the client easily. For example this is used by signs to synchronise the text to be displayed.
-     */
     public Packet getDescriptionPacket()
     {
         return null;
@@ -203,17 +170,11 @@ public abstract class TileEntity
         return this.tileEntityInvalid;
     }
 
-    /**
-     * invalidates a tile entity
-     */
     public void invalidate()
     {
         this.tileEntityInvalid = true;
     }
 
-    /**
-     * validates a tile entity
-     */
     public void validate()
     {
         this.tileEntityInvalid = false;

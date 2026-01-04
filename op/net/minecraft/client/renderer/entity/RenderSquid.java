@@ -14,9 +14,6 @@ public class RenderSquid extends RenderLiving<EntitySquid>
         super(renderManagerIn, modelBaseIn, shadowSizeIn);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntitySquid entity)
     {
         return squidTextures;
@@ -33,9 +30,6 @@ public class RenderSquid extends RenderLiving<EntitySquid>
         GlStateManager.translate(0.0F, -1.2F, 0.0F);
     }
 
-    /**
-     * Defines what float the third param in setRotationAngles of ModelBase is
-     */
     protected float handleRotationFloat(EntitySquid livingBase, float partialTicks)
     {
         return livingBase.lastTentacleAngle + (livingBase.tentacleAngle - livingBase.lastTentacleAngle) * partialTicks;

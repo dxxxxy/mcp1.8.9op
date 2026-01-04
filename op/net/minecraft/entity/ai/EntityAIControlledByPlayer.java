@@ -18,16 +18,8 @@ public class EntityAIControlledByPlayer extends EntityAIBase
     private final EntityLiving thisEntity;
     private final float maxSpeed;
     private float currentSpeed;
-
-    /** Whether the entity's speed is boosted. */
     private boolean speedBoosted;
-
-    /**
-     * Counter for speed boosting, upon reaching maxSpeedBoostTime the speed boost will be disabled
-     */
     private int speedBoostTime;
-
-    /** Maximum time the entity's speed should be boosted for. */
     private int maxSpeedBoostTime;
 
     public EntityAIControlledByPlayer(EntityLiving entitylivingIn, float maxspeed)
@@ -37,34 +29,22 @@ public class EntityAIControlledByPlayer extends EntityAIBase
         this.setMutexBits(7);
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
     public void startExecuting()
     {
         this.currentSpeed = 0.0F;
     }
 
-    /**
-     * Resets the task
-     */
     public void resetTask()
     {
         this.speedBoosted = false;
         this.currentSpeed = 0.0F;
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
         return this.thisEntity.isEntityAlive() && this.thisEntity.riddenByEntity != null && this.thisEntity.riddenByEntity instanceof EntityPlayer && (this.speedBoosted || this.thisEntity.canBeSteered());
     }
 
-    /**
-     * Updates the task
-     */
     public void updateTask()
     {
         EntityPlayer entityplayer = (EntityPlayer)this.thisEntity.riddenByEntity;
@@ -191,25 +171,16 @@ public class EntityAIControlledByPlayer extends EntityAIBase
         this.thisEntity.moveEntityWithHeading(0.0F, f1);
     }
 
-    /**
-     * True if the block is a stair block or a slab block
-     */
     private boolean isStairOrSlab(Block blockIn)
     {
         return blockIn instanceof BlockStairs || blockIn instanceof BlockSlab;
     }
 
-    /**
-     * Return whether the entity's speed is boosted.
-     */
     public boolean isSpeedBoosted()
     {
         return this.speedBoosted;
     }
 
-    /**
-     * Boost the entity's movement speed.
-     */
     public void boostSpeed()
     {
         this.speedBoosted = true;
@@ -217,9 +188,6 @@ public class EntityAIControlledByPlayer extends EntityAIBase
         this.maxSpeedBoostTime = this.thisEntity.getRNG().nextInt(841) + 140;
     }
 
-    /**
-     * Return whether the entity is being controlled by a player.
-     */
     public boolean isControlledByPlayer()
     {
         return !this.isSpeedBoosted() && this.currentSpeed > this.maxSpeed * 0.3F;

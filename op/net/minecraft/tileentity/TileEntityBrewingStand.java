@@ -22,38 +22,19 @@ import net.minecraft.util.ITickable;
 
 public class TileEntityBrewingStand extends TileEntityLockable implements ITickable, ISidedInventory
 {
-    /** an array of the input slot indices */
     private static final int[] inputSlots = new int[] {3};
-
-    /** an array of the output slot indices */
     private static final int[] outputSlots = new int[] {0, 1, 2};
-
-    /** The ItemStacks currently placed in the slots of the brewing stand */
     private ItemStack[] brewingItemStacks = new ItemStack[4];
     private int brewTime;
-
-    /**
-     * an integer with each bit specifying whether that slot of the stand contains a potion
-     */
     private boolean[] filledSlots;
-
-    /**
-     * used to check if the current ingredient has been removed from the brewing stand during brewing
-     */
     private Item ingredientID;
     private String customName;
 
-    /**
-     * Get the name of this object. For players this returns their username
-     */
     public String getName()
     {
         return this.hasCustomName() ? this.customName : "container.brewing";
     }
 
-    /**
-     * Returns true if this thing is named
-     */
     public boolean hasCustomName()
     {
         return this.customName != null && this.customName.length() > 0;
@@ -64,17 +45,11 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         this.customName = name;
     }
 
-    /**
-     * Returns the number of slots in the inventory.
-     */
     public int getSizeInventory()
     {
         return this.brewingItemStacks.length;
     }
 
-    /**
-     * Like the old updateEntity(), except more generic.
-     */
     public void update()
     {
         if (this.brewTime > 0)
@@ -219,9 +194,6 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         }
     }
 
-    /**
-     * The result of brewing a potion of the specified damage value with an ingredient itemstack.
-     */
     private int getPotionResult(int meta, ItemStack stack)
     {
         return stack == null ? meta : (stack.getItem().isPotionIngredient(stack) ? PotionHelper.applyIngredient(meta, stack.getItem().getPotionEffect(stack)) : meta);
@@ -277,17 +249,11 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         }
     }
 
-    /**
-     * Returns the stack in the given slot.
-     */
     public ItemStack getStackInSlot(int index)
     {
         return index >= 0 && index < this.brewingItemStacks.length ? this.brewingItemStacks[index] : null;
     }
 
-    /**
-     * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
-     */
     public ItemStack decrStackSize(int index, int count)
     {
         if (index >= 0 && index < this.brewingItemStacks.length)
@@ -302,9 +268,6 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         }
     }
 
-    /**
-     * Removes a stack from the given slot and returns it.
-     */
     public ItemStack removeStackFromSlot(int index)
     {
         if (index >= 0 && index < this.brewingItemStacks.length)
@@ -319,9 +282,6 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         }
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-     */
     public void setInventorySlotContents(int index, ItemStack stack)
     {
         if (index >= 0 && index < this.brewingItemStacks.length)
@@ -330,17 +290,11 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         }
     }
 
-    /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
-     */
     public int getInventoryStackLimit()
     {
         return 64;
     }
 
-    /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
-     */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
         return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
@@ -354,9 +308,6 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
     {
     }
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
-     */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
         return index == 3 ? stack.getItem().isPotionIngredient(stack) : stack.getItem() == Items.potionitem || stack.getItem() == Items.glass_bottle;
@@ -382,19 +333,11 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ITicka
         return side == EnumFacing.UP ? inputSlots : outputSlots;
     }
 
-    /**
-     * Returns true if automation can insert the given item in the given slot from the given side. Args: slot, item,
-     * side
-     */
     public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
     {
         return this.isItemValidForSlot(index, itemStackIn);
     }
 
-    /**
-     * Returns true if automation can extract the given item in the given slot from the given side. Args: slot, item,
-     * side
-     */
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
     {
         return true;

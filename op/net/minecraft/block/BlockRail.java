@@ -30,17 +30,11 @@ public class BlockRail extends BlockRailBase
         return SHAPE;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(SHAPE, BlockRailBase.EnumRailDirection.byMetadata(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((BlockRailBase.EnumRailDirection)state.getValue(SHAPE)).getMetadata();

@@ -199,18 +199,18 @@ public class TextureManager implements ITickable, IResourceManagerReloadListener
 
         EmissiveTextures.update();
 
-        for (Object entry0 : new HashSet(this.mapTextureObjects.entrySet()))
+        for (Object o : new HashSet(this.mapTextureObjects.entrySet()))
         {
-            Entry<ResourceLocation, ITextureObject> entry = (Entry<ResourceLocation, ITextureObject>) entry0;
+            Entry<ResourceLocation, ITextureObject> entry = (Entry<ResourceLocation, ITextureObject>) o;
             this.loadTexture((ResourceLocation)entry.getKey(), (ITextureObject)entry.getValue());
         }
     }
 
     public void reloadBannerTextures()
     {
-        for (Object entry0 : new HashSet(this.mapTextureObjects.entrySet()))
+        for (Object o : new HashSet(this.mapTextureObjects.entrySet()))
         {
-            Entry<ResourceLocation, ITextureObject> entry = (Entry<ResourceLocation, ITextureObject>) entry0;
+            Entry<ResourceLocation, ITextureObject> entry = (Entry<ResourceLocation, ITextureObject>) o;
             ResourceLocation resourcelocation = (ResourceLocation)entry.getKey();
             ITextureObject itextureobject = (ITextureObject)entry.getValue();
 

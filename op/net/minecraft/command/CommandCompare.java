@@ -11,33 +11,21 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 
 public class CommandCompare extends CommandBase
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "testforblocks";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 2;
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.compare.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length < 9)

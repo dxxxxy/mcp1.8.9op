@@ -88,9 +88,6 @@ public class ItemMinecart extends Item
         BlockDispenser.dispenseBehaviorRegistry.putObject(this, dispenserMinecartBehavior);
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);

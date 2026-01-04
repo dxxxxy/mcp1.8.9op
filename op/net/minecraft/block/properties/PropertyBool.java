@@ -22,9 +22,6 @@ public class PropertyBool extends PropertyHelper<Boolean>
         return new PropertyBool(name);
     }
 
-    /**
-     * Get the name for the given value.
-     */
     public String getName(Boolean value)
     {
         return value.toString();

@@ -10,13 +10,8 @@ import net.minecraft.village.MerchantRecipeList;
 
 public class NpcMerchant implements IMerchant
 {
-    /** Instance of Merchants Inventory. */
     private InventoryMerchant theMerchantInventory;
-
-    /** This merchant's current player customer. */
     private EntityPlayer customer;
-
-    /** The MerchantRecipeList instance. */
     private MerchantRecipeList recipeList;
     private IChatComponent field_175548_d;
 
@@ -51,17 +46,10 @@ public class NpcMerchant implements IMerchant
         recipe.incrementToolUses();
     }
 
-    /**
-     * Notifies the merchant of a possible merchantrecipe being fulfilled or not. Usually, this is just a sound byte
-     * being played depending if the suggested itemstack is not null.
-     */
     public void verifySellingItem(ItemStack stack)
     {
     }
 
-    /**
-     * Get the formatted ChatComponent that will be used for the sender's username in chat
-     */
     public IChatComponent getDisplayName()
     {
         return (IChatComponent)(this.field_175548_d != null ? this.field_175548_d : new ChatComponentTranslation("entity.Villager.name", new Object[0]));

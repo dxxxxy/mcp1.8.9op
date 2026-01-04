@@ -16,23 +16,11 @@ public class EntitySquid extends EntityWaterMob
     public float prevSquidPitch;
     public float squidYaw;
     public float prevSquidYaw;
-
-    /**
-     * appears to be rotation in radians; we already have pitch & yaw, so this completes the triumvirate.
-     */
     public float squidRotation;
-
-    /** previous squidRotation in radians */
     public float prevSquidRotation;
-
-    /** angle of the tentacles in radians */
     public float tentacleAngle;
-
-    /** the last calculated angle of the tentacles in radians */
     public float lastTentacleAngle;
     private float randomMotionSpeed;
-
-    /** change in squidRotation in radians. */
     private float rotationVelocity;
     private float field_70871_bB;
     private float randomMotionVecX;
@@ -59,33 +47,21 @@ public class EntitySquid extends EntityWaterMob
         return this.height * 0.5F;
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return null;
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return null;
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return null;
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
     protected float getSoundVolume()
     {
         return 0.4F;
@@ -96,22 +72,11 @@ public class EntitySquid extends EntityWaterMob
         return null;
     }
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
     protected boolean canTriggerWalking()
     {
         return false;
     }
 
-    /**
-     * Drop 0-2 items of this living's type
-     *  
-     * @param wasRecentlyHit true if this this entity was recently hit by appropriate entity (generally only if player
-     * or tameable)
-     * @param lootingModifier level of enchanment to be applied to this drop
-     */
     protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
     {
         int i = this.rand.nextInt(3 + lootingModifier) + 1;
@@ -122,19 +87,11 @@ public class EntitySquid extends EntityWaterMob
         }
     }
 
-    /**
-     * Checks if this entity is inside water (if inWater field is true as a result of handleWaterMovement() returning
-     * true)
-     */
     public boolean isInWater()
     {
         return this.worldObj.handleMaterialAcceleration(this.getEntityBoundingBox().expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -216,17 +173,11 @@ public class EntitySquid extends EntityWaterMob
         }
     }
 
-    /**
-     * Moves the entity based on the specified heading.  Args: strafe, forward
-     */
     public void moveEntityWithHeading(float strafe, float forward)
     {
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
     }
 
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
     public boolean getCanSpawnHere()
     {
         return this.posY > 45.0D && this.posY < (double)this.worldObj.getSeaLevel() && super.getCanSpawnHere();

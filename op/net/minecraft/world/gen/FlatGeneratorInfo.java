@@ -16,17 +16,11 @@ public class FlatGeneratorInfo
     private final Map<String, Map<String, String>> worldFeatures = Maps.<String, Map<String, String>>newHashMap();
     private int biomeToUse;
 
-    /**
-     * Return the biome used on this preset.
-     */
     public int getBiome()
     {
         return this.biomeToUse;
     }
 
-    /**
-     * Set the biome used on this preset.
-     */
     public void setBiome(int biome)
     {
         this.biomeToUse = biome;

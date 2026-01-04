@@ -47,9 +47,6 @@ public class BlockSnow extends Block
         return new AxisAlignedBB((double)pos.getX() + this.minX, (double)pos.getY() + this.minY, (double)pos.getZ() + this.minZ, (double)pos.getX() + this.maxX, (double)((float)pos.getY() + (float)i * f), (double)pos.getZ() + this.maxZ);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -60,9 +57,6 @@ public class BlockSnow extends Block
         return false;
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
     public void setBlockBoundsForItemRender()
     {
         this.getBoundsForLayers(0);
@@ -86,9 +80,6 @@ public class BlockSnow extends Block
         return block != Blocks.ice && block != Blocks.packed_ice ? (block.getMaterial() == Material.leaves ? true : (block == this && ((Integer)iblockstate.getValue(LAYERS)).intValue() >= 7 ? true : block.isOpaqueCube() && block.blockMaterial.blocksMovement())) : false;
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         this.checkAndDropBlock(worldIn, pos, state);
@@ -115,17 +106,11 @@ public class BlockSnow extends Block
         player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Items.snowball;
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return 0;
@@ -145,25 +130,16 @@ public class BlockSnow extends Block
         return side == EnumFacing.UP ? true : super.shouldSideBeRendered(worldIn, pos, side);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(LAYERS, Integer.valueOf((meta & 7) + 1));
     }
 
-    /**
-     * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
-     */
     public boolean isReplaceable(World worldIn, BlockPos pos)
     {
         return ((Integer)worldIn.getBlockState(pos).getValue(LAYERS)).intValue() == 1;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Integer)state.getValue(LAYERS)).intValue() - 1;

@@ -24,9 +24,6 @@ public class MapItemRenderer
         this.textureManager = textureManagerIn;
     }
 
-    /**
-     * Updates a map texture
-     */
     public void updateMapTexture(MapData mapdataIn)
     {
         this.getMapRendererInstance(mapdataIn).updateMapTexture();
@@ -37,9 +34,6 @@ public class MapItemRenderer
         this.getMapRendererInstance(mapdataIn).render(p_148250_2_);
     }
 
-    /**
-     * Returns {@link net.minecraft.client.gui.MapItemRenderer.Instance MapItemRenderer.Instance} with given map data
-     */
     private MapItemRenderer.Instance getMapRendererInstance(MapData mapdataIn)
     {
         MapItemRenderer.Instance mapitemrenderer$instance = (MapItemRenderer.Instance)this.loadedMaps.get(mapdataIn.mapName);
@@ -53,9 +47,6 @@ public class MapItemRenderer
         return mapitemrenderer$instance;
     }
 
-    /**
-     * Clears the currently loaded maps and removes their corresponding textures
-     */
     public void clearLoadedMaps()
     {
         for (MapItemRenderer.Instance mapitemrenderer$instance : this.loadedMaps.values())

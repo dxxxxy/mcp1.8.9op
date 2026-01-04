@@ -10,8 +10,5 @@ public interface IProperty<T extends Comparable<T>>
 
     Class<T> getValueClass();
 
-    /**
-     * Get the name for the given value.
-     */
     String getName(T value);
 }

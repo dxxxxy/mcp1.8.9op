@@ -7,11 +7,7 @@ import net.minecraft.client.resources.IResourceManager;
 public class DynamicTexture extends AbstractTexture
 {
     private final int[] dynamicTextureData;
-
-    /** width of this icon in pixels */
     private final int width;
-
-    /** height of this icon in pixels */
     private final int height;
 
     public DynamicTexture(BufferedImage bufferedImage)

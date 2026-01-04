@@ -33,17 +33,11 @@ import net.optifine.reflect.Reflector;
 
 public class TileEntityRendererDispatcher
 {
-    public Map<Class, TileEntitySpecialRenderer>  mapSpecialRenderers = Maps.newHashMap();
+    public Map<Class, TileEntitySpecialRenderer> mapSpecialRenderers = Maps.newHashMap();
     public static TileEntityRendererDispatcher instance = new TileEntityRendererDispatcher();
     public FontRenderer fontRenderer;
-
-    /** The player's current X position (same as playerX) */
     public static double staticPlayerX;
-
-    /** The player's current Y position (same as playerY) */
     public static double staticPlayerY;
-
-    /** The player's current Z position (same as playerZ) */
     public static double staticPlayerZ;
     public TextureManager renderEngine;
     public World worldObj;
@@ -160,9 +154,6 @@ public class TileEntityRendererDispatcher
         }
     }
 
-    /**
-     * Render this TileEntity at a given set of coordinates
-     */
     public void renderTileEntityAt(TileEntity tileEntityIn, double x, double y, double z, float partialTicks)
     {
         this.renderTileEntityAt(tileEntityIn, x, y, z, partialTicks, -1);

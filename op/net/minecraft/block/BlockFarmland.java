@@ -35,9 +35,6 @@ public class BlockFarmland extends Block
         return new AxisAlignedBB((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 1), (double)(pos.getZ() + 1));
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -69,9 +66,6 @@ public class BlockFarmland extends Block
         }
     }
 
-    /**
-     * Block's chance to react to a living entity falling on it.
-     */
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
         if (entityIn instanceof EntityLivingBase)
@@ -109,9 +103,6 @@ public class BlockFarmland extends Block
         return false;
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
@@ -141,9 +132,6 @@ public class BlockFarmland extends Block
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Blocks.dirt.getItemDropped(Blocks.dirt.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), rand, fortune);
@@ -154,17 +142,11 @@ public class BlockFarmland extends Block
         return Item.getItemFromBlock(Blocks.dirt);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(MOISTURE, Integer.valueOf(meta & 7));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Integer)state.getValue(MOISTURE)).intValue();

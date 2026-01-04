@@ -45,33 +45,21 @@ public class BlockSign extends BlockContainer
         return true;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * Return true if an entity can be spawned inside the block (used to get the player's bed spawn location)
-     */
     public boolean canSpawnInBlock()
     {
         return true;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntitySign();
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Items.sign;

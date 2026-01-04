@@ -37,9 +37,6 @@ public class BlockTrapDoor extends Block
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -72,9 +69,6 @@ public class BlockTrapDoor extends Block
         this.setBounds(worldIn.getBlockState(pos));
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
     public void setBlockBoundsForItemRender()
     {
         float f = 0.1875F;
@@ -139,9 +133,6 @@ public class BlockTrapDoor extends Block
         }
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!worldIn.isRemote)
@@ -171,19 +162,12 @@ public class BlockTrapDoor extends Block
         }
     }
 
-    /**
-     * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit.
-     */
     public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end)
     {
         this.setBlockBoundsBasedOnState(worldIn, pos);
         return super.collisionRayTrace(worldIn, pos, start, end);
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState iblockstate = this.getDefaultState();
@@ -197,9 +181,6 @@ public class BlockTrapDoor extends Block
         return iblockstate;
     }
 
-    /**
-     * Check whether this Block can be placed on the given side
-     */
     public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
     {
         return !side.getAxis().isVertical() && isValidSupportBlock(worldIn.getBlockState(pos.offset(side.getOpposite())).getBlock());
@@ -253,17 +234,11 @@ public class BlockTrapDoor extends Block
         return EnumWorldBlockLayer.CUTOUT;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, getFacing(meta)).withProperty(OPEN, Boolean.valueOf((meta & 4) != 0)).withProperty(HALF, (meta & 8) == 0 ? BlockTrapDoor.DoorHalf.BOTTOM : BlockTrapDoor.DoorHalf.TOP);
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

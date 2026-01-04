@@ -50,9 +50,6 @@ public class ItemMonsterPlacer extends Item
         return entitylist$entityegginfo != null ? (renderPass == 0 ? entitylist$entityegginfo.primaryColor : entitylist$entityegginfo.secondaryColor) : 16777215;
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (worldIn.isRemote)
@@ -114,9 +111,6 @@ public class ItemMonsterPlacer extends Item
         }
     }
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
     public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
     {
         if (worldIn.isRemote)
@@ -173,10 +167,6 @@ public class ItemMonsterPlacer extends Item
         }
     }
 
-    /**
-     * Spawns the creature specified by the egg's type in the location specified by the last three parameters.
-     * Parameters: world, entityID, x, y, z.
-     */
     public static Entity spawnCreature(World worldIn, int entityID, double x, double y, double z)
     {
         if (!EntityList.entityEggs.containsKey(Integer.valueOf(entityID)))
@@ -207,9 +197,6 @@ public class ItemMonsterPlacer extends Item
         }
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
         for (EntityList.EntityEggInfo entitylist$entityegginfo : EntityList.entityEggs.values())

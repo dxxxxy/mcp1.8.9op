@@ -16,41 +16,17 @@ import org.lwjgl.util.glu.GLU;
 
 public class ActiveRenderInfo
 {
-    /** The current GL viewport */
     private static final IntBuffer VIEWPORT = GLAllocation.createDirectIntBuffer(16);
-
-    /** The current GL modelview matrix */
     private static final FloatBuffer MODELVIEW = GLAllocation.createDirectFloatBuffer(16);
-
-    /** The current GL projection matrix */
     private static final FloatBuffer PROJECTION = GLAllocation.createDirectFloatBuffer(16);
-
-    /** The computed view object coordinates */
     private static final FloatBuffer OBJECTCOORDS = GLAllocation.createDirectFloatBuffer(3);
     private static Vec3 position = new Vec3(0.0D, 0.0D, 0.0D);
-
-    /** The X component of the entity's yaw rotation */
     private static float rotationX;
-
-    /** The combined X and Z components of the entity's pitch rotation */
     private static float rotationXZ;
-
-    /** The Z component of the entity's yaw rotation */
     private static float rotationZ;
-
-    /**
-     * The Y component (scaled along the Z axis) of the entity's pitch rotation
-     */
     private static float rotationYZ;
-
-    /**
-     * The Y component (scaled along the X axis) of the entity's pitch rotation
-     */
     private static float rotationXY;
 
-    /**
-     * Updates the current render info and camera location based on entity look angles and 1st/3rd person view mode
-     */
     public static void updateRenderInfo(EntityPlayer entityplayerIn, boolean p_74583_1_)
     {
         GlStateManager.getFloat(2982, MODELVIEW);

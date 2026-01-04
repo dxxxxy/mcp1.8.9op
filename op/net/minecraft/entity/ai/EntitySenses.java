@@ -16,18 +16,12 @@ public class EntitySenses
         this.entityObj = entityObjIn;
     }
 
-    /**
-     * Clears canSeeCachePositive and canSeeCacheNegative.
-     */
     public void clearSensingCache()
     {
         this.seenEntities.clear();
         this.unseenEntities.clear();
     }
 
-    /**
-     * Checks, whether 'our' entity can see the entity given as argument (true) or not (false), caching the result.
-     */
     public boolean canSee(Entity entityIn)
     {
         if (this.seenEntities.contains(entityIn))

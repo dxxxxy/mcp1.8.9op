@@ -72,9 +72,6 @@ public class FontMetadataSectionSerializer extends BaseMetadataSectionSerializer
         return new FontMetadataSection(afloat, afloat2, afloat1);
     }
 
-    /**
-     * The name of this section type as it appears in JSON.
-     */
     public String getSectionName()
     {
         return "font";

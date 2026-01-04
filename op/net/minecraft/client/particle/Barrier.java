@@ -24,9 +24,6 @@ public class Barrier extends EntityFX
         return 1;
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         float f = this.particleIcon.getMinU();

@@ -36,10 +36,6 @@ public final class SpawnerAnimals
     private int lastPlayerChunkZ = Integer.MAX_VALUE;
     private int countChunkPos;
 
-    /**
-     * adds all chunks within the spawn radius of the players to eligibleChunksForSpawning. pars: the world,
-     * hostileCreatures, passiveCreatures. returns number of eligible chunks.
-     */
     public int findChunksForSpawning(WorldServer worldServerIn, boolean spawnHostileMobs, boolean spawnPeacefulMobs, boolean p_77192_4_)
     {
         if (!spawnHostileMobs && !spawnPeacefulMobs)
@@ -291,9 +287,6 @@ public final class SpawnerAnimals
         }
     }
 
-    /**
-     * Called during chunk generation to spawn initial creatures.
-     */
     public static void performWorldGenSpawning(World worldIn, BiomeGenBase biomeIn, int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random randomIn)
     {
         List<BiomeGenBase.SpawnListEntry> list = biomeIn.getSpawnableList(EnumCreatureType.CREATURE);

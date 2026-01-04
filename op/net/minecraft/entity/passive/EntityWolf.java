@@ -40,19 +40,10 @@ import net.minecraft.world.World;
 
 public class EntityWolf extends EntityTameable
 {
-    /** Float used to smooth the rotation of the wolf head */
     private float headRotationCourse;
     private float headRotationCourseOld;
-
-    /** true is the wolf is wet else false */
     private boolean isWet;
-
-    /** True if the wolf is shaking else False */
     private boolean isShaking;
-
-    /**
-     * This time increases while wolf is shaking and emitting water particles.
-     */
     private float timeWolfIsShaking;
     private float prevTimeWolfIsShaking;
 
@@ -103,9 +94,6 @@ public class EntityWolf extends EntityTameable
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
     }
 
-    /**
-     * Sets the active target the Task system uses for tracking
-     */
     public void setAttackTarget(EntityLivingBase entitylivingbaseIn)
     {
         super.setAttackTarget(entitylivingbaseIn);
@@ -138,9 +126,6 @@ public class EntityWolf extends EntityTameable
         this.playSound("mob.wolf.step", 0.15F, 1.0F);
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
@@ -148,9 +133,6 @@ public class EntityWolf extends EntityTameable
         tagCompound.setByte("CollarColor", (byte)this.getCollarColor().getDyeDamage());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
@@ -162,33 +144,21 @@ public class EntityWolf extends EntityTameable
         }
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return this.isAngry() ? "mob.wolf.growl" : (this.rand.nextInt(3) == 0 ? (this.isTamed() && this.dataWatcher.getWatchableObjectFloat(18) < 10.0F ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.wolf.hurt";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.wolf.death";
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
     protected float getSoundVolume()
     {
         return 0.4F;
@@ -199,10 +169,6 @@ public class EntityWolf extends EntityTameable
         return Item.getItemById(-1);
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -221,9 +187,6 @@ public class EntityWolf extends EntityTameable
         }
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         super.onUpdate();
@@ -278,17 +241,11 @@ public class EntityWolf extends EntityTameable
         }
     }
 
-    /**
-     * True if the wolf is wet
-     */
     public boolean isWolfWet()
     {
         return this.isWet;
     }
 
-    /**
-     * Used when calculating the amount of shading to apply while the wolf is wet.
-     */
     public float getShadingWhileWet(float p_70915_1_)
     {
         return 0.75F + (this.prevTimeWolfIsShaking + (this.timeWolfIsShaking - this.prevTimeWolfIsShaking) * p_70915_1_) / 2.0F * 0.25F;
@@ -320,18 +277,11 @@ public class EntityWolf extends EntityTameable
         return this.height * 0.8F;
     }
 
-    /**
-     * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
-     * use in wolves.
-     */
     public int getVerticalFaceSpeed()
     {
         return this.isSitting() ? 20 : super.getVerticalFaceSpeed();
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         if (this.isEntityInvulnerable(source))
@@ -380,9 +330,6 @@ public class EntityWolf extends EntityTameable
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
     public boolean interact(EntityPlayer player)
     {
         ItemStack itemstack = player.inventory.getCurrentItem();
@@ -495,34 +442,21 @@ public class EntityWolf extends EntityTameable
         return this.isAngry() ? 1.5393804F : (this.isTamed() ? (0.55F - (20.0F - this.dataWatcher.getWatchableObjectFloat(18)) * 0.02F) * (float)Math.PI : ((float)Math.PI / 5F));
     }
 
-    /**
-     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-     * the animal type)
-     */
     public boolean isBreedingItem(ItemStack stack)
     {
         return stack == null ? false : (!(stack.getItem() instanceof ItemFood) ? false : ((ItemFood)stack.getItem()).isWolfsFavoriteMeat());
     }
 
-    /**
-     * Will return how many at most can spawn in a chunk at once.
-     */
     public int getMaxSpawnedInChunk()
     {
         return 8;
     }
 
-    /**
-     * Determines whether this wolf is angry or not.
-     */
     public boolean isAngry()
     {
         return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
     }
 
-    /**
-     * Sets whether this wolf is angry or not.
-     */
     public void setAngry(boolean angry)
     {
         byte b0 = this.dataWatcher.getWatchableObjectByte(16);
@@ -573,9 +507,6 @@ public class EntityWolf extends EntityTameable
         }
     }
 
-    /**
-     * Returns true if the mob is currently able to mate with the specified mob.
-     */
     public boolean canMateWith(EntityAnimal otherAnimal)
     {
         if (otherAnimal == this)
@@ -602,9 +533,6 @@ public class EntityWolf extends EntityTameable
         return this.dataWatcher.getWatchableObjectByte(19) == 1;
     }
 
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
     protected boolean canDespawn()
     {
         return !this.isTamed() && this.ticksExisted > 2400;

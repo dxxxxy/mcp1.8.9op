@@ -62,7 +62,7 @@ public class LightMap
                     f = Config.limitTo1(f);
                     float f1 = f * (float)(j - 1);
                     float f2 = Config.limitTo1(torchFlickerX + 0.5F) * (float)(j - 1);
-                    float f3 = Config.limitTo1(Config.getGameSettings().saturation);
+                    float f3 = Config.limitTo1(Config.getGameSettings().gammaSetting);
                     boolean flag = f3 > 1.0E-4F;
                     float[][] afloat = this.lightMapRgb.getColorsRgb();
                     this.getLightMapColumn(afloat, f1, k, j, this.sunRgbs);

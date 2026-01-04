@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 
 public class ShapelessRecipes implements IRecipe
 {
-    /** Is the ItemStack that you get when craft the recipe. */
     private final ItemStack recipeOutput;
     private final List<ItemStack> recipeItems;
 
@@ -40,9 +39,6 @@ public class ShapelessRecipes implements IRecipe
         return aitemstack;
     }
 
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     */
     public boolean matches(InventoryCrafting inv, World worldIn)
     {
         List<ItemStack> list = Lists.newArrayList(this.recipeItems);
@@ -78,17 +74,11 @@ public class ShapelessRecipes implements IRecipe
         return list.isEmpty();
     }
 
-    /**
-     * Returns an Item that is the result of this recipe
-     */
     public ItemStack getCraftingResult(InventoryCrafting inv)
     {
         return this.recipeOutput.copy();
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     public int getRecipeSize()
     {
         return this.recipeItems.size();

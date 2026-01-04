@@ -85,9 +85,6 @@ public class RenderEntityItem extends Render<EntityItem>
         return i;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityItem entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         ItemStack itemstack = entity.getEntityItem();
@@ -153,9 +150,6 @@ public class RenderEntityItem extends Render<EntityItem>
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityItem entity)
     {
         return TextureMap.locationBlocksTexture;

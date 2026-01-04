@@ -43,9 +43,6 @@ public class S18PacketEntityTeleport implements Packet<INetHandlerPlayClient>
         this.onGround = onGroundIn;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityId = buf.readVarIntFromBuffer();
@@ -57,9 +54,6 @@ public class S18PacketEntityTeleport implements Packet<INetHandlerPlayClient>
         this.onGround = buf.readBoolean();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.entityId);
@@ -71,9 +65,6 @@ public class S18PacketEntityTeleport implements Packet<INetHandlerPlayClient>
         buf.writeBoolean(this.onGround);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleEntityTeleport(this);

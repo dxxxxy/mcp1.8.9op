@@ -29,18 +29,11 @@ public class BlockDirt extends Block
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         return ((BlockDirt.DirtType)state.getValue(VARIANT)).func_181066_d();
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         if (state.getValue(VARIANT) == BlockDirt.DirtType.PODZOL)
@@ -52,9 +45,6 @@ public class BlockDirt extends Block
         return state;
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         list.add(new ItemStack(this, 1, BlockDirt.DirtType.DIRT.getMetadata()));
@@ -62,26 +52,17 @@ public class BlockDirt extends Block
         list.add(new ItemStack(this, 1, BlockDirt.DirtType.PODZOL.getMetadata()));
     }
 
-    /**
-     * Gets the meta to use for the Pick Block ItemStack result
-     */
     public int getDamageValue(World worldIn, BlockPos pos)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         return iblockstate.getBlock() != this ? 0 : ((BlockDirt.DirtType)iblockstate.getValue(VARIANT)).getMetadata();
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(VARIANT, BlockDirt.DirtType.byMetadata(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((BlockDirt.DirtType)state.getValue(VARIANT)).getMetadata();
@@ -92,10 +73,6 @@ public class BlockDirt extends Block
         return new BlockState(this, new IProperty[] {VARIANT, SNOWY});
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         BlockDirt.DirtType blockdirt$dirttype = (BlockDirt.DirtType)state.getValue(VARIANT);

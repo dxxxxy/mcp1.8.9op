@@ -15,9 +15,6 @@ public class RenderPig extends RenderLiving<EntityPig>
         this.addLayer(new LayerSaddle(this));
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityPig entity)
     {
         return pigTextures;

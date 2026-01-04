@@ -45,10 +45,6 @@ public class TileEntityFlowerPot extends TileEntity
         this.flowerPotData = compound.getInteger("Data");
     }
 
-    /**
-     * Allows for a specialized description packet to be created. This is often used to sync tile entity data from the
-     * server to the client easily. For example this is used by signs to synchronise the text to be displayed.
-     */
     public Packet getDescriptionPacket()
     {
         NBTTagCompound nbttagcompound = new NBTTagCompound();

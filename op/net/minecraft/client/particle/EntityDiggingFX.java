@@ -24,9 +24,6 @@ public class EntityDiggingFX extends EntityFX
         this.particleScale /= 2.0F;
     }
 
-    /**
-     * Sets the position of the block that this particle came from. Used for calculating texture and color multiplier.
-     */
     public EntityDiggingFX setBlockPos(BlockPos pos)
     {
         this.sourcePos = pos;
@@ -69,9 +66,6 @@ public class EntityDiggingFX extends EntityFX
         return 1;
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         float f = ((float)this.particleTextureIndexX + this.particleTextureJitterX / 4.0F) / 16.0F;

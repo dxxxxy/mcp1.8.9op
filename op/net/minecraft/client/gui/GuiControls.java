@@ -9,17 +9,9 @@ import net.minecraft.client.settings.KeyBinding;
 public class GuiControls extends GuiScreen
 {
     private static final GameSettings.Options[] optionsArr = new GameSettings.Options[] {GameSettings.Options.INVERT_MOUSE, GameSettings.Options.SENSITIVITY, GameSettings.Options.TOUCHSCREEN};
-
-    /**
-     * A reference to the screen object that created this. Used for navigating between screens.
-     */
     private GuiScreen parentScreen;
     protected String screenTitle = "Controls";
-
-    /** Reference to the GameSettings object. */
     private GameSettings options;
-
-    /** The ID of the button that has been pressed. */
     public KeyBinding buttonId = null;
     public long time;
     private GuiKeyBindingList keyBindingList;
@@ -31,10 +23,6 @@ public class GuiControls extends GuiScreen
         this.options = settings;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         this.keyBindingList = new GuiKeyBindingList(this, this.mc);
@@ -58,18 +46,12 @@ public class GuiControls extends GuiScreen
         }
     }
 
-    /**
-     * Handles mouse input.
-     */
     public void handleMouseInput() throws IOException
     {
         super.handleMouseInput();
         this.keyBindingList.handleMouseInput();
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.id == 200)
@@ -78,7 +60,7 @@ public class GuiControls extends GuiScreen
         }
         else if (button.id == 201)
         {
-            for (KeyBinding keybinding : this.mc.gameSettings.mc)
+            for (KeyBinding keybinding : this.mc.gameSettings.keyBindings)
             {
                 keybinding.setKeyCode(keybinding.getKeyCodeDefault());
             }
@@ -92,9 +74,6 @@ public class GuiControls extends GuiScreen
         }
     }
 
-    /**
-     * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
-     */
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
     {
         if (this.buttonId != null)
@@ -109,9 +88,6 @@ public class GuiControls extends GuiScreen
         }
     }
 
-    /**
-     * Called when a mouse button is released.  Args : mouseX, mouseY, releaseButton
-     */
     protected void mouseReleased(int mouseX, int mouseY, int state)
     {
         if (state != 0 || !this.keyBindingList.mouseReleased(mouseX, mouseY, state))
@@ -120,10 +96,6 @@ public class GuiControls extends GuiScreen
         }
     }
 
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
         if (this.buttonId != null)
@@ -151,9 +123,6 @@ public class GuiControls extends GuiScreen
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
@@ -161,7 +130,7 @@ public class GuiControls extends GuiScreen
         this.drawCenteredString(this.fontRendererObj, this.screenTitle, this.width / 2, 8, 16777215);
         boolean flag = true;
 
-        for (KeyBinding keybinding : this.options.mc)
+        for (KeyBinding keybinding : this.options.keyBindings)
         {
             if (keybinding.getKeyCode() != keybinding.getKeyCodeDefault())
             {

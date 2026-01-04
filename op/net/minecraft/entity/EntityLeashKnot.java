@@ -32,9 +32,6 @@ public class EntityLeashKnot extends EntityHanging
         super.entityInit();
     }
 
-    /**
-     * Updates facing and bounding box based on it
-     */
     public void updateFacingWithBoundingBox(EnumFacing facingDirectionIn)
     {
     }
@@ -54,49 +51,28 @@ public class EntityLeashKnot extends EntityHanging
         return -0.0625F;
     }
 
-    /**
-     * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
-     * length * 64 * renderDistanceWeight Args: distance
-     */
     public boolean isInRangeToRenderDist(double distance)
     {
         return distance < 1024.0D;
     }
 
-    /**
-     * Called when this entity is broken. Entity parameter may be null.
-     */
     public void onBroken(Entity brokenEntity)
     {
     }
 
-    /**
-     * Either write this entity to the NBT tag given and return true, or return false without doing anything. If this
-     * returns false the entity is not saved on disk. Ridden entities return false here as they are saved with their
-     * rider.
-     */
     public boolean writeToNBTOptional(NBTTagCompound tagCompund)
     {
         return false;
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
     }
 
-    /**
-     * First layer of player interaction
-     */
     public boolean interactFirst(EntityPlayer playerIn)
     {
         ItemStack itemstack = playerIn.getHeldItem();
@@ -137,9 +113,6 @@ public class EntityLeashKnot extends EntityHanging
         return true;
     }
 
-    /**
-     * checks to make sure painting can be placed there
-     */
     public boolean onValidSurface()
     {
         return this.worldObj.getBlockState(this.hangingPosition).getBlock() instanceof BlockFence;

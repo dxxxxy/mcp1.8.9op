@@ -19,9 +19,6 @@ public class RenderFish extends Render<EntityFishHook>
         super(renderManagerIn);
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityFishHook entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -65,7 +62,7 @@ public class RenderFish extends Render<EntityFishHook>
             double d2 = entity.angler.prevPosZ + (entity.angler.posZ - entity.angler.prevPosZ) * (double)partialTicks + vec3.zCoord;
             double d3 = (double)entity.angler.getEyeHeight();
 
-            if (this.renderManager.options != null && this.renderManager.options.showDebugInfo > 0 || entity.angler != Minecraft.getMinecraft().thePlayer)
+            if (this.renderManager.options != null && this.renderManager.options.thirdPersonView > 0 || entity.angler != Minecraft.getMinecraft().thePlayer)
             {
                 float f9 = (entity.angler.prevRenderYawOffset + (entity.angler.renderYawOffset - entity.angler.prevRenderYawOffset) * partialTicks) * (float)Math.PI / 180.0F;
                 double d4 = (double)MathHelper.sin(f9);
@@ -102,9 +99,6 @@ public class RenderFish extends Render<EntityFishHook>
         }
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityFishHook entity)
     {
         return FISH_PARTICLES;

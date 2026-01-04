@@ -5,37 +5,16 @@ import net.minecraft.util.MathHelper;
 
 public class ModelSpider extends ModelBase
 {
-    /** The spider's head box */
     public ModelRenderer spiderHead;
-
-    /** The spider's neck box */
     public ModelRenderer spiderNeck;
-
-    /** The spider's body box */
     public ModelRenderer spiderBody;
-
-    /** Spider's first leg */
     public ModelRenderer spiderLeg1;
-
-    /** Spider's second leg */
     public ModelRenderer spiderLeg2;
-
-    /** Spider's third leg */
     public ModelRenderer spiderLeg3;
-
-    /** Spider's fourth leg */
     public ModelRenderer spiderLeg4;
-
-    /** Spider's fifth leg */
     public ModelRenderer spiderLeg5;
-
-    /** Spider's sixth leg */
     public ModelRenderer spiderLeg6;
-
-    /** Spider's seventh leg */
     public ModelRenderer spiderLeg7;
-
-    /** Spider's eight leg */
     public ModelRenderer spiderLeg8;
 
     public ModelSpider()
@@ -77,9 +56,6 @@ public class ModelSpider extends ModelBase
         this.spiderLeg8.setRotationPoint(4.0F, (float)i, -1.0F);
     }
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
     public void render(Entity entityIn, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float scale)
     {
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entityIn);
@@ -96,11 +72,6 @@ public class ModelSpider extends ModelBase
         this.spiderLeg8.render(scale);
     }
 
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         this.spiderHead.rotateAngleY = netHeadYaw / (180F / (float)Math.PI);

@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 
 public class EntityPig extends EntityAnimal
 {
-    /** AI task for player control. */
     private final EntityAIControlledByPlayer aiControlledByPlayer;
 
     public EntityPig(World worldIn)
@@ -53,10 +52,6 @@ public class EntityPig extends EntityAnimal
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
     }
 
-    /**
-     * returns true if all the conditions for steering the entity are met. For pigs, this is true if it is being ridden
-     * by a player and the player is holding a carrot-on-a-stick
-     */
     public boolean canBeSteered()
     {
         ItemStack itemstack = ((EntityPlayer)this.riddenByEntity).getHeldItem();
@@ -69,43 +64,28 @@ public class EntityPig extends EntityAnimal
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
         tagCompound.setBoolean("Saddle", this.getSaddled());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
         this.setSaddled(tagCompund.getBoolean("Saddle"));
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return "mob.pig.say";
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.pig.say";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.pig.death";
@@ -116,9 +96,6 @@ public class EntityPig extends EntityAnimal
         this.playSound("mob.pig.step", 0.15F, 1.0F);
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
     public boolean interact(EntityPlayer player)
     {
         if (super.interact(player))
@@ -141,13 +118,6 @@ public class EntityPig extends EntityAnimal
         return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
     }
 
-    /**
-     * Drop 0-2 items of this living's type
-     *  
-     * @param wasRecentlyHit true if this this entity was recently hit by appropriate entity (generally only if player
-     * or tameable)
-     * @param lootingModifier level of enchanment to be applied to this drop
-     */
     protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
     {
         int i = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + lootingModifier);
@@ -170,17 +140,11 @@ public class EntityPig extends EntityAnimal
         }
     }
 
-    /**
-     * Returns true if the pig is saddled.
-     */
     public boolean getSaddled()
     {
         return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
     }
 
-    /**
-     * Set or remove the saddle of the pig.
-     */
     public void setSaddled(boolean saddled)
     {
         if (saddled)
@@ -193,9 +157,6 @@ public class EntityPig extends EntityAnimal
         }
     }
 
-    /**
-     * Called when a lightning bolt hits the entity.
-     */
     public void onStruckByLightning(EntityLightningBolt lightningBolt)
     {
         if (!this.worldObj.isRemote && !this.isDead)
@@ -231,18 +192,11 @@ public class EntityPig extends EntityAnimal
         return new EntityPig(this.worldObj);
     }
 
-    /**
-     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-     * the animal type)
-     */
     public boolean isBreedingItem(ItemStack stack)
     {
         return stack != null && stack.getItem() == Items.carrot;
     }
 
-    /**
-     * Return the AI task for player control.
-     */
     public EntityAIControlledByPlayer getAIControlledByPlayer()
     {
         return this.aiControlledByPlayer;

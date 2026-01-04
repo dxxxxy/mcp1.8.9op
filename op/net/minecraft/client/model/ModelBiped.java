@@ -7,35 +7,15 @@ import net.minecraft.util.MathHelper;
 public class ModelBiped extends ModelBase
 {
     public ModelRenderer bipedHead;
-
-    /** The Biped's Headwear. Used for the outer layer of player skins. */
     public ModelRenderer bipedHeadwear;
     public ModelRenderer bipedBody;
-
-    /** The Biped's Right Arm */
     public ModelRenderer bipedRightArm;
-
-    /** The Biped's Left Arm */
     public ModelRenderer bipedLeftArm;
-
-    /** The Biped's Right Leg */
     public ModelRenderer bipedRightLeg;
-
-    /** The Biped's Left Leg */
     public ModelRenderer bipedLeftLeg;
-
-    /**
-     * Records whether the model should be rendered holding an item in the left hand, and if that item is a block.
-     */
     public int heldItemLeft;
-
-    /**
-     * Records whether the model should be rendered holding an item in the right hand, and if that item is a block.
-     */
     public int heldItemRight;
     public boolean isSneak;
-
-    /** Records whether the model should be rendered aiming a bow. */
     public boolean aimedBow;
 
     public ModelBiped()
@@ -77,9 +57,6 @@ public class ModelBiped extends ModelBase
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + p_i1149_2_, 0.0F);
     }
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
     public void render(Entity entityIn, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float scale)
     {
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entityIn);
@@ -121,11 +98,6 @@ public class ModelBiped extends ModelBase
         GlStateManager.popMatrix();
     }
 
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         this.bipedHead.rotateAngleY = netHeadYaw / (180F / (float)Math.PI);

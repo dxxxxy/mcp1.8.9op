@@ -23,17 +23,11 @@ public class S37PacketStatistics implements Packet<INetHandlerPlayClient>
         this.field_148976_a = p_i45173_1_;
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleStatistics(this);
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         int i = buf.readVarIntFromBuffer();
@@ -51,9 +45,6 @@ public class S37PacketStatistics implements Packet<INetHandlerPlayClient>
         }
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.field_148976_a.size());

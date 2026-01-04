@@ -20,16 +20,9 @@ import net.minecraft.world.World;
 
 public class BlockFence extends Block
 {
-    /** Whether this fence connects in the northern direction */
     public static final PropertyBool NORTH = PropertyBool.create("north");
-
-    /** Whether this fence connects in the eastern direction */
     public static final PropertyBool EAST = PropertyBool.create("east");
-
-    /** Whether this fence connects in the southern direction */
     public static final PropertyBool SOUTH = PropertyBool.create("south");
-
-    /** Whether this fence connects in the western direction */
     public static final PropertyBool WEST = PropertyBool.create("west");
 
     public BlockFence(Material materialIn)
@@ -44,9 +37,6 @@ public class BlockFence extends Block
         this.setCreativeTab(CreativeTabs.tabDecorations);
     }
 
-    /**
-     * Add all collision boxes of this Block to the list that intersect with the given mask.
-     */
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
         boolean flag = this.canConnectTo(worldIn, pos.north());
@@ -140,9 +130,6 @@ public class BlockFence extends Block
         this.setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -174,18 +161,11 @@ public class BlockFence extends Block
         return worldIn.isRemote ? true : ItemLead.attachToFence(playerIn, worldIn, pos);
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return 0;
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         return state.withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(worldIn, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(worldIn, pos.west())));

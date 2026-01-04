@@ -46,8 +46,6 @@ public class EntityMinecartCommandBlock extends EntityMinecart
             return EntityMinecartCommandBlock.this;
         }
     };
-
-    /** Cooldown before command block logic runs again in ticks */
     private int activatorRailCooldown = 0;
 
     public EntityMinecartCommandBlock(World worldIn)
@@ -67,9 +65,6 @@ public class EntityMinecartCommandBlock extends EntityMinecart
         this.getDataWatcher().addObject(24, "");
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     protected void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
@@ -78,9 +73,6 @@ public class EntityMinecartCommandBlock extends EntityMinecart
         this.getDataWatcher().updateObject(24, IChatComponent.Serializer.componentToJson(this.getCommandBlockLogic().getLastOutput()));
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     protected void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
@@ -102,9 +94,6 @@ public class EntityMinecartCommandBlock extends EntityMinecart
         return this.commandBlockLogic;
     }
 
-    /**
-     * Called every tick the minecart is on an activator rail. Args: x, y, z, is the rail receiving power
-     */
     public void onActivatorRailPass(int x, int y, int z, boolean receivingPower)
     {
         if (receivingPower && this.ticksExisted - this.activatorRailCooldown >= 4)
@@ -114,9 +103,6 @@ public class EntityMinecartCommandBlock extends EntityMinecart
         }
     }
 
-    /**
-     * First layer of player interaction
-     */
     public boolean interactFirst(EntityPlayer playerIn)
     {
         this.commandBlockLogic.tryOpenEditCommandBlock(playerIn);

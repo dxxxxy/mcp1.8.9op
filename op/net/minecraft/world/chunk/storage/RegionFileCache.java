@@ -39,9 +39,6 @@ public class RegionFileCache
         }
     }
 
-    /**
-     * clears region file references
-     */
     public static synchronized void clearRegionFileReferences()
     {
         for (RegionFile regionfile : regionsByFilename.values())
@@ -62,18 +59,12 @@ public class RegionFileCache
         regionsByFilename.clear();
     }
 
-    /**
-     * Returns an input stream for the specified chunk. Args: worldDir, chunkX, chunkZ
-     */
     public static DataInputStream getChunkInputStream(File worldDir, int chunkX, int chunkZ)
     {
         RegionFile regionfile = createOrLoadRegionFile(worldDir, chunkX, chunkZ);
         return regionfile.getChunkDataInputStream(chunkX & 31, chunkZ & 31);
     }
 
-    /**
-     * Returns an output stream for the specified chunk. Args: worldDir, chunkX, chunkZ
-     */
     public static DataOutputStream getChunkOutputStream(File worldDir, int chunkX, int chunkZ)
     {
         RegionFile regionfile = createOrLoadRegionFile(worldDir, chunkX, chunkZ);

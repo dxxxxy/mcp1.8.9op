@@ -22,9 +22,6 @@ public class RenderXPOrb extends Render<EntityXPOrb>
         this.shadowOpaque = 0.75F;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityXPOrb entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -88,9 +85,6 @@ public class RenderXPOrb extends Render<EntityXPOrb>
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityXPOrb entity)
     {
         return experienceOrbTextures;

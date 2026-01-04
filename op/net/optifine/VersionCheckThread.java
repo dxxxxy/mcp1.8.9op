@@ -28,7 +28,7 @@ public class VersionCheckThread extends Thread
                 httpurlconnection.setRequestProperty("OF-MC-Version", "1.8.9");
                 httpurlconnection.setRequestProperty("OF-MC-Brand", "" + ClientBrandRetriever.getClientModName());
                 httpurlconnection.setRequestProperty("OF-Edition", "HD_U");
-                httpurlconnection.setRequestProperty("OF-Release", "M5");
+                httpurlconnection.setRequestProperty("OF-Release", "M6_pre2");
                 httpurlconnection.setRequestProperty("OF-Java-Version", "" + System.getProperty("java.version"));
                 httpurlconnection.setRequestProperty("OF-CpuCount", "" + Config.getAvailableProcessors());
                 httpurlconnection.setRequestProperty("OF-OpenGL-Version", "" + Config.openGlVersion);
@@ -51,7 +51,7 @@ public class VersionCheckThread extends Thread
                     String s1 = astring[0].trim();
                     Config.dbg("Version found: " + s1);
 
-                    if (Config.compareRelease(s1, "M5") <= 0)
+                    if (Config.compareRelease(s1, "M6_pre2") <= 0)
                     {
                         return;
                     }

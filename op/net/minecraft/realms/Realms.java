@@ -107,7 +107,7 @@ public class Realms
 
     public static boolean getRealmsNotificationsEnabled()
     {
-        return Minecraft.getMinecraft().gameSettings.getOptionOrdinalValue(GameSettings.Options.enumFloat);
+        return Minecraft.getMinecraft().gameSettings.getOptionOrdinalValue(GameSettings.Options.REALMS_NOTIFICATIONS);
     }
 
     public static boolean inTitleScreen()

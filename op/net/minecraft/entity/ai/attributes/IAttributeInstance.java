@@ -5,9 +5,6 @@ import java.util.UUID;
 
 public interface IAttributeInstance
 {
-    /**
-     * Get the Attribute this is an instance of
-     */
     IAttribute getAttribute();
 
     double getBaseValue();
@@ -20,9 +17,6 @@ public interface IAttributeInstance
 
     boolean hasModifier(AttributeModifier modifier);
 
-    /**
-     * Returns attribute modifier, if any, by the given UUID
-     */
     AttributeModifier getModifier(UUID uuid);
 
     void applyModifier(AttributeModifier modifier);

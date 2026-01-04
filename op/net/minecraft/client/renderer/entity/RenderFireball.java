@@ -21,9 +21,6 @@ public class RenderFireball extends Render<EntityFireball>
         this.scale = scaleIn;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityFireball entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -54,9 +51,6 @@ public class RenderFireball extends Render<EntityFireball>
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityFireball entity)
     {
         return TextureMap.locationBlocksTexture;

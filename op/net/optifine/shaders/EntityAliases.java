@@ -111,9 +111,9 @@ public class EntityAliases
                 Config.dbg("[Shaders] Parsing entity mappings: " + path);
                 ConnectedParser connectedparser = new ConnectedParser("Shaders");
 
-                for (Object s0 : properties.keySet())
+                for (Object o : properties.keySet())
                 {
-                    String s = (String) s0;
+                    String s = (String) o;
                     String s1 = properties.getProperty(s);
                     String s2 = "entity.";
 

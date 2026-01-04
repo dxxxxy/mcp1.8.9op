@@ -36,9 +36,6 @@ public class S1DPacketEntityEffect implements Packet<INetHandlerPlayClient>
         this.hideParticles = (byte)(effect.getIsShowParticles() ? 1 : 0);
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityId = buf.readVarIntFromBuffer();
@@ -48,9 +45,6 @@ public class S1DPacketEntityEffect implements Packet<INetHandlerPlayClient>
         this.hideParticles = buf.readByte();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.entityId);
@@ -65,9 +59,6 @@ public class S1DPacketEntityEffect implements Packet<INetHandlerPlayClient>
         return this.duration == 32767;
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleEntityEffect(this);

@@ -49,10 +49,6 @@ public class GuiButtonRealmsProxy extends GuiButton
         return super.yPosition;
     }
 
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
     {
         if (super.mousePressed(mc, mouseX, mouseY))
@@ -63,17 +59,11 @@ public class GuiButtonRealmsProxy extends GuiButton
         return super.mousePressed(mc, mouseX, mouseY);
     }
 
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
     public void mouseReleased(int mouseX, int mouseY)
     {
         this.realmsButton.released(mouseX, mouseY);
     }
 
-    /**
-     * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
-     */
     public void mouseDragged(Minecraft mc, int mouseX, int mouseY)
     {
         this.realmsButton.renderBg(mouseX, mouseY);
@@ -84,10 +74,6 @@ public class GuiButtonRealmsProxy extends GuiButton
         return this.realmsButton;
     }
 
-    /**
-     * Returns 0 if the button is disabled, 1 if the mouse is NOT hovering over this button and 2 if it IS hovering over
-     * this button.
-     */
     public int getHoverState(boolean mouseOver)
     {
         return this.realmsButton.getYImage(mouseOver);

@@ -30,27 +30,18 @@ public class S1CPacketEntityMetadata implements Packet<INetHandlerPlayClient>
         }
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityId = buf.readVarIntFromBuffer();
         this.field_149378_b = DataWatcher.readWatchedListFromPacketBuffer(buf);
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.entityId);
         DataWatcher.writeWatchedListToPacketBuffer(this.field_149378_b, buf);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleEntityMetadata(this);

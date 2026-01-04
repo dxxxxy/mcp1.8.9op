@@ -39,9 +39,6 @@ public class BlockRedstoneLight extends Block
         }
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!worldIn.isRemote)
@@ -68,9 +65,6 @@ public class BlockRedstoneLight extends Block
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(Blocks.redstone_lamp);

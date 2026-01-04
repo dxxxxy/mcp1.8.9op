@@ -23,18 +23,11 @@ public class BlockPlanks extends Block
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         return ((BlockPlanks.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockPlanks.EnumType blockplanks$enumtype : BlockPlanks.EnumType.values())
@@ -43,25 +36,16 @@ public class BlockPlanks extends Block
         }
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(VARIANT, BlockPlanks.EnumType.byMetadata(meta));
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         return ((BlockPlanks.EnumType)state.getValue(VARIANT)).getMapColor();
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((BlockPlanks.EnumType)state.getValue(VARIANT)).getMetadata();

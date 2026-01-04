@@ -328,9 +328,6 @@ public class GuiPageButtonList extends GuiListExtended
         }
     }
 
-    /**
-     * Gets the IGuiListEntry object for the given index
-     */
     public GuiPageButtonList.GuiEntry getListEntry(int index)
     {
         return (GuiPageButtonList.GuiEntry)this.field_178074_u.get(index);
@@ -341,9 +338,6 @@ public class GuiPageButtonList extends GuiListExtended
         return this.field_178074_u.size();
     }
 
-    /**
-     * Gets the width of the list
-     */
     public int getListWidth()
     {
         return 400;

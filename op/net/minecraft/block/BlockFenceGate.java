@@ -28,10 +28,6 @@ public class BlockFenceGate extends BlockDirectional
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         EnumFacing.Axis enumfacing$axis = ((EnumFacing)state.getValue(FACING)).getAxis();
@@ -76,9 +72,6 @@ public class BlockFenceGate extends BlockDirectional
         }
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -94,10 +87,6 @@ public class BlockFenceGate extends BlockDirectional
         return ((Boolean)worldIn.getBlockState(pos).getValue(OPEN)).booleanValue();
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()).withProperty(OPEN, Boolean.valueOf(false)).withProperty(POWERED, Boolean.valueOf(false)).withProperty(IN_WALL, Boolean.valueOf(false));
@@ -127,9 +116,6 @@ public class BlockFenceGate extends BlockDirectional
         return true;
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!worldIn.isRemote)
@@ -161,17 +147,11 @@ public class BlockFenceGate extends BlockDirectional
         return true;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta)).withProperty(OPEN, Boolean.valueOf((meta & 4) != 0)).withProperty(POWERED, Boolean.valueOf((meta & 8) != 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

@@ -5,15 +5,9 @@ import net.minecraft.entity.Entity;
 public class MovingObjectPosition
 {
     private BlockPos blockPos;
-
-    /** What type of ray trace hit was this? 0 = block, 1 = entity */
     public MovingObjectPosition.MovingObjectType typeOfHit;
     public EnumFacing sideHit;
-
-    /** The vector position of the hit */
     public Vec3 hitVec;
-
-    /** The hit entity */
     public Entity entityHit;
 
     public MovingObjectPosition(Vec3 hitVecIn, EnumFacing facing, BlockPos blockPosIn)

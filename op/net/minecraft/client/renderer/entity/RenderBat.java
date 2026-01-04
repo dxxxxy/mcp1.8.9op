@@ -15,18 +15,11 @@ public class RenderBat extends RenderLiving<EntityBat>
         super(renderManagerIn, new ModelBat(), 0.25F);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityBat entity)
     {
         return batTextures;
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityBat entitylivingbaseIn, float partialTickTime)
     {
         GlStateManager.scale(0.35F, 0.35F, 0.35F);

@@ -198,9 +198,9 @@ public class RenderChunk
             boolean flag = Reflector.ForgeBlock_canRenderInLayer.exists();
             boolean flag1 = Reflector.ForgeHooksClient_setRenderLayer.exists();
 
-            for (Object blockposm0 : BlockPosM.getAllInBoxMutable(blockpos, blockpos1))
+            for (Object o : BlockPosM.getAllInBoxMutable(blockpos, blockpos1))
             {
-                BlockPosM blockposm = (BlockPosM) blockposm0;
+                BlockPosM blockposm = (BlockPosM) o;
                 IBlockState iblockstate = chunkcacheof.getBlockState(blockposm);
                 Block block = iblockstate.getBlock();
 

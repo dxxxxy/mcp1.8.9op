@@ -8,9 +8,6 @@ import net.minecraft.world.World;
 
 public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem
 {
-    /**
-     * Dispenses the specified ItemStack from a dispenser.
-     */
     public final ItemStack dispense(IBlockSource source, ItemStack stack)
     {
         ItemStack itemstack = this.dispenseStack(source, stack);
@@ -19,9 +16,6 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem
         return itemstack;
     }
 
-    /**
-     * Dispense the specified stack, play the dispense sound and spawn particles.
-     */
     protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
     {
         EnumFacing enumfacing = BlockDispenser.getFacing(source.getBlockMetadata());
@@ -57,17 +51,11 @@ public class BehaviorDefaultDispenseItem implements IBehaviorDispenseItem
         worldIn.spawnEntityInWorld(entityitem);
     }
 
-    /**
-     * Play the dispense sound from the specified block.
-     */
     protected void playDispenseSound(IBlockSource source)
     {
         source.getWorld().playAuxSFX(1000, source.getBlockPos(), 0);
     }
 
-    /**
-     * Order clients to display dispense particles from the specified block and facing.
-     */
     protected void spawnDispenseParticles(IBlockSource source, EnumFacing facingIn)
     {
         source.getWorld().playAuxSFX(2000, source.getBlockPos(), this.func_82488_a(facingIn));

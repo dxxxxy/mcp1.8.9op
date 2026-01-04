@@ -250,9 +250,6 @@ public class ResourcePackRepository
         }
     }
 
-    /**
-     * Keep only the 10 most recent resources packs, delete the others
-     */
     private void deleteOldServerResourcesPacks()
     {
         List<File> list = Lists.newArrayList(FileUtils.listFiles(this.dirServerResourcepacks, TrueFileFilter.TRUE, (IOFileFilter)null));
@@ -275,9 +272,6 @@ public class ResourcePackRepository
         return Minecraft.getMinecraft().scheduleResourcesRefresh();
     }
 
-    /**
-     * Getter for the IResourcePack instance associated with this ResourcePackRepository
-     */
     public IResourcePack getResourcePackInstance()
     {
         return this.resourcePackInstance;

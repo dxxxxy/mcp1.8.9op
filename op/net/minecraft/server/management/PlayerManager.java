@@ -37,16 +37,8 @@ public class PlayerManager
     private final LongHashMap<PlayerManager.PlayerInstance> playerInstances = new LongHashMap();
     private final List<PlayerManager.PlayerInstance> playerInstancesToUpdate = Lists.<PlayerManager.PlayerInstance>newArrayList();
     private final List<PlayerManager.PlayerInstance> playerInstanceList = Lists.<PlayerManager.PlayerInstance>newArrayList();
-
-    /**
-     * Number of chunks the server sends to the client. Valid 3<=x<=15. In server.properties.
-     */
     private int playerViewRadius;
-
-    /** time what is using to check if InhabitedTime should be calculated */
     private long previousTotalWorldTime;
-
-    /** x, z direction vectors: east, south, west, north */
     private final int[][] xzDirectionsConst = new int[][] {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
     private final Map<EntityPlayerMP, Set<ChunkCoordIntPair>> mapPlayerPendingEntries = new HashMap();
 
@@ -56,17 +48,11 @@ public class PlayerManager
         this.setPlayerViewRadius(serverWorld.getMinecraftServer().getConfigurationManager().getViewDistance());
     }
 
-    /**
-     * Returns the WorldServer associated with this PlayerManager
-     */
     public WorldServer getWorldServer()
     {
         return this.theWorldServer;
     }
 
-    /**
-     * updates all the player instances that need to be updated
-     */
     public void updatePlayerInstances()
     {
         Set<Entry<EntityPlayerMP, Set<ChunkCoordIntPair>>> set = this.mapPlayerPendingEntries.entrySet();
@@ -145,9 +131,6 @@ public class PlayerManager
         return this.playerInstances.getValueByKey(i) != null;
     }
 
-    /**
-     * passi n the chunk x and y and a flag as to whether or not the instance should be made if it doesnt exist
-     */
     private PlayerManager.PlayerInstance getPlayerInstance(int chunkX, int chunkZ, boolean createIfAbsent)
     {
         long i = (long)chunkX + 2147483647L | (long)chunkZ + 2147483647L << 32;
@@ -175,9 +158,6 @@ public class PlayerManager
         }
     }
 
-    /**
-     * Adds an EntityPlayerMP to the PlayerManager and to all player instances within player visibility
-     */
     public void addPlayer(EntityPlayerMP player)
     {
         int i = (int)player.posX >> 4;
@@ -210,9 +190,6 @@ public class PlayerManager
         this.filterChunkLoadQueue(player);
     }
 
-    /**
-     * Removes all chunks from the given player's chunk load queue that are not in viewing range of the player.
-     */
     public void filterChunkLoadQueue(EntityPlayerMP player)
     {
         List<ChunkCoordIntPair> list = Lists.newArrayList(player.loadedChunks);
@@ -265,9 +242,6 @@ public class PlayerManager
         }
     }
 
-    /**
-     * Removes an EntityPlayerMP from the PlayerManager.
-     */
     public void removePlayer(EntityPlayerMP player)
     {
         this.mapPlayerPendingEntries.remove(player);
@@ -290,10 +264,6 @@ public class PlayerManager
         this.players.remove(player);
     }
 
-    /**
-     * Determine if two rectangles centered at the given points overlap for the provided radius. Arguments: x1, z1, x2,
-     * z2, radius.
-     */
     private boolean overlaps(int x1, int z1, int x2, int z2, int radius)
     {
         int i = x1 - x2;
@@ -301,9 +271,6 @@ public class PlayerManager
         return i >= -radius && i <= radius ? j >= -radius && j <= radius : false;
     }
 
-    /**
-     * update chunks around a player being moved by server logic (e.g. cart, boat)
-     */
     public void updateMountedMovingPlayer(EntityPlayerMP player)
     {
         int i = (int)player.posX >> 4;
@@ -427,9 +394,6 @@ public class PlayerManager
         }
     }
 
-    /**
-     * Get the furthest viewable block given player's view distance
-     */
     public static int getFurthestViewableBlock(int distance)
     {
         return distance * 16 - 16;

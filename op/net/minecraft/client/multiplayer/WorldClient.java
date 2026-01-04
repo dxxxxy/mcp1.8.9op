@@ -42,10 +42,7 @@ import net.optifine.reflect.Reflector;
 
 public class WorldClient extends World
 {
-    /** The packets that need to be sent to the server. */
     private NetHandlerPlayClient sendQueue;
-
-    /** The ChunkProviderClient instance */
     private ChunkProviderClient clientChunkProvider;
     private final Set<Entity> entityList = Sets.<Entity>newHashSet();
     private final Set<Entity> entitySpawnQueue = Sets.<Entity>newHashSet();
@@ -73,9 +70,6 @@ public class WorldClient extends World
         }
     }
 
-    /**
-     * Runs a single tick for the world
-     */
     public void tick()
     {
         super.tick();
@@ -106,24 +100,10 @@ public class WorldClient extends World
         this.theProfiler.endSection();
     }
 
-    /**
-     * Invalidates an AABB region of blocks from the receive queue, in the event that the block has been modified
-     * client-side in the intervening 80 receive ticks.
-     *  
-     * @param x1 X position of the block where the region begin
-     * @param y1 Y position of the block where the region begin
-     * @param z1 Z position of the block where the region begin
-     * @param x2 X position of the block where the region end
-     * @param y2 Y position of the block where the region end
-     * @param z2 Z position of the block where the region end
-     */
     public void invalidateBlockReceiveRegion(int x1, int y1, int z1, int x2, int y2, int z2)
     {
     }
 
-    /**
-     * Creates the chunk provider for this world. Called in the constructor. Retrieves provider from worldProvider?
-     */
     protected IChunkProvider createChunkProvider()
     {
         this.clientChunkProvider = new ChunkProviderClient(this);
@@ -180,9 +160,6 @@ public class WorldClient extends World
         }
     }
 
-    /**
-     * Called when an entity is spawned in the world. This includes players.
-     */
     public boolean spawnEntityInWorld(Entity entityIn)
     {
         boolean flag = super.spawnEntityInWorld(entityIn);
@@ -200,9 +177,6 @@ public class WorldClient extends World
         return flag;
     }
 
-    /**
-     * Schedule the entity for removal during the next tick. Marks the entity dead in anticipation.
-     */
     public void removeEntity(Entity entityIn)
     {
         super.removeEntity(entityIn);
@@ -238,12 +212,6 @@ public class WorldClient extends World
         }
     }
 
-    /**
-     * Add an ID to Entity mapping to entityHashSet
-     *  
-     * @param entityID The ID to give to the entity to spawn
-     * @param entityToSpawn The Entity to spawn in the World
-     */
     public void addEntityToWorld(int entityID, Entity entityToSpawn)
     {
         Entity entity = this.getEntityByID(entityID);
@@ -264,9 +232,6 @@ public class WorldClient extends World
         this.entitiesById.addKey(entityID, entityToSpawn);
     }
 
-    /**
-     * Returns the Entity with the given ID, or null if it doesn't exist in this World.
-     */
     public Entity getEntityByID(int id)
     {
         return (Entity)(id == this.mc.thePlayer.getEntityId() ? this.mc.thePlayer : super.getEntityByID(id));
@@ -294,17 +259,11 @@ public class WorldClient extends World
         return super.setBlockState(pos, state, 3);
     }
 
-    /**
-     * If on MP, sends a quitting packet.
-     */
     public void sendQuittingDisconnectingPacket()
     {
         this.sendQueue.getNetworkManager().closeChannel(new ChatComponentText("Quitting"));
     }
 
-    /**
-     * Updates all weather states.
-     */
     protected void updateWeather()
     {
     }
@@ -338,9 +297,6 @@ public class WorldClient extends World
         }
     }
 
-    /**
-     * also releases skins.
-     */
     public void removeAllEntities()
     {
         this.loadedEntityList.removeAll(this.unloadedEntityList);
@@ -395,9 +351,6 @@ public class WorldClient extends World
         }
     }
 
-    /**
-     * Adds some basic stats of the world to the given crash report.
-     */
     public CrashReportCategory addWorldInfoToCrashReport(CrashReport report)
     {
         CrashReportCategory crashreportcategory = super.addWorldInfoToCrashReport(report);
@@ -432,23 +385,11 @@ public class WorldClient extends World
         return crashreportcategory;
     }
 
-    /**
-     * Plays a sound at the specified position.
-     *  
-     * @param pos The position where to play the sound
-     * @param soundName The name of the sound to play
-     * @param volume The volume of the sound
-     * @param pitch The pitch of the sound
-     * @param distanceDelay True if the sound is delayed over distance
-     */
     public void playSoundAtPos(BlockPos pos, String soundName, float volume, float pitch, boolean distanceDelay)
     {
         this.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, soundName, volume, pitch, distanceDelay);
     }
 
-    /**
-     * par8 is loudness, all pars passed to minecraftInstance.sndManager.playSound
-     */
     public void playSound(double x, double y, double z, String soundName, float volume, float pitch, boolean distanceDelay)
     {
         double d0 = this.mc.getRenderViewEntity().getDistanceSq(x, y, z);
@@ -475,9 +416,6 @@ public class WorldClient extends World
         this.worldScoreboard = scoreboardIn;
     }
 
-    /**
-     * Sets the world time.
-     */
     public void setWorldTime(long time)
     {
         if (time < 0L)
@@ -505,11 +443,6 @@ public class WorldClient extends World
         return i;
     }
 
-    /**
-     * Sets the block state at a given location. Flag 1 will cause a block update. Flag 2 will send the change to
-     * clients (you almost always want this). Flag 4 prevents the block from being re-rendered, if this is a client
-     * world. Flags can be added together.
-     */
     public boolean setBlockState(BlockPos pos, IBlockState newState, int flags)
     {
         this.playerUpdate = this.isPlayerActing();

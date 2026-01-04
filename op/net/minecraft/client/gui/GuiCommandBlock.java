@@ -14,15 +14,9 @@ import org.lwjgl.input.Keyboard;
 public class GuiCommandBlock extends GuiScreen
 {
     private static final Logger field_146488_a = LogManager.getLogger();
-
-    /** Text field containing the command block's command. */
     private GuiTextField commandTextField;
     private GuiTextField previousOutputTextField;
-
-    /** Command block being edited. */
     private final CommandBlockLogic localCommandBlock;
-
-    /** "Done" button for the GUI. */
     private GuiButton doneBtn;
     private GuiButton cancelBtn;
     private GuiButton field_175390_s;
@@ -33,18 +27,11 @@ public class GuiCommandBlock extends GuiScreen
         this.localCommandBlock = p_i45032_1_;
     }
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
     public void updateScreen()
     {
         this.commandTextField.updateCursorCounter();
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         Keyboard.enableRepeatEvents(true);
@@ -65,17 +52,11 @@ public class GuiCommandBlock extends GuiScreen
         this.doneBtn.enabled = this.commandTextField.getText().trim().length() > 0;
     }
 
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
     public void onGuiClosed()
     {
         Keyboard.enableRepeatEvents(false);
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.enabled)
@@ -109,10 +90,6 @@ public class GuiCommandBlock extends GuiScreen
         }
     }
 
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
         this.commandTextField.textboxKeyTyped(typedChar, keyCode);
@@ -132,9 +109,6 @@ public class GuiCommandBlock extends GuiScreen
         }
     }
 
-    /**
-     * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
-     */
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
     {
         super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -142,9 +116,6 @@ public class GuiCommandBlock extends GuiScreen
         this.previousOutputTextField.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();

@@ -27,9 +27,6 @@ public class RenderBiped<T extends EntityLiving> extends RenderLiving<T>
         this.addLayer(new LayerCustomHead(modelBipedIn.bipedHead));
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(T entity)
     {
         return DEFAULT_RES_LOC;

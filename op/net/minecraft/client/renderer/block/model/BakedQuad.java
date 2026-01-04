@@ -11,10 +11,6 @@ import net.optifine.reflect.Reflector;
 
 public class BakedQuad implements IVertexProducer
 {
-    /**
-     * Joined 4 vertex records, each has 7 fields (x, y, z, shadeColor, u, v, <unused>), see
-     * FaceBakery.storeVertexData()
-     */
     protected int[] vertexData;
     protected final int tintIndex;
     protected EnumFacing face;

@@ -27,19 +27,12 @@ public class ItemDye extends Item
         this.setCreativeTab(CreativeTabs.tabMaterials);
     }
 
-    /**
-     * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
-     * different names based on their damage or NBT.
-     */
     public String getUnlocalizedName(ItemStack stack)
     {
         int i = stack.getMetadata();
         return super.getUnlocalizedName() + "." + EnumDyeColor.byDyeDamage(i).getUnlocalizedName();
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
@@ -150,9 +143,6 @@ public class ItemDye extends Item
         }
     }
 
-    /**
-     * Returns true if the item can be used on the given entity, e.g. shears on sheep.
-     */
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target)
     {
         if (target instanceof EntitySheep)
@@ -174,9 +164,6 @@ public class ItemDye extends Item
         }
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
         for (int i = 0; i < 16; ++i)

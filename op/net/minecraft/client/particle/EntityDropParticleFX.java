@@ -10,10 +10,7 @@ import net.minecraft.world.World;
 
 public class EntityDropParticleFX extends EntityFX
 {
-    /** the material type for dropped items/blocks */
     private Material materialType;
-
-    /** The height of the current bob */
     private int bobTimer;
 
     protected EntityDropParticleFX(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, Material p_i1203_8_)
@@ -48,17 +45,11 @@ public class EntityDropParticleFX extends EntityFX
         return this.materialType == Material.water ? super.getBrightnessForRender(partialTicks) : 257;
     }
 
-    /**
-     * Gets how bright this entity is.
-     */
     public float getBrightness(float partialTicks)
     {
         return this.materialType == Material.water ? super.getBrightness(partialTicks) : 1.0F;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;

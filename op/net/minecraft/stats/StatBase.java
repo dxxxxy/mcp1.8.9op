@@ -12,10 +12,7 @@ import net.minecraft.util.IJsonSerializable;
 
 public class StatBase
 {
-    /** The Stat ID */
     public final String statId;
-
-    /** The Stat name */
     private final IChatComponent statName;
     public boolean isIndependent;
     private final IStatType type;
@@ -73,19 +70,12 @@ public class StatBase
         this(statIdIn, statNameIn, simpleStatType);
     }
 
-    /**
-     * Initializes the current stat as independent (i.e., lacking prerequisites for being updated) and returns the
-     * current instance.
-     */
     public StatBase initIndependentStat()
     {
         this.isIndependent = true;
         return this;
     }
 
-    /**
-     * Register the stat into StatList.
-     */
     public StatBase registerStat()
     {
         if (StatList.oneShotStats.containsKey(this.statId))
@@ -100,9 +90,6 @@ public class StatBase
         }
     }
 
-    /**
-     * Returns whether or not the StatBase-derived class is a statistic (running counter) or an achievement (one-shot).
-     */
     public boolean isAchievement()
     {
         return false;
@@ -121,9 +108,6 @@ public class StatBase
         return ichatcomponent;
     }
 
-    /**
-     * 1.8.9
-     */
     public IChatComponent createChatComponent()
     {
         IChatComponent ichatcomponent = this.getStatName();
@@ -159,9 +143,6 @@ public class StatBase
         return "Stat{id=" + this.statId + ", nameId=" + this.statName + ", awardLocallyOnly=" + this.isIndependent + ", formatter=" + this.type + ", objectiveCriteria=" + this.objectiveCriteria + '}';
     }
 
-    /**
-     * 1.8.9
-     */
     public IScoreObjectiveCriteria getCriteria()
     {
         return this.objectiveCriteria;

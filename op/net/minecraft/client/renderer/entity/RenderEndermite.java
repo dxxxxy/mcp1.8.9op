@@ -18,9 +18,6 @@ public class RenderEndermite extends RenderLiving<EntityEndermite>
         return 180.0F;
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityEndermite entity)
     {
         return ENDERMITE_TEXTURES;

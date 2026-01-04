@@ -4,12 +4,6 @@ import java.util.Random;
 
 public class NoiseGeneratorImproved extends NoiseGenerator
 {
-    /**
-     * An int[512], where the first 256 elements are the numbers 0..255, in random shuffled order,
-     * and the second half of the array is identical to the first half, apparently for convenience in wrapping lookups.
-     *  
-     * Effectively a shuffled 0..255 that wraps once.
-     */
     private int[] permutations;
     public double xCoord;
     public double yCoord;
@@ -64,9 +58,6 @@ public class NoiseGeneratorImproved extends NoiseGenerator
         return field_152381_e[i] * p_76310_2_ + field_152382_f[i] * p_76310_4_ + field_152383_g[i] * p_76310_6_;
     }
 
-    /**
-     * noiseArray should be xSize*ySize*zSize in size
-     */
     public void populateNoiseArray(double[] noiseArray, double xOffset, double yOffset, double zOffset, int xSize, int ySize, int zSize, double xScale, double yScale, double zScale, double noiseScale)
     {
         if (ySize == 1)

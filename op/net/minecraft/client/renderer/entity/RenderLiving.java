@@ -42,9 +42,6 @@ public abstract class RenderLiving<T extends EntityLiving> extends RendererLivin
         }
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
@@ -59,9 +56,6 @@ public abstract class RenderLiving<T extends EntityLiving> extends RendererLivin
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
     }
 
-    /**
-     * Gets the value between start and end according to pct
-     */
     private double interpolateValue(double start, double end, double pct)
     {
         return start + (end - start) * pct;

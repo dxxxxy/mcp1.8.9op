@@ -17,33 +17,21 @@ public class BlockSeaLantern extends Block
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return 2 + random.nextInt(2);
     }
 
-    /**
-     * Get the quantity dropped based on the given fortune level
-     */
     public int quantityDroppedWithBonus(int fortune, Random random)
     {
         return MathHelper.clamp_int(this.quantityDropped(random) + random.nextInt(fortune + 1), 1, 5);
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Items.prismarine_crystals;
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         return MapColor.quartzColor;

@@ -490,17 +490,17 @@ public class CustomItems
         return list;
     }
 
-    private static CustomItemProperties[][] propertyListToArray(List list)
+    private static CustomItemProperties[][] propertyListToArray(List lists)
     {
-        CustomItemProperties[][] acustomitemproperties = new CustomItemProperties[list.size()][];
+        CustomItemProperties[][] acustomitemproperties = new CustomItemProperties[lists.size()][];
 
-        for (int i = 0; i < list.size(); ++i)
+        for (int i = 0; i < lists.size(); ++i)
         {
-            List list1 = (List)list.get(i);
+            List list = (List)lists.get(i);
 
-            if (list1 != null)
+            if (list != null)
             {
-                CustomItemProperties[] acustomitemproperties1 = (CustomItemProperties[])((CustomItemProperties[])list1.toArray(new CustomItemProperties[list1.size()]));
+                CustomItemProperties[] acustomitemproperties1 = (CustomItemProperties[])((CustomItemProperties[])list.toArray(new CustomItemProperties[list.size()]));
                 Arrays.sort(acustomitemproperties1, new CustomItemsComparator());
                 acustomitemproperties[i] = acustomitemproperties1;
             }
@@ -546,22 +546,22 @@ public class CustomItems
         }
     }
 
-    private static void addToList(CustomItemProperties cp, List list, int id)
+    private static void addToList(CustomItemProperties cp, List lists, int id)
     {
-        while (id >= list.size())
+        while (id >= lists.size())
         {
-            list.add(null);
+            lists.add(null);
         }
 
-        List list1 = (List)list.get(id);
+        List list = (List)lists.get(id);
 
-        if (list1 == null)
+        if (list == null)
         {
-            list1 = new ArrayList();
-            list.set(id, list1);
+            list = new ArrayList();
+            list.set(id, list);
         }
 
-        list1.add(cp);
+        list.add(cp);
     }
 
     public static IBakedModel getCustomItemModel(ItemStack itemStack, IBakedModel model, ResourceLocation modelLocation, boolean fullModel)

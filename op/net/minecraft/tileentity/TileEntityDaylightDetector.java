@@ -5,9 +5,6 @@ import net.minecraft.util.ITickable;
 
 public class TileEntityDaylightDetector extends TileEntity implements ITickable
 {
-    /**
-     * Like the old updateEntity(), except more generic.
-     */
     public void update()
     {
         if (this.worldObj != null && !this.worldObj.isRemote && this.worldObj.getTotalWorldTime() % 20L == 0L)

@@ -36,20 +36,12 @@ public class ItemRenderer
 {
     private static final ResourceLocation RES_MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
     private static final ResourceLocation RES_UNDERWATER_OVERLAY = new ResourceLocation("textures/misc/underwater.png");
-
-    /** A reference to the Minecraft object. */
     private final Minecraft mc;
     private ItemStack itemToRender;
-
-    /**
-     * How far the current item has been equipped (0 disequipped and 1 fully up)
-     */
     private float equippedProgress;
     private float prevEquippedProgress;
     private final RenderManager renderManager;
     private final RenderItem itemRenderer;
-
-    /** The index of the currently held item (0-8, or -1 if not yet updated) */
     private int equippedItemSlot = -1;
 
     public ItemRenderer(Minecraft mcIn)
@@ -88,19 +80,11 @@ public class ItemRenderer
         }
     }
 
-    /**
-     * Returns true if given block is translucent
-     */
     private boolean isBlockTranslucent(Block blockIn)
     {
         return blockIn != null && blockIn.getBlockLayer() == EnumWorldBlockLayer.TRANSLUCENT;
     }
 
-    /**
-     * Rotate the render around X and Y
-     *  
-     * @param angleY The angle for the rotation arround Y
-     */
     private void rotateArroundXAndY(float angle, float angleY)
     {
         GlStateManager.pushMatrix();
@@ -110,9 +94,6 @@ public class ItemRenderer
         GlStateManager.popMatrix();
     }
 
-    /**
-     * Set the OpenGL LightMapTextureCoords based on the AbstractClientPlayer
-     */
     private void setLightMapFromPlayer(AbstractClientPlayer clientPlayer)
     {
         int i = this.mc.theWorld.getCombinedLight(new BlockPos(clientPlayer.posX, clientPlayer.posY + (double)clientPlayer.getEyeHeight(), clientPlayer.posZ), 0);
@@ -127,9 +108,6 @@ public class ItemRenderer
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, f, f1);
     }
 
-    /**
-     * Rotate the render according to the player's yaw and pitch
-     */
     private void rotateWithPlayerRotations(EntityPlayerSP entityplayerspIn, float partialTicks)
     {
         float f = entityplayerspIn.prevRenderArmPitch + (entityplayerspIn.renderArmPitch - entityplayerspIn.prevRenderArmPitch) * partialTicks;
@@ -138,11 +116,6 @@ public class ItemRenderer
         GlStateManager.rotate((entityplayerspIn.rotationYaw - f1) * 0.1F, 0.0F, 1.0F, 0.0F);
     }
 
-    /**
-     * Return the angle to render the Map
-     *  
-     * @param pitch The player's pitch
-     */
     private float getMapAngleFromPitch(float pitch)
     {
         float f = 1.0F - pitch / 45.0F + 0.1F;
@@ -231,12 +204,6 @@ public class ItemRenderer
         }
     }
 
-    /**
-     * Render the player's arm
-     *  
-     * @param equipProgress The progress of equiping the item
-     * @param swingProgress The swing movement progression
-     */
     private void renderPlayerArm(AbstractClientPlayer clientPlayer, float equipProgress, float swingProgress)
     {
         float f = -0.3F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
@@ -264,11 +231,6 @@ public class ItemRenderer
         GlStateManager.enableCull();
     }
 
-    /**
-     * Rotate and translate render to show item consumption
-     *  
-     * @param swingProgress The swing movement progress
-     */
     private void doItemUsedTransformations(float swingProgress)
     {
         float f = -0.4F * MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
@@ -277,11 +239,6 @@ public class ItemRenderer
         GlStateManager.translate(f, f1, f2);
     }
 
-    /**
-     * Perform the drinking animation movement
-     *  
-     * @param partialTicks Partials ticks
-     */
     private void performDrinking(AbstractClientPlayer clientPlayer, float partialTicks)
     {
         float f = (float)clientPlayer.getItemInUseCount() - partialTicks + 1.0F;
@@ -301,9 +258,6 @@ public class ItemRenderer
         GlStateManager.rotate(f3 * 30.0F, 0.0F, 0.0F, 1.0F);
     }
 
-    /**
-     * Performs transformations prior to the rendering of a held item in first person.
-     */
     private void transformFirstPersonItem(float equipProgress, float swingProgress)
     {
         GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
@@ -317,11 +271,6 @@ public class ItemRenderer
         GlStateManager.scale(0.4F, 0.4F, 0.4F);
     }
 
-    /**
-     * Translate and rotate the render to look like holding a bow
-     *  
-     * @param partialTicks Partial ticks
-     */
     private void doBowTransformations(float partialTicks, AbstractClientPlayer clientPlayer)
     {
         GlStateManager.rotate(-18.0F, 0.0F, 0.0F, 1.0F);
@@ -349,9 +298,6 @@ public class ItemRenderer
         GlStateManager.scale(1.0F, 1.0F, 1.0F + f1 * 0.2F);
     }
 
-    /**
-     * Translate and rotate the render for holding a block
-     */
     private void doBlockTransformations()
     {
         GlStateManager.translate(-0.5F, 0.2F, 0.0F);
@@ -360,9 +306,6 @@ public class ItemRenderer
         GlStateManager.rotate(60.0F, 0.0F, 1.0F, 0.0F);
     }
 
-    /**
-     * Renders the active item in the player's hand when in first person mode. Args: partialTickTime
-     */
     public void renderItemInFirstPerson(float partialTicks)
     {
         if (!Config.isShaders() || !Shaders.isSkipRenderHand())
@@ -429,9 +372,6 @@ public class ItemRenderer
         }
     }
 
-    /**
-     * Renders all the overlays that are in first person mode. Args: partialTickTime
-     */
     public void renderOverlays(float partialTicks)
     {
         GlStateManager.disableAlpha();
@@ -484,12 +424,6 @@ public class ItemRenderer
         GlStateManager.enableAlpha();
     }
 
-    /**
-     * Render the block in the player's hand
-     *  
-     * @param partialTicks Partial ticks
-     * @param atlas The TextureAtlasSprite to render
-     */
     private void renderBlockInHand(float partialTicks, TextureAtlasSprite atlas)
     {
         this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -517,12 +451,6 @@ public class ItemRenderer
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /**
-     * Renders a texture that warps around based on the direction the player is looking. Texture needs to be bound
-     * before being called. Used for the water overlay. Args: parialTickTime
-     *  
-     * @param partialTicks Partial ticks
-     */
     private void renderWaterOverlayTexture(float partialTicks)
     {
         if (!Config.isShaders() || Shaders.isUnderwaterOverlay())
@@ -555,11 +483,6 @@ public class ItemRenderer
         }
     }
 
-    /**
-     * Renders the fire on the screen for first person mode. Arg: partialTickTime
-     *  
-     * @param partialTicks Partial ticks
-     */
     private void renderFireInFirstPerson(float partialTicks)
     {
         Tessellator tessellator = Tessellator.getInstance();
@@ -655,17 +578,11 @@ public class ItemRenderer
         }
     }
 
-    /**
-     * Resets equippedProgress
-     */
     public void resetEquippedProgress()
     {
         this.equippedProgress = 0.0F;
     }
 
-    /**
-     * Resets equippedProgress
-     */
     public void resetEquippedProgress2()
     {
         this.equippedProgress = 0.0F;

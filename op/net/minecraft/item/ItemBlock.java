@@ -23,18 +23,12 @@ public class ItemBlock extends Item
         this.block = block;
     }
 
-    /**
-     * Sets the unlocalized name of this item to the string passed as the parameter, prefixed by "item."
-     */
     public ItemBlock setUnlocalizedName(String unlocalizedName)
     {
         super.setUnlocalizedName(unlocalizedName);
         return this;
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
@@ -139,34 +133,21 @@ public class ItemBlock extends Item
         return worldIn.canBlockBePlaced(this.block, pos, false, side, (Entity)null, stack);
     }
 
-    /**
-     * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
-     * different names based on their damage or NBT.
-     */
     public String getUnlocalizedName(ItemStack stack)
     {
         return this.block.getUnlocalizedName();
     }
 
-    /**
-     * Returns the unlocalized name of this item.
-     */
     public String getUnlocalizedName()
     {
         return this.block.getUnlocalizedName();
     }
 
-    /**
-     * gets the CreativeTab this item is displayed on
-     */
     public CreativeTabs getCreativeTab()
     {
         return this.block.getCreativeTabToDisplayOn();
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
         this.block.getSubBlocks(itemIn, tab, subItems);

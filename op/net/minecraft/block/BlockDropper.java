@@ -21,9 +21,6 @@ public class BlockDropper extends BlockDispenser
         return this.dropBehavior;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityDropper();

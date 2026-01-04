@@ -22,9 +22,6 @@ public class S1FPacketSetExperience implements Packet<INetHandlerPlayClient>
         this.level = levelIn;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.field_149401_a = buf.readFloat();
@@ -32,9 +29,6 @@ public class S1FPacketSetExperience implements Packet<INetHandlerPlayClient>
         this.totalExperience = buf.readVarIntFromBuffer();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeFloat(this.field_149401_a);
@@ -42,9 +36,6 @@ public class S1FPacketSetExperience implements Packet<INetHandlerPlayClient>
         buf.writeVarIntToBuffer(this.totalExperience);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleSetExperience(this);

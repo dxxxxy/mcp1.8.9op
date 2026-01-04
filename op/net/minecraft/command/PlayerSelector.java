@@ -36,25 +36,11 @@ import net.minecraft.world.WorldSettings;
 
 public class PlayerSelector
 {
-    /**
-     * This matches the at-tokens introduced for command blocks, including their arguments, if any.
-     */
     private static final Pattern tokenPattern = Pattern.compile("^@([pare])(?:\\[([\\w=,!-]*)\\])?$");
-
-    /**
-     * This matches things like "-1,,4", and is used for getting x,y,z,range from the token's argument list.
-     */
     private static final Pattern intListPattern = Pattern.compile("\\G([-!]?[\\w-]*)(?:$|,)");
-
-    /**
-     * This matches things like "rm=4,c=2" and is used for handling named token arguments.
-     */
     private static final Pattern keyValueListPattern = Pattern.compile("\\G(\\w+)=([-!]?[\\w-]*)(?:$|,)");
     private static final Set<String> WORLD_BINDING_ARGS = Sets.newHashSet(new String[] {"x", "y", "z", "dx", "dy", "dz", "rm", "r"});
 
-    /**
-     * Returns the one player that matches the given at-token.  Returns null if more than one player matches.
-     */
     public static EntityPlayerMP matchOnePlayer(ICommandSender sender, String token)
     {
         return (EntityPlayerMP)matchOneEntity(sender, token, EntityPlayerMP.class);
@@ -644,9 +630,6 @@ public class PlayerSelector
         return map;
     }
 
-    /**
-     * Returns whether the given pattern can match more than one player.
-     */
     public static boolean matchesMultiplePlayers(String p_82377_0_)
     {
         Matcher matcher = tokenPattern.matcher(p_82377_0_);
@@ -664,9 +647,6 @@ public class PlayerSelector
         }
     }
 
-    /**
-     * Returns whether the given token has any arguments set.
-     */
     public static boolean hasArguments(String p_82378_0_)
     {
         return tokenPattern.matcher(p_82378_0_).matches();

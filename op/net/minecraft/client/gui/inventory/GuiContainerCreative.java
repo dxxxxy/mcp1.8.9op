@@ -34,22 +34,11 @@ import org.lwjgl.input.Mouse;
 
 public class GuiContainerCreative extends InventoryEffectRenderer
 {
-    /** The location of the creative inventory tabs texture */
     private static final ResourceLocation creativeInventoryTabs = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
     private static InventoryBasic field_147060_v = new InventoryBasic("tmp", true, 45);
-
-    /** Currently selected creative inventory tab index. */
     private static int selectedTabIndex = CreativeTabs.tabBlock.getTabIndex();
-
-    /** Amount scrolled in Creative mode inventory (0 = top, 1 = bottom) */
     private float currentScroll;
-
-    /** True if the scrollbar is being dragged */
     private boolean isScrolling;
-
-    /**
-     * True if the left mouse button was held down last time drawScreen was called.
-     */
     private boolean wasClicking;
     private GuiTextField searchField;
     private List<Slot> field_147063_B;
@@ -66,9 +55,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         this.xSize = 195;
     }
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
     public void updateScreen()
     {
         if (!this.mc.playerController.isInCreativeMode())
@@ -79,9 +65,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         this.updateActivePotionEffects();
     }
 
-    /**
-     * Called when the mouse is clicked over a slot or outside the gui.
-     */
     protected void handleMouseClick(Slot slotIn, int slotId, int clickedButton, int clickType)
     {
         this.field_147057_D = true;
@@ -256,10 +239,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         }
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         if (this.mc.playerController.isInCreativeMode())
@@ -284,9 +263,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         }
     }
 
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
     public void onGuiClosed()
     {
         super.onGuiClosed();
@@ -299,15 +275,11 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         Keyboard.enableRepeatEvents(false);
     }
 
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
         if (selectedTabIndex != CreativeTabs.tabAllSearch.getTabIndex())
         {
-            if (GameSettings.isKeyDown(this.mc.gameSettings.keyBindPlayerList))
+            if (GameSettings.isKeyDown(this.mc.gameSettings.keyBindChat))
             {
                 this.setCurrentCreativeTab(CreativeTabs.tabAllSearch);
             }
@@ -386,9 +358,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         guicontainercreative$containercreative.scrollTo(0.0F);
     }
 
-    /**
-     * Draw the foreground layer for the GuiContainer (everything in front of the items). Args : mouseX, mouseY
-     */
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         CreativeTabs creativetabs = CreativeTabs.creativeTabArray[selectedTabIndex];
@@ -400,9 +369,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         }
     }
 
-    /**
-     * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
-     */
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
     {
         if (mouseButton == 0)
@@ -422,9 +388,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    /**
-     * Called when a mouse button is released.  Args : mouseX, mouseY, releaseButton
-     */
     protected void mouseReleased(int mouseX, int mouseY, int state)
     {
         if (state == 0)
@@ -445,9 +408,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         super.mouseReleased(mouseX, mouseY, state);
     }
 
-    /**
-     * returns (if you are not on the inventoryTab) and (the flag isn't set) and (you have more than 1 page of items)
-     */
     private boolean needsScrollBars()
     {
         return selectedTabIndex != CreativeTabs.tabInventory.getTabIndex() && CreativeTabs.creativeTabArray[selectedTabIndex].shouldHidePlayerInventory() && ((GuiContainerCreative.ContainerCreative)this.inventorySlots).func_148328_e();
@@ -540,9 +500,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         guicontainercreative$containercreative.scrollTo(0.0F);
     }
 
-    /**
-     * Handles mouse input.
-     */
     public void handleMouseInput() throws IOException
     {
         super.handleMouseInput();
@@ -568,9 +525,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         boolean flag = Mouse.isButtonDown(0);
@@ -670,9 +624,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         }
     }
 
-    /**
-     * Args : renderPartialTicks, mouseX, mouseY
-     */
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -738,10 +689,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         return p_147049_2_ >= j && p_147049_2_ <= j + 28 && p_147049_3_ >= k && p_147049_3_ <= k + 32;
     }
 
-    /**
-     * Renders the creative inventory hovering text if mouse is over it. Returns true if did render or false otherwise.
-     * Params: current creative tab to be checked, current mouse x position, current mouse y position.
-     */
     protected boolean renderCreativeInventoryHoveringText(CreativeTabs p_147052_1_, int p_147052_2_, int p_147052_3_)
     {
         int i = p_147052_1_.getTabColumn();
@@ -828,9 +775,6 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         this.zLevel = 0.0F;
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.id == 0)

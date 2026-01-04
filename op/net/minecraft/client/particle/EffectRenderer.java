@@ -35,14 +35,10 @@ import net.optifine.reflect.Reflector;
 public class EffectRenderer
 {
     private static final ResourceLocation particleTextures = new ResourceLocation("textures/particle/particles.png");
-
-    /** Reference to the World object. */
     protected World worldObj;
     private List<EntityFX>[][] fxLayers = new List[4][];
     private List<EntityParticleEmitter> particleEmitters = Lists.<EntityParticleEmitter>newArrayList();
     private TextureManager renderer;
-
-    /** RNG. */
     private Random rand = new Random();
     private Map<Integer, IParticleFactory> particleTypes = Maps.<Integer, IParticleFactory>newHashMap();
 
@@ -119,17 +115,6 @@ public class EffectRenderer
         this.particleEmitters.add(new EntityParticleEmitter(this.worldObj, entityIn, particleTypes));
     }
 
-    /**
-     * Spawns the relevant particle according to the particle id.
-     *
-     * @param xCoord X position of the particle
-     * @param yCoord Y position of the particle
-     * @param zCoord Z position of the particle
-     * @param xSpeed X speed of the particle
-     * @param ySpeed Y speed of the particle
-     * @param zSpeed Z speed of the particle
-     * @param parameters Parameters for the particle (color for redstone, ...)
-     */
     public EntityFX spawnEffectParticle(int particleId, double xCoord, double yCoord, double zCoord, double xSpeed, double ySpeed, double zSpeed, int... parameters)
     {
         IParticleFactory iparticlefactory = (IParticleFactory)this.particleTypes.get(Integer.valueOf(particleId));
@@ -265,9 +250,6 @@ public class EffectRenderer
         }
     }
 
-    /**
-     * Renders all current particles. Args player, partialTickTime
-     */
     public void renderParticles(Entity entityIn, float partialTicks)
     {
         float f = ActiveRenderInfo.getRotationX();
@@ -438,9 +420,6 @@ public class EffectRenderer
         }
     }
 
-    /**
-     * Adds block hit particles for the specified block
-     */
     public void addBlockHitEffects(BlockPos pos, EnumFacing side)
     {
         IBlockState iblockstate = this.worldObj.getBlockState(pos);

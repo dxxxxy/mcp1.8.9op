@@ -18,35 +18,17 @@ public class MathHelper
     public static final float deg2Rad = MathUtils.roundToFloat(0.017453292519943295D);
     private static final float[] SIN_TABLE_FAST = new float[4096];
     public static boolean fastMath = false;
-
-    /**
-     * A table of sin values computed from 0 (inclusive) to 2*pi (exclusive), with steps of 2*PI / 65536.
-     */
     private static final float[] SIN_TABLE = new float[65536];
-
-    /**
-     * Though it looks like an array, this is really more like a mapping.  Key (index of this array) is the upper 5 bits
-     * of the result of multiplying a 32-bit unsigned integer by the B(2, 5) De Bruijn sequence 0x077CB531.  Value
-     * (value stored in the array) is the unique index (from the right) of the leftmost one-bit in a 32-bit unsigned
-     * integer that can cause the upper 5 bits to get that value.  Used for highly optimized "find the log-base-2 of
-     * this number" calculations.
-     */
     private static final int[] multiplyDeBruijnBitPosition;
     private static final double field_181163_d;
     private static final double[] field_181164_e;
     private static final double[] field_181165_f;
 
-    /**
-     * sin looked up in a table
-     */
     public static float sin(float p_76126_0_)
     {
         return fastMath ? SIN_TABLE_FAST[(int)(p_76126_0_ * radToIndex) & 4095] : SIN_TABLE[(int)(p_76126_0_ * 10430.378F) & 65535];
     }
 
-    /**
-     * cos looked up in the sin table with the appropriate offset
-     */
     public static float cos(float value)
     {
         return fastMath ? SIN_TABLE_FAST[(int)(value * radToIndex + 1024.0F) & 4095] : SIN_TABLE[(int)(value * 10430.378F + 16384.0F) & 65535];
@@ -62,35 +44,23 @@ public class MathHelper
         return (float)Math.sqrt(value);
     }
 
-    /**
-     * Returns the greatest integer less than or equal to the float argument
-     */
     public static int floor_float(float value)
     {
         int i = (int)value;
         return value < (float)i ? i - 1 : i;
     }
 
-    /**
-     * returns par0 cast as an int, and no greater than Integer.MAX_VALUE-1024
-     */
     public static int truncateDoubleToInt(double value)
     {
         return (int)(value + 1024.0D) - 1024;
     }
 
-    /**
-     * Returns the greatest integer less than or equal to the double argument
-     */
     public static int floor_double(double value)
     {
         int i = (int)value;
         return value < (double)i ? i - 1 : i;
     }
 
-    /**
-     * Long version of floor_double
-     */
     public static long floor_double_long(double value)
     {
         long i = (long)value;
@@ -107,9 +77,6 @@ public class MathHelper
         return value >= 0.0F ? value : -value;
     }
 
-    /**
-     * Returns the unsigned value of an int.
-     */
     public static int abs_int(int value)
     {
         return value >= 0 ? value : -value;
@@ -127,19 +94,11 @@ public class MathHelper
         return value > (double)i ? i + 1 : i;
     }
 
-    /**
-     * Returns the value of the first parameter, clamped to be within the lower and upper limits given by the second and
-     * third parameters.
-     */
     public static int clamp_int(int num, int min, int max)
     {
         return num < min ? min : (num > max ? max : num);
     }
 
-    /**
-     * Returns the value of the first parameter, clamped to be within the lower and upper limits given by the second and
-     * third parameters
-     */
     public static float clamp_float(float num, float min, float max)
     {
         return num < min ? min : (num > max ? max : num);
@@ -155,9 +114,6 @@ public class MathHelper
         return slide < 0.0D ? lowerBnd : (slide > 1.0D ? upperBnd : lowerBnd + (upperBnd - lowerBnd) * slide);
     }
 
-    /**
-     * Maximum of the absolute value of two numbers.
-     */
     public static double abs_max(double p_76132_0_, double p_76132_2_)
     {
         if (p_76132_0_ < 0.0D)
@@ -173,9 +129,6 @@ public class MathHelper
         return p_76132_0_ > p_76132_2_ ? p_76132_0_ : p_76132_2_;
     }
 
-    /**
-     * Buckets an integer with specifed bucket sizes.  Args: i, bucketSize
-     */
     public static int bucketInt(int p_76137_0_, int p_76137_1_)
     {
         return p_76137_0_ < 0 ? -((-p_76137_0_ - 1) / p_76137_1_) - 1 : p_76137_0_ / p_76137_1_;
@@ -218,9 +171,6 @@ public class MathHelper
         return (p_180184_0_ % p_180184_1_ + p_180184_1_) % p_180184_1_;
     }
 
-    /**
-     * the angle is reduced to an angle between -180 and +180 by mod, and a 360 check
-     */
     public static float wrapAngleTo180_float(float value)
     {
         value = value % 360.0F;
@@ -238,9 +188,6 @@ public class MathHelper
         return value;
     }
 
-    /**
-     * the angle is reduced to an angle between -180 and +180 by mod, and a 360 check
-     */
     public static double wrapAngleTo180_double(double value)
     {
         value = value % 360.0D;
@@ -258,9 +205,6 @@ public class MathHelper
         return value;
     }
 
-    /**
-     * parses the string as integer or returns the second parameter if it fails
-     */
     public static int parseIntWithDefault(String p_82715_0_, int p_82715_1_)
     {
         try
@@ -273,17 +217,11 @@ public class MathHelper
         }
     }
 
-    /**
-     * parses the string as integer or returns the second parameter if it fails. this value is capped to par2
-     */
     public static int parseIntWithDefaultAndMax(String p_82714_0_, int p_82714_1_, int p_82714_2_)
     {
         return Math.max(p_82714_2_, parseIntWithDefault(p_82714_0_, p_82714_1_));
     }
 
-    /**
-     * parses the string as double or returns the second parameter if it fails.
-     */
     public static double parseDoubleWithDefault(String p_82712_0_, double p_82712_1_)
     {
         try
@@ -301,9 +239,6 @@ public class MathHelper
         return Math.max(p_82713_3_, parseDoubleWithDefault(p_82713_0_, p_82713_1_));
     }
 
-    /**
-     * Returns the input value rounded up to the next highest power of two.
-     */
     public static int roundUpToPowerOfTwo(int value)
     {
         int i = value - 1;
@@ -315,29 +250,17 @@ public class MathHelper
         return i + 1;
     }
 
-    /**
-     * Is the given value a power of two?  (1, 2, 4, 8, 16, ...)
-     */
     private static boolean isPowerOfTwo(int value)
     {
         return value != 0 && (value & value - 1) == 0;
     }
 
-    /**
-     * Uses a B(2, 5) De Bruijn sequence and a lookup table to efficiently calculate the log-base-two of the given
-     * value.  Optimized for cases where the input value is a power-of-two.  If the input value is not a power-of-two,
-     * then subtract 1 from the return value.
-     */
     private static int calculateLogBaseTwoDeBruijn(int value)
     {
         value = isPowerOfTwo(value) ? value : roundUpToPowerOfTwo(value);
         return multiplyDeBruijnBitPosition[(int)((long)value * 125613361L >> 27) & 31];
     }
 
-    /**
-     * Efficiently calculates the floor of the base-2 log of an integer value.  This is effectively the index of the
-     * highest bit that is set.  For example, if the number in binary is 0...100101, this will return 5.
-     */
     public static int calculateLogBaseTwo(int value)
     {
         return calculateLogBaseTwoDeBruijn(value) - (isPowerOfTwo(value) ? 0 : 1);

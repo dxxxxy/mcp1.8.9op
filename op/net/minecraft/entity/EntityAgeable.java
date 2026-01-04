@@ -23,9 +23,6 @@ public abstract class EntityAgeable extends EntityCreature
 
     public abstract EntityAgeable createChild(EntityAgeable ageable);
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
     public boolean interact(EntityPlayer player)
     {
         ItemStack itemstack = player.inventory.getCurrentItem();
@@ -78,11 +75,6 @@ public abstract class EntityAgeable extends EntityCreature
         this.dataWatcher.addObject(12, Byte.valueOf((byte)0));
     }
 
-    /**
-     * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
-     * positive, it get's decremented each tick. Don't confuse this with EntityLiving.getAge. With a negative value the
-     * Entity is considered a child.
-     */
     public int getGrowingAge()
     {
         return this.worldObj.isRemote ? this.dataWatcher.getWatchableObjectByte(12) : this.growingAge;
@@ -123,19 +115,11 @@ public abstract class EntityAgeable extends EntityCreature
         }
     }
 
-    /**
-     * "Adds the value of the parameter times 20 to the age of this entity. If the entity is an adult (if the entity's
-     * age is greater than 0), it will have no effect."
-     */
     public void addGrowth(int growth)
     {
         this.func_175501_a(growth, false);
     }
 
-    /**
-     * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
-     * positive, it get's decremented each tick. With a negative value the Entity is considered a child.
-     */
     public void setGrowingAge(int age)
     {
         this.dataWatcher.updateObject(12, Byte.valueOf((byte)MathHelper.clamp_int(age, -1, 1)));
@@ -143,9 +127,6 @@ public abstract class EntityAgeable extends EntityCreature
         this.setScaleForAge(this.isChild());
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
@@ -153,9 +134,6 @@ public abstract class EntityAgeable extends EntityCreature
         tagCompound.setInteger("ForcedAge", this.field_175502_b);
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
@@ -163,10 +141,6 @@ public abstract class EntityAgeable extends EntityCreature
         this.field_175502_b = tagCompund.getInteger("ForcedAge");
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -207,33 +181,20 @@ public abstract class EntityAgeable extends EntityCreature
         }
     }
 
-    /**
-     * This is called when Entity's growing age timer reaches 0 (negative values are considered as a child, positive as
-     * an adult)
-     */
     protected void onGrowingAdult()
     {
     }
 
-    /**
-     * If Animal, checks if the age timer is negative
-     */
     public boolean isChild()
     {
         return this.getGrowingAge() < 0;
     }
 
-    /**
-     * "Sets the scale for an ageable entity according to the boolean parameter, which says if it's a child."
-     */
     public void setScaleForAge(boolean p_98054_1_)
     {
         this.setScale(p_98054_1_ ? 0.5F : 1.0F);
     }
 
-    /**
-     * Sets the width and height of the entity. Args: width, height
-     */
     protected final void setSize(float width, float height)
     {
         boolean flag = this.ageWidth > 0.0F;

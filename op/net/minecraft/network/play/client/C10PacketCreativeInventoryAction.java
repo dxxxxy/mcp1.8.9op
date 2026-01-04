@@ -21,26 +21,17 @@ public class C10PacketCreativeInventoryAction implements Packet<INetHandlerPlayS
         this.stack = stackIn != null ? stackIn.copy() : null;
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayServer handler)
     {
         handler.processCreativeInventoryAction(this);
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.slotId = buf.readShort();
         this.stack = buf.readItemStackFromBuffer();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeShort(this.slotId);

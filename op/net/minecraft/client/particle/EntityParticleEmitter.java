@@ -21,16 +21,10 @@ public class EntityParticleEmitter extends EntityFX
         this.onUpdate();
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         for (int i = 0; i < 16; ++i)

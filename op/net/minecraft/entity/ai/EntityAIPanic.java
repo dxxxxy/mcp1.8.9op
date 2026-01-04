@@ -18,9 +18,6 @@ public class EntityAIPanic extends EntityAIBase
         this.setMutexBits(1);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
         if (this.theEntityCreature.getAITarget() == null && !this.theEntityCreature.isBurning())
@@ -45,17 +42,11 @@ public class EntityAIPanic extends EntityAIBase
         }
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
     public void startExecuting()
     {
         this.theEntityCreature.getNavigator().tryMoveToXYZ(this.randPosX, this.randPosY, this.randPosZ, this.speed);
     }
 
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
     public boolean continueExecuting()
     {
         return !this.theEntityCreature.getNavigator().noPath();

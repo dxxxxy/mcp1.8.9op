@@ -21,8 +21,6 @@ import org.lwjgl.opengl.GL11;
 public class TileEntitySignRenderer extends TileEntitySpecialRenderer<TileEntitySign>
 {
     private static final ResourceLocation SIGN_TEXTURE = new ResourceLocation("textures/entity/sign.png");
-
-    /** The ModelSign instance for use in this renderer */
     private final ModelSign model = new ModelSign();
     private static double textRenderDistanceSq = 4096.0D;
 
@@ -166,7 +164,7 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer<TileEntity
     public static void updateTextRenderDistance()
     {
         Minecraft minecraft = Config.getMinecraft();
-        double d0 = (double)Config.limit(minecraft.gameSettings.gammaSetting, 1.0F, 120.0F);
+        double d0 = (double)Config.limit(minecraft.gameSettings.fovSetting, 1.0F, 120.0F);
         double d1 = Math.max(1.5D * (double)minecraft.displayHeight / d0, 16.0D);
         textRenderDistanceSq = d1 * d1;
     }

@@ -9,10 +9,7 @@ import net.minecraft.world.World;
 
 public class TileEntityNote extends TileEntity
 {
-    /** Note to play */
     public byte note;
-
-    /** stores the latest redstone state */
     public boolean previousRedstoneState;
 
     public void writeToNBT(NBTTagCompound compound)
@@ -28,9 +25,6 @@ public class TileEntityNote extends TileEntity
         this.note = (byte)MathHelper.clamp_int(this.note, 0, 24);
     }
 
-    /**
-     * change pitch by -> (currentPitch + 1) % 25
-     */
     public void changePitch()
     {
         this.note = (byte)((this.note + 1) % 25);

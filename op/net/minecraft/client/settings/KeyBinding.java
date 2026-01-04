@@ -16,8 +16,6 @@ public class KeyBinding implements Comparable<KeyBinding>
     private final int keyCodeDefault;
     private final String keyCategory;
     private int keyCode;
-
-    /** Is the key held down? */
     private boolean pressed;
     private int pressTime;
 
@@ -81,9 +79,6 @@ public class KeyBinding implements Comparable<KeyBinding>
         keybindSet.add(category);
     }
 
-    /**
-     * Returns true if the key is pressed (used for continuous querying). Should be used in tickers.
-     */
     public boolean isKeyDown()
     {
         return this.pressed;
@@ -94,10 +89,6 @@ public class KeyBinding implements Comparable<KeyBinding>
         return this.keyCategory;
     }
 
-    /**
-     * Returns true on the initial key press. For continuous querying use {@link isKeyDown()}. Should be used in key
-     * events.
-     */
     public boolean isPressed()
     {
         if (this.pressTime == 0)

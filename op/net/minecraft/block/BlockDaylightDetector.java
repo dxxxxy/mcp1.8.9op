@@ -102,9 +102,6 @@ public class BlockDaylightDetector extends BlockContainer
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(Blocks.daylight_detector);
@@ -120,49 +117,31 @@ public class BlockDaylightDetector extends BlockContainer
         return false;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
-     */
     public int getRenderType()
     {
         return 3;
     }
 
-    /**
-     * Can this block provide power. Only wire currently seems to have this change based on its state.
-     */
     public boolean canProvidePower()
     {
         return true;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityDaylightDetector();
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(POWER, Integer.valueOf(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Integer)state.getValue(POWER)).intValue();
@@ -173,9 +152,6 @@ public class BlockDaylightDetector extends BlockContainer
         return new BlockState(this, new IProperty[] {POWER});
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         if (!this.inverted)

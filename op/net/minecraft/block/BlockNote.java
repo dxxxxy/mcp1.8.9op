@@ -24,9 +24,6 @@ public class BlockNote extends BlockContainer
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         boolean flag = worldIn.isBlockPowered(pos);
@@ -84,9 +81,6 @@ public class BlockNote extends BlockContainer
         }
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityNote();
@@ -102,9 +96,6 @@ public class BlockNote extends BlockContainer
         return (String)INSTRUMENTS.get(id);
     }
 
-    /**
-     * Called on both Client and Server when World#addBlockEvent is called
-     */
     public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
     {
         float f = (float)Math.pow(2.0D, (double)(eventParam - 12) / 12.0D);
@@ -113,9 +104,6 @@ public class BlockNote extends BlockContainer
         return true;
     }
 
-    /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
-     */
     public int getRenderType()
     {
         return 3;

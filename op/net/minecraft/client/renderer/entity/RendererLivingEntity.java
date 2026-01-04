@@ -77,11 +77,6 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
         return this.mainModel;
     }
 
-    /**
-     * Returns a rotation angle that is inbetween two other rotation angles. par1 and par2 are the angles between which
-     * to interpolate, par3 is probably a float between 0.0 and 1.0 that tells us where "between" the two angles we are.
-     * Example: par1 = 30, par2 = 50, par3 = 0.5, then return = 40
-     */
     protected float interpolateRotation(float par1, float par2, float par3)
     {
         float f;
@@ -103,9 +98,6 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
     {
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         if (!Reflector.RenderLivingEvent_Pre_Constructor.exists() || !Reflector.postForgeBusEvent(Reflector.RenderLivingEvent_Pre_Constructor, new Object[] {entity, this, Double.valueOf(x), Double.valueOf(y), Double.valueOf(z)}))
@@ -329,9 +321,6 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
 
-    /**
-     * Renders the model in RenderLiving
-     */
     protected void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float scaleFactor)
     {
         boolean flag = !entitylivingbaseIn.isInvisible();
@@ -508,9 +497,6 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
         }
     }
 
-    /**
-     * Sets a simple glTranslate on a LivingEntity.
-     */
     protected void renderLivingAt(T entityLivingBaseIn, double x, double y, double z)
     {
         GlStateManager.translate((float)x, (float)y, (float)z);
@@ -544,17 +530,11 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
         }
     }
 
-    /**
-     * Returns where in the swing animation the living entity is (from 0 to 1).  Args : entity, partialTickTime
-     */
     protected float getSwingProgress(T livingBase, float partialTickTime)
     {
         return livingBase.getSwingProgress(partialTickTime);
     }
 
-    /**
-     * Defines what float the third param in setRotationAngles of ModelBase is
-     */
     protected float handleRotationFloat(T livingBase, float partialTicks)
     {
         return (float)livingBase.ticksExisted + partialTicks;
@@ -610,18 +590,11 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
         return 90.0F;
     }
 
-    /**
-     * Returns an ARGB int color back. Args: entityLiving, lightBrightness, partialTickTime
-     */
     protected int getColorMultiplier(T entitylivingbaseIn, float lightBrightness, float partialTickTime)
     {
         return 0;
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(T entitylivingbaseIn, float partialTickTime)
     {
     }

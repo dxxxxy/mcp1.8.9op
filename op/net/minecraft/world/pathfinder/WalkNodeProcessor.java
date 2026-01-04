@@ -28,20 +28,12 @@ public class WalkNodeProcessor extends NodeProcessor
         this.shouldAvoidWater = this.avoidsWater;
     }
 
-    /**
-     * This method is called when all nodes have been processed and PathEntity is created.
-     *  {@link net.minecraft.world.pathfinder.WalkNodeProcessor WalkNodeProcessor} uses this to change its field {@link
-     * net.minecraft.world.pathfinder.WalkNodeProcessor#avoidsWater avoidsWater}
-     */
     public void postProcess()
     {
         super.postProcess();
         this.avoidsWater = this.shouldAvoidWater;
     }
 
-    /**
-     * Returns given entity's position as PathPoint
-     */
     public PathPoint getPathPointTo(Entity entityIn)
     {
         int i;
@@ -67,9 +59,6 @@ public class WalkNodeProcessor extends NodeProcessor
         return this.openPoint(MathHelper.floor_double(entityIn.getEntityBoundingBox().minX), i, MathHelper.floor_double(entityIn.getEntityBoundingBox().minZ));
     }
 
-    /**
-     * Returns PathPoint for given coordinates
-     */
     public PathPoint getPathPointToCoords(Entity entityIn, double x, double y, double target)
     {
         return this.openPoint(MathHelper.floor_double(x - (double)(entityIn.width / 2.0F)), MathHelper.floor_double(y), MathHelper.floor_double(target - (double)(entityIn.width / 2.0F)));
@@ -113,9 +102,6 @@ public class WalkNodeProcessor extends NodeProcessor
         return i;
     }
 
-    /**
-     * Returns a point that the entity can safely move to
-     */
     private PathPoint getSafePoint(Entity entityIn, int x, int y, int z, int p_176171_5_)
     {
         PathPoint pathpoint = null;
@@ -180,12 +166,6 @@ public class WalkNodeProcessor extends NodeProcessor
         }
     }
 
-    /**
-     * Checks if an entity collides with blocks at a position.
-     * Returns 1 if clear, 0 for colliding with any solid block, -1 for water(if avoids water),
-     * -2 for lava, -3 for fence and wall, -4 for closed trapdoor, 2 if otherwise clear except for open trapdoor or
-     * water(if not avoiding)
-     */
     private int getVerticalOffset(Entity entityIn, int x, int y, int z)
     {
         return func_176170_a(this.blockaccess, entityIn, x, y, z, this.entitySizeX, this.entitySizeY, this.entitySizeZ, this.avoidsWater, this.canBreakDoors, this.canEnterDoors);

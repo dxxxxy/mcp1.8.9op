@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 
 public class PathNavigateClimber extends PathNavigateGround
 {
-    /** Current path navigation target */
     private BlockPos targetPosition;
 
     public PathNavigateClimber(EntityLiving entityLivingIn, World worldIn)
@@ -16,27 +15,18 @@ public class PathNavigateClimber extends PathNavigateGround
         super(entityLivingIn, worldIn);
     }
 
-    /**
-     * Returns path to given BlockPos
-     */
     public PathEntity getPathToPos(BlockPos pos)
     {
         this.targetPosition = pos;
         return super.getPathToPos(pos);
     }
 
-    /**
-     * Returns the path to the given EntityLiving. Args : entity
-     */
     public PathEntity getPathToEntityLiving(Entity entityIn)
     {
         this.targetPosition = new BlockPos(entityIn);
         return super.getPathToEntityLiving(entityIn);
     }
 
-    /**
-     * Try to find and set a path to EntityLiving. Returns true if successful. Args : entity, speed
-     */
     public boolean tryMoveToEntityLiving(Entity entityIn, double speedIn)
     {
         PathEntity pathentity = this.getPathToEntityLiving(entityIn);

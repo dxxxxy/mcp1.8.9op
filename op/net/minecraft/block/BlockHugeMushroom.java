@@ -26,17 +26,11 @@ public class BlockHugeMushroom extends Block
         this.smallBlock = p_i46392_3_;
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return Math.max(0, random.nextInt(10) - 7);
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         switch ((BlockHugeMushroom.EnumType)state.getValue(VARIANT))
@@ -55,9 +49,6 @@ public class BlockHugeMushroom extends Block
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(this.smallBlock);
@@ -68,26 +59,16 @@ public class BlockHugeMushroom extends Block
         return Item.getItemFromBlock(this.smallBlock);
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState();
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(VARIANT, BlockHugeMushroom.EnumType.byMetadata(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((BlockHugeMushroom.EnumType)state.getValue(VARIANT)).getMetadata();

@@ -21,10 +21,6 @@ public class GuiIngestServers extends GuiScreen
         this.field_152309_a = p_i46312_1_;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         this.field_152310_f = I18n.format("options.stream.ingest.title", new Object[0]);
@@ -39,18 +35,12 @@ public class GuiIngestServers extends GuiScreen
         this.buttonList.add(new GuiButton(2, this.width / 2 + 5, this.height - 24 - 6, 150, 20, I18n.format("options.stream.ingest.reset", new Object[0])));
     }
 
-    /**
-     * Handles mouse input.
-     */
     public void handleMouseInput() throws IOException
     {
         super.handleMouseInput();
         this.field_152311_g.handleMouseInput();
     }
 
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
     public void onGuiClosed()
     {
         if (this.mc.getTwitchStream().func_152908_z())
@@ -59,9 +49,6 @@ public class GuiIngestServers extends GuiScreen
         }
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.enabled)
@@ -78,9 +65,6 @@ public class GuiIngestServers extends GuiScreen
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();

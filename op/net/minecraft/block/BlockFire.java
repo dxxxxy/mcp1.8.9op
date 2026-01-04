@@ -33,10 +33,6 @@ public class BlockFire extends Block
     private final Map<Block, Integer> encouragements = Maps.<Block, Integer>newIdentityHashMap();
     private final Map<Block, Integer> flammabilities = Maps.<Block, Integer>newIdentityHashMap();
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         int i = pos.getX();
@@ -119,9 +115,6 @@ public class BlockFire extends Block
         return null;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -132,17 +125,11 @@ public class BlockFire extends Block
         return false;
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return 0;
     }
 
-    /**
-     * How many world ticks before ticking
-     */
     public int tickRate(World worldIn)
     {
         return 30;
@@ -347,17 +334,11 @@ public class BlockFire extends Block
         }
     }
 
-    /**
-     * Returns if this block is collidable (only used by Fire). Args: x, y, z
-     */
     public boolean isCollidable()
     {
         return false;
     }
 
-    /**
-     * Checks if the block can be caught on fire
-     */
     public boolean canCatchFire(IBlockAccess worldIn, BlockPos pos)
     {
         return this.getEncouragement(worldIn.getBlockState(pos).getBlock()) > 0;
@@ -368,9 +349,6 @@ public class BlockFire extends Block
         return World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) || this.canNeighborCatchFire(worldIn, pos);
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && !this.canNeighborCatchFire(worldIn, pos))
@@ -470,9 +448,6 @@ public class BlockFire extends Block
         }
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         return MapColor.tntColor;
@@ -483,17 +458,11 @@ public class BlockFire extends Block
         return EnumWorldBlockLayer.CUTOUT;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(AGE, Integer.valueOf(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Integer)state.getValue(AGE)).intValue();

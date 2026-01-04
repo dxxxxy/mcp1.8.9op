@@ -16,9 +16,6 @@ public class TileEntityMobSpawnerRenderer extends TileEntitySpecialRenderer<Tile
         GlStateManager.popMatrix();
     }
 
-    /**
-     * Render the mob inside the mob spawner.
-     */
     public static void renderMob(MobSpawnerBaseLogic mobSpawnerLogic, double posX, double posY, double posZ, float partialTicks)
     {
         Entity entity = mobSpawnerLogic.func_180612_a(mobSpawnerLogic.getSpawnerWorld());

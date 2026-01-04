@@ -40,9 +40,6 @@ public class BlockTNT extends Block
         }
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (worldIn.isBlockPowered(pos))
@@ -52,9 +49,6 @@ public class BlockTNT extends Block
         }
     }
 
-    /**
-     * Called when this Block is destroyed by an Explosion
-     */
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
     {
         if (!worldIn.isRemote)
@@ -65,9 +59,6 @@ public class BlockTNT extends Block
         }
     }
 
-    /**
-     * Called when a player destroys this Block
-     */
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
         this.explode(worldIn, pos, state, (EntityLivingBase)null);
@@ -113,9 +104,6 @@ public class BlockTNT extends Block
         return super.onBlockActivated(worldIn, pos, state, playerIn, side, hitX, hitY, hitZ);
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         if (!worldIn.isRemote && entityIn instanceof EntityArrow)
@@ -130,25 +118,16 @@ public class BlockTNT extends Block
         }
     }
 
-    /**
-     * Return whether this block can drop from an explosion.
-     */
     public boolean canDropFromExplosion(Explosion explosionIn)
     {
         return false;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(EXPLODE, Boolean.valueOf((meta & 1) > 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Boolean)state.getValue(EXPLODE)).booleanValue() ? 1 : 0;

@@ -24,9 +24,6 @@ public abstract class MapGenStructure extends MapGenBase
 
     public abstract String getStructureName();
 
-    /**
-     * Recursively called by generate()
-     */
     protected final void recursiveGenerate(World worldIn, final int chunkX, final int chunkZ, int p_180701_4_, int p_180701_5_, ChunkPrimer chunkPrimerIn)
     {
         this.initializeStructureData(worldIn);

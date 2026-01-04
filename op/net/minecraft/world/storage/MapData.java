@@ -23,8 +23,6 @@ public class MapData extends WorldSavedData
     public int zCenter;
     public byte dimension;
     public byte scale;
-
-    /** colours */
     public byte[] colors = new byte[16384];
     public List<MapData.MapInfo> playersArrayList = Lists.<MapData.MapInfo>newArrayList();
     private Map<EntityPlayer, MapData.MapInfo> playersHashMap = Maps.<EntityPlayer, MapData.MapInfo>newHashMap();
@@ -44,9 +42,6 @@ public class MapData extends WorldSavedData
         this.zCenter = k * i + i / 2 - 64;
     }
 
-    /**
-     * reads in data from the NBTTagCompound into this MapDataBase
-     */
     public void readFromNBT(NBTTagCompound nbt)
     {
         this.dimension = nbt.getByte("dimension");
@@ -88,9 +83,6 @@ public class MapData extends WorldSavedData
         }
     }
 
-    /**
-     * write data to NBTTagCompound from this MapDataBase, similar to Entities and TileEntities
-     */
     public void writeToNBT(NBTTagCompound nbt)
     {
         nbt.setByte("dimension", this.dimension);
@@ -102,9 +94,6 @@ public class MapData extends WorldSavedData
         nbt.setByteArray("colors", this.colors);
     }
 
-    /**
-     * Adds the player passed to the list of visible players and checks to see which players are visible
-     */
     public void updateVisiblePlayers(EntityPlayer player, ItemStack mapStack)
     {
         if (!this.playersHashMap.containsKey(player))

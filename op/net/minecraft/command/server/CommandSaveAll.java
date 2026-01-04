@@ -11,25 +11,16 @@ import net.minecraft.world.WorldServer;
 
 public class CommandSaveAll extends CommandBase
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "save-all";
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.save.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         MinecraftServer minecraftserver = MinecraftServer.getServer();

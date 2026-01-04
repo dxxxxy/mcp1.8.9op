@@ -28,9 +28,6 @@ public class ServersideAttributeMap extends BaseAttributeMap
         return (ModifiableAttributeInstance)iattributeinstance;
     }
 
-    /**
-     * Registers an attribute with this AttributeMap, returns a modifiable AttributeInstance associated with this map
-     */
     public IAttributeInstance registerAttribute(IAttribute attribute)
     {
         IAttributeInstance iattributeinstance = super.registerAttribute(attribute);

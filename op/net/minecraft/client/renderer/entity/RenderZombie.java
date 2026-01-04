@@ -51,18 +51,12 @@ public class RenderZombie extends RenderBiped<EntityZombie>
         this.field_177121_n = Lists.newArrayList(this.layerRenderers);
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityZombie entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         this.func_82427_a(entity);
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityZombie entity)
     {
         return entity.isVillager() ? zombieVillagerTextures : zombieTextures;

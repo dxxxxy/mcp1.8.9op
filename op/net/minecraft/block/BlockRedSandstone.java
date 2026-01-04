@@ -22,18 +22,11 @@ public class BlockRedSandstone extends Block
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         return ((BlockRedSandstone.EnumType)state.getValue(TYPE)).getMetadata();
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockRedSandstone.EnumType blockredsandstone$enumtype : BlockRedSandstone.EnumType.values())
@@ -42,17 +35,11 @@ public class BlockRedSandstone extends Block
         }
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(TYPE, BlockRedSandstone.EnumType.byMetadata(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((BlockRedSandstone.EnumType)state.getValue(TYPE)).getMetadata();

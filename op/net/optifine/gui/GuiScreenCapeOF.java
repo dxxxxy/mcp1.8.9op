@@ -27,10 +27,6 @@ public class GuiScreenCapeOF extends GuiScreenOF
         this.parentScreen = parentScreenIn;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         int i = 0;
@@ -46,9 +42,6 @@ public class GuiScreenCapeOF extends GuiScreenOF
         this.buttonList.add(new GuiButtonOF(200, this.width / 2 - 100, this.height / 6 + 24 * (i >> 1), I18n.format("gui.done", new Object[0])));
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button)
     {
         if (button.enabled)
@@ -124,9 +117,6 @@ public class GuiScreenCapeOF extends GuiScreenOF
         this.setLinkUrl((String)null);
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();

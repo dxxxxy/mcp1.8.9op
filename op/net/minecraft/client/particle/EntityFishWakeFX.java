@@ -22,9 +22,6 @@ public class EntityFishWakeFX extends EntityFX
         this.motionZ = p_i45073_12_;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;

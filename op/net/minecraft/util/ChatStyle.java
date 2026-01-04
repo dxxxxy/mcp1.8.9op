@@ -14,9 +14,6 @@ import net.minecraft.event.HoverEvent;
 
 public class ChatStyle
 {
-    /**
-     * The parent of this ChatStyle.  Used for looking up values that this instance does not override.
-     */
     private ChatStyle parentStyle;
     private EnumChatFormatting color;
     private Boolean bold;
@@ -27,10 +24,6 @@ public class ChatStyle
     private ClickEvent chatClickEvent;
     private HoverEvent chatHoverEvent;
     private String insertion;
-
-    /**
-     * The base of the ChatStyle hierarchy.  All ChatStyle instances are implicitly children of this.
-     */
     private static final ChatStyle rootStyle = new ChatStyle()
     {
         public EnumChatFormatting getColor()
@@ -123,186 +116,116 @@ public class ChatStyle
         }
     };
 
-    /**
-     * Gets the effective color of this ChatStyle.
-     */
     public EnumChatFormatting getColor()
     {
         return this.color == null ? this.getParent().getColor() : this.color;
     }
 
-    /**
-     * Whether or not text of this ChatStyle should be in bold.
-     */
     public boolean getBold()
     {
         return this.bold == null ? this.getParent().getBold() : this.bold.booleanValue();
     }
 
-    /**
-     * Whether or not text of this ChatStyle should be italicized.
-     */
     public boolean getItalic()
     {
         return this.italic == null ? this.getParent().getItalic() : this.italic.booleanValue();
     }
 
-    /**
-     * Whether or not to format text of this ChatStyle using strikethrough.
-     */
     public boolean getStrikethrough()
     {
         return this.strikethrough == null ? this.getParent().getStrikethrough() : this.strikethrough.booleanValue();
     }
 
-    /**
-     * Whether or not text of this ChatStyle should be underlined.
-     */
     public boolean getUnderlined()
     {
         return this.underlined == null ? this.getParent().getUnderlined() : this.underlined.booleanValue();
     }
 
-    /**
-     * Whether or not text of this ChatStyle should be obfuscated.
-     */
     public boolean getObfuscated()
     {
         return this.obfuscated == null ? this.getParent().getObfuscated() : this.obfuscated.booleanValue();
     }
 
-    /**
-     * Whether or not this style is empty (inherits everything from the parent).
-     */
     public boolean isEmpty()
     {
         return this.bold == null && this.italic == null && this.strikethrough == null && this.underlined == null && this.obfuscated == null && this.color == null && this.chatClickEvent == null && this.chatHoverEvent == null;
     }
 
-    /**
-     * The effective chat click event.
-     */
     public ClickEvent getChatClickEvent()
     {
         return this.chatClickEvent == null ? this.getParent().getChatClickEvent() : this.chatClickEvent;
     }
 
-    /**
-     * The effective chat hover event.
-     */
     public HoverEvent getChatHoverEvent()
     {
         return this.chatHoverEvent == null ? this.getParent().getChatHoverEvent() : this.chatHoverEvent;
     }
 
-    /**
-     * Get the text to be inserted into Chat when the component is shift-clicked
-     */
     public String getInsertion()
     {
         return this.insertion == null ? this.getParent().getInsertion() : this.insertion;
     }
 
-    /**
-     * Sets the color for this ChatStyle to the given value.  Only use color values for this; set other values using the
-     * specific methods.
-     */
     public ChatStyle setColor(EnumChatFormatting color)
     {
         this.color = color;
         return this;
     }
 
-    /**
-     * Sets whether or not text of this ChatStyle should be in bold.  Set to false if, e.g., the parent style is bold
-     * and you want text of this style to be unbolded.
-     */
     public ChatStyle setBold(Boolean boldIn)
     {
         this.bold = boldIn;
         return this;
     }
 
-    /**
-     * Sets whether or not text of this ChatStyle should be italicized.  Set to false if, e.g., the parent style is
-     * italicized and you want to override that for this style.
-     */
     public ChatStyle setItalic(Boolean italic)
     {
         this.italic = italic;
         return this;
     }
 
-    /**
-     * Sets whether or not to format text of this ChatStyle using strikethrough.  Set to false if, e.g., the parent
-     * style uses strikethrough and you want to override that for this style.
-     */
     public ChatStyle setStrikethrough(Boolean strikethrough)
     {
         this.strikethrough = strikethrough;
         return this;
     }
 
-    /**
-     * Sets whether or not text of this ChatStyle should be underlined.  Set to false if, e.g., the parent style is
-     * underlined and you want to override that for this style.
-     */
     public ChatStyle setUnderlined(Boolean underlined)
     {
         this.underlined = underlined;
         return this;
     }
 
-    /**
-     * Sets whether or not text of this ChatStyle should be obfuscated.  Set to false if, e.g., the parent style is
-     * obfuscated and you want to override that for this style.
-     */
     public ChatStyle setObfuscated(Boolean obfuscated)
     {
         this.obfuscated = obfuscated;
         return this;
     }
 
-    /**
-     * Sets the event that should be run when text of this ChatStyle is clicked on.
-     */
     public ChatStyle setChatClickEvent(ClickEvent event)
     {
         this.chatClickEvent = event;
         return this;
     }
 
-    /**
-     * Sets the event that should be run when text of this ChatStyle is hovered over.
-     */
     public ChatStyle setChatHoverEvent(HoverEvent event)
     {
         this.chatHoverEvent = event;
         return this;
     }
 
-    /**
-     * Set a text to be inserted into Chat when the component is shift-clicked
-     */
     public ChatStyle setInsertion(String insertion)
     {
         this.insertion = insertion;
         return this;
     }
 
-    /**
-     * Sets the fallback ChatStyle to use if this ChatStyle does not override some value.  Without a parent, obvious
-     * defaults are used (bold: false, underlined: false, etc).
-     */
     public ChatStyle setParentStyle(ChatStyle parent)
     {
         this.parentStyle = parent;
         return this;
     }
 
-    /**
-     * Gets the equivalent text formatting code for this style, without the initial section sign (U+00A7) character.
-     */
     public String getFormattingCode()
     {
         if (this.isEmpty())
@@ -347,9 +270,6 @@ public class ChatStyle
         }
     }
 
-    /**
-     * Gets the immediate parent of this ChatStyle.
-     */
     private ChatStyle getParent()
     {
         return this.parentStyle == null ? rootStyle : this.parentStyle;
@@ -441,11 +361,6 @@ public class ChatStyle
         return i;
     }
 
-    /**
-     * Creates a shallow copy of this style.  Changes to this instance's values will not be reflected in the copy, but
-     * changes to the parent style's values WILL be reflected in both this instance and the copy, wherever either does
-     * not override a value.
-     */
     public ChatStyle createShallowCopy()
     {
         ChatStyle chatstyle = new ChatStyle();
@@ -462,10 +377,6 @@ public class ChatStyle
         return chatstyle;
     }
 
-    /**
-     * Creates a deep copy of this style.  No changes to this instance or its parent style will be reflected in the
-     * copy.
-     */
     public ChatStyle createDeepCopy()
     {
         ChatStyle chatstyle = new ChatStyle();

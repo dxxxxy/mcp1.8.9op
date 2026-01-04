@@ -10,7 +10,6 @@ import net.minecraft.util.MathHelper;
 
 public class SlotFurnaceOutput extends Slot
 {
-    /** The player that is using the GUI where this slot resides. */
     private EntityPlayer thePlayer;
     private int field_75228_b;
 
@@ -20,18 +19,11 @@ public class SlotFurnaceOutput extends Slot
         this.thePlayer = player;
     }
 
-    /**
-     * Check if the stack is a valid item for this slot. Always true beside for the armor slots.
-     */
     public boolean isItemValid(ItemStack stack)
     {
         return false;
     }
 
-    /**
-     * Decrease the size of the stack in slot (first int arg) by the amount of the second int arg. Returns the new
-     * stack.
-     */
     public ItemStack decrStackSize(int amount)
     {
         if (this.getHasStack())
@@ -48,19 +40,12 @@ public class SlotFurnaceOutput extends Slot
         super.onPickupFromSlot(playerIn, stack);
     }
 
-    /**
-     * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood. Typically increases an
-     * internal count then calls onCrafting(item).
-     */
     protected void onCrafting(ItemStack stack, int amount)
     {
         this.field_75228_b += amount;
         this.onCrafting(stack);
     }
 
-    /**
-     * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood.
-     */
     protected void onCrafting(ItemStack stack)
     {
         stack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.field_75228_b);

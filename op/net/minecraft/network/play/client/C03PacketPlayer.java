@@ -25,25 +25,16 @@ public class C03PacketPlayer implements Packet<INetHandlerPlayServer>
         this.onGround = isOnGround;
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayServer handler)
     {
         handler.processPlayer(this);
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.onGround = buf.readUnsignedByte() != 0;
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeByte(this.onGround ? 1 : 0);

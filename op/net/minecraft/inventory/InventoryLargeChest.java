@@ -11,13 +11,8 @@ import net.minecraft.world.LockCode;
 
 public class InventoryLargeChest implements ILockableContainer
 {
-    /** Name of the chest. */
     private String name;
-
-    /** Inventory object corresponding to double chest upper part */
     private ILockableContainer upperChest;
-
-    /** Inventory object corresponding to double chest lower part */
     private ILockableContainer lowerChest;
 
     public InventoryLargeChest(String nameIn, ILockableContainer upperChestIn, ILockableContainer lowerChestIn)
@@ -47,73 +42,46 @@ public class InventoryLargeChest implements ILockableContainer
         }
     }
 
-    /**
-     * Returns the number of slots in the inventory.
-     */
     public int getSizeInventory()
     {
         return this.upperChest.getSizeInventory() + this.lowerChest.getSizeInventory();
     }
 
-    /**
-     * Return whether the given inventory is part of this large chest.
-     */
     public boolean isPartOfLargeChest(IInventory inventoryIn)
     {
         return this.upperChest == inventoryIn || this.lowerChest == inventoryIn;
     }
 
-    /**
-     * Get the name of this object. For players this returns their username
-     */
     public String getName()
     {
         return this.upperChest.hasCustomName() ? this.upperChest.getName() : (this.lowerChest.hasCustomName() ? this.lowerChest.getName() : this.name);
     }
 
-    /**
-     * Returns true if this thing is named
-     */
     public boolean hasCustomName()
     {
         return this.upperChest.hasCustomName() || this.lowerChest.hasCustomName();
     }
 
-    /**
-     * Get the formatted ChatComponent that will be used for the sender's username in chat
-     */
     public IChatComponent getDisplayName()
     {
         return (IChatComponent)(this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName(), new Object[0]));
     }
 
-    /**
-     * Returns the stack in the given slot.
-     */
     public ItemStack getStackInSlot(int index)
     {
         return index >= this.upperChest.getSizeInventory() ? this.lowerChest.getStackInSlot(index - this.upperChest.getSizeInventory()) : this.upperChest.getStackInSlot(index);
     }
 
-    /**
-     * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
-     */
     public ItemStack decrStackSize(int index, int count)
     {
         return index >= this.upperChest.getSizeInventory() ? this.lowerChest.decrStackSize(index - this.upperChest.getSizeInventory(), count) : this.upperChest.decrStackSize(index, count);
     }
 
-    /**
-     * Removes a stack from the given slot and returns it.
-     */
     public ItemStack removeStackFromSlot(int index)
     {
         return index >= this.upperChest.getSizeInventory() ? this.lowerChest.removeStackFromSlot(index - this.upperChest.getSizeInventory()) : this.upperChest.removeStackFromSlot(index);
     }
 
-    /**
-     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-     */
     public void setInventorySlotContents(int index, ItemStack stack)
     {
         if (index >= this.upperChest.getSizeInventory())
@@ -126,27 +94,17 @@ public class InventoryLargeChest implements ILockableContainer
         }
     }
 
-    /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
-     */
     public int getInventoryStackLimit()
     {
         return this.upperChest.getInventoryStackLimit();
     }
 
-    /**
-     * For tile entities, ensures the chunk containing the tile entity is saved to disk later - the game won't think it
-     * hasn't changed and skip it.
-     */
     public void markDirty()
     {
         this.upperChest.markDirty();
         this.lowerChest.markDirty();
     }
 
-    /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
-     */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
         return this.upperChest.isUseableByPlayer(player) && this.lowerChest.isUseableByPlayer(player);
@@ -164,9 +122,6 @@ public class InventoryLargeChest implements ILockableContainer
         this.lowerChest.closeInventory(player);
     }
 
-    /**
-     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
-     */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
         return true;

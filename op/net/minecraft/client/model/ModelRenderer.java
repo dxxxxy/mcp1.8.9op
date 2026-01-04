@@ -17,16 +17,9 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelRenderer
 {
-    /** The size of the texture file's width in pixels. */
     public float textureWidth;
-
-    /** The size of the texture file's height in pixels. */
     public float textureHeight;
-
-    /** The X offset into the texture used for displaying this model */
     private int textureOffsetX;
-
-    /** The Y offset into the texture used for displaying this model */
     private int textureOffsetY;
     public float rotationPointX;
     public float rotationPointY;
@@ -35,13 +28,9 @@ public class ModelRenderer
     public float rotateAngleY;
     public float rotateAngleZ;
     private boolean compiled;
-
-    /** The GL display list rendered by the Tessellator for this model */
     private int displayList;
     public boolean mirror;
     public boolean showModel;
-
-    /** Hides the model. */
     public boolean isHidden;
     public List<ModelBox> cubeList;
     public List<ModelRenderer> childModels;
@@ -92,9 +81,6 @@ public class ModelRenderer
         this.setTextureOffset(texOffX, texOffY);
     }
 
-    /**
-     * Sets the current box's rotation points and rotation angles to another box.
-     */
     public void addChild(ModelRenderer renderer)
     {
         if (this.childModels == null)
@@ -133,9 +119,6 @@ public class ModelRenderer
         return this;
     }
 
-    /**
-     * Creates a textured box. Args: originX, originY, originZ, width, height, depth, scaleFactor.
-     */
     public void addBox(float p_78790_1_, float p_78790_2_, float p_78790_3_, int width, int height, int depth, float scaleFactor)
     {
         this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, p_78790_1_, p_78790_2_, p_78790_3_, width, height, depth, scaleFactor));
@@ -350,9 +333,6 @@ public class ModelRenderer
         }
     }
 
-    /**
-     * Allows the changing of Angles after a box has been rendered
-     */
     public void postRender(float scale)
     {
         if (!this.isHidden && this.showModel)
@@ -393,9 +373,6 @@ public class ModelRenderer
         }
     }
 
-    /**
-     * Compiles a GL display list for this model
-     */
     private void compileDisplayList(float scale)
     {
         if (this.displayList == 0)
@@ -421,9 +398,6 @@ public class ModelRenderer
         this.compiled = true;
     }
 
-    /**
-     * Returns the model renderer with the new texture parameters.
-     */
     public ModelRenderer setTextureSize(int textureWidthIn, int textureHeightIn)
     {
         this.textureWidth = (float)textureWidthIn;

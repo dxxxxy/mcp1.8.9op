@@ -23,17 +23,11 @@ public class S2FPacketSetSlot implements Packet<INetHandlerPlayClient>
         this.item = itemIn == null ? null : itemIn.copy();
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleSetSlot(this);
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.windowId = buf.readByte();
@@ -41,9 +35,6 @@ public class S2FPacketSetSlot implements Packet<INetHandlerPlayClient>
         this.item = buf.readItemStackFromBuffer();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeByte(this.windowId);

@@ -18,16 +18,9 @@ import org.apache.logging.log4j.Logger;
 public class ChunkProviderClient implements IChunkProvider
 {
     private static final Logger logger = LogManager.getLogger();
-
-    /**
-     * The completely empty chunk used by ChunkProviderClient when chunkMapping doesn't contain the requested
-     * coordinates.
-     */
     private Chunk blankChunk;
     private LongHashMap<Chunk> chunkMapping = new LongHashMap();
     private List<Chunk> chunkListing = Lists.<Chunk>newArrayList();
-
-    /** Reference to the World object. */
     private World worldObj;
 
     public ChunkProviderClient(World worldIn)
@@ -36,18 +29,11 @@ public class ChunkProviderClient implements IChunkProvider
         this.worldObj = worldIn;
     }
 
-    /**
-     * Checks to see if a chunk exists at x, z
-     */
     public boolean chunkExists(int x, int z)
     {
         return true;
     }
 
-    /**
-     * Unload chunk from ChunkProviderClient's hashmap. Called in response to a Packet50PreChunk with its mode field set
-     * to false
-     */
     public void unloadChunk(int x, int z)
     {
         Chunk chunk = this.provideChunk(x, z);
@@ -61,12 +47,6 @@ public class ChunkProviderClient implements IChunkProvider
         this.chunkListing.remove(chunk);
     }
 
-    /**
-     * loads or generates the chunk at the chunk location specified
-     *  
-     * @param chunkX x coord of the chunk to load (block coord >> 4)
-     * @param chunkZ z coord of the chunk to load (block coord >> 4)
-     */
     public Chunk loadChunk(int chunkX, int chunkZ)
     {
         Chunk chunk = new Chunk(this.worldObj, chunkX, chunkZ);
@@ -76,36 +56,21 @@ public class ChunkProviderClient implements IChunkProvider
         return chunk;
     }
 
-    /**
-     * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
-     * specified chunk from the map seed and chunk seed
-     */
     public Chunk provideChunk(int x, int z)
     {
         Chunk chunk = (Chunk)this.chunkMapping.getValueByKey(ChunkCoordIntPair.chunkXZ2Int(x, z));
         return chunk == null ? this.blankChunk : chunk;
     }
 
-    /**
-     * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
-     * Return true if all chunks have been saved.
-     */
     public boolean saveChunks(boolean saveAllChunks, IProgressUpdate progressCallback)
     {
         return true;
     }
 
-    /**
-     * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
-     * unimplemented.
-     */
     public void saveExtraData()
     {
     }
 
-    /**
-     * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
-     */
     public boolean unloadQueuedChunks()
     {
         long i = System.currentTimeMillis();
@@ -123,17 +88,11 @@ public class ChunkProviderClient implements IChunkProvider
         return false;
     }
 
-    /**
-     * Returns if the IChunkProvider supports saving.
-     */
     public boolean canSave()
     {
         return false;
     }
 
-    /**
-     * Populates chunk with ores etc etc
-     */
     public void populate(IChunkProvider chunkProvider, int x, int z)
     {
     }
@@ -143,9 +102,6 @@ public class ChunkProviderClient implements IChunkProvider
         return false;
     }
 
-    /**
-     * Converts the instance data to a readable string.
-     */
     public String makeString()
     {
         return "MultiplayerChunkCache: " + this.chunkMapping.getNumHashElements() + ", " + this.chunkListing.size();

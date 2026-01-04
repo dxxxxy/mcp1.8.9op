@@ -14,9 +14,6 @@ public class StatBasic extends StatBase
         super(statIdIn, statNameIn);
     }
 
-    /**
-     * Register the stat into StatList.
-     */
     public StatBase registerStat()
     {
         super.registerStat();

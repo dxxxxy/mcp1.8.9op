@@ -26,8 +26,6 @@ public class BlockPistonBase extends Block
 {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
     public static final PropertyBool EXTENDED = PropertyBool.create("extended");
-
-    /** This piston is the sticky one? */
     private final boolean isSticky;
 
     public BlockPistonBase(boolean isSticky)
@@ -40,17 +38,11 @@ public class BlockPistonBase extends Block
         this.setCreativeTab(CreativeTabs.tabRedstone);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
-     */
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         worldIn.setBlockState(pos, state.withProperty(FACING, getFacingFromEntity(worldIn, pos, placer)), 2);
@@ -61,9 +53,6 @@ public class BlockPistonBase extends Block
         }
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!worldIn.isRemote)
@@ -80,10 +69,6 @@ public class BlockPistonBase extends Block
         }
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, getFacingFromEntity(worldIn, pos, placer)).withProperty(EXTENDED, Boolean.valueOf(false));
@@ -138,9 +123,6 @@ public class BlockPistonBase extends Block
         }
     }
 
-    /**
-     * Called on both Client and Server when World#addBlockEvent is called
-     */
     public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
     {
         EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
@@ -265,17 +247,11 @@ public class BlockPistonBase extends Block
         }
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
     public void setBlockBoundsForItemRender()
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    /**
-     * Add all collision boxes of this Block to the list that intersect with the given mask.
-     */
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -449,25 +425,16 @@ public class BlockPistonBase extends Block
         }
     }
 
-    /**
-     * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
-     */
     public IBlockState getStateForEntityRender(IBlockState state)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.UP);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, getFacing(meta)).withProperty(EXTENDED, Boolean.valueOf((meta & 8) > 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

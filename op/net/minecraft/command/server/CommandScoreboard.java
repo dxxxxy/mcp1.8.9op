@@ -33,33 +33,21 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class CommandScoreboard extends CommandBase
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "scoreboard";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 2;
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.scoreboard.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (!this.func_175780_b(sender, args))
@@ -1344,9 +1332,6 @@ public class CommandScoreboard extends CommandBase
         return list;
     }
 
-    /**
-     * Return whether the specified command parameter index is a username parameter.
-     */
     public boolean isUsernameIndex(String[] args, int index)
     {
         return !args[0].equalsIgnoreCase("players") ? (args[0].equalsIgnoreCase("teams") ? index == 2 : false) : (args.length > 1 && args[1].equalsIgnoreCase("operation") ? index == 2 || index == 5 : index == 2);

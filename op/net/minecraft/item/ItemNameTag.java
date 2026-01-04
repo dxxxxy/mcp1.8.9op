@@ -12,9 +12,6 @@ public class ItemNameTag extends Item
         this.setCreativeTab(CreativeTabs.tabTools);
     }
 
-    /**
-     * Returns true if the item can be used on the given entity, e.g. shears on sheep.
-     */
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target)
     {
         if (!stack.hasDisplayName())

@@ -31,10 +31,10 @@ public class ModelUtils
 
     private static void dbgQuads(String name, List quads, String prefix)
     {
-        for (Object bakedquad0 : quads)
+        for (Object o : quads)
         {
-            BakedQuad bakedQuad = (BakedQuad) bakedquad0;
-            dbgQuad(name, bakedQuad, prefix);
+            BakedQuad bakedquad = (BakedQuad) o;
+            dbgQuad(name, bakedquad, prefix);
         }
     }
 
@@ -84,9 +84,9 @@ public class ModelUtils
     {
         List list = new ArrayList();
 
-        for (Object e : lists)
+        for (Object o : lists)
         {
-            BakedQuad bakedquad = (BakedQuad) e;
+            BakedQuad bakedquad = (BakedQuad) o;
             BakedQuad bakedquad1 = duplicateQuad(bakedquad);
             list.add(bakedquad1);
         }

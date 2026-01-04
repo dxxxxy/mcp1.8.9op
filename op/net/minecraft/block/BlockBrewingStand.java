@@ -36,33 +36,21 @@ public class BlockBrewingStand extends BlockContainer
         this.setDefaultState(this.blockState.getBaseState().withProperty(HAS_BOTTLE[0], Boolean.valueOf(false)).withProperty(HAS_BOTTLE[1], Boolean.valueOf(false)).withProperty(HAS_BOTTLE[2], Boolean.valueOf(false)));
     }
 
-    /**
-     * Gets the localized name of this block. Used for the statistics page.
-     */
     public String getLocalizedName()
     {
         return StatCollector.translateToLocal("item.brewingStand.name");
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
-     */
     public int getRenderType()
     {
         return 3;
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityBrewingStand();
@@ -73,9 +61,6 @@ public class BlockBrewingStand extends BlockContainer
         return false;
     }
 
-    /**
-     * Add all collision boxes of this Block to the list that intersect with the given mask.
-     */
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
         this.setBlockBounds(0.4375F, 0.0F, 0.4375F, 0.5625F, 0.875F, 0.5625F);
@@ -84,9 +69,6 @@ public class BlockBrewingStand extends BlockContainer
         super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
     public void setBlockBoundsForItemRender()
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
@@ -112,9 +94,6 @@ public class BlockBrewingStand extends BlockContainer
         }
     }
 
-    /**
-     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
-     */
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         if (stack.hasDisplayName())
@@ -148,9 +127,6 @@ public class BlockBrewingStand extends BlockContainer
         super.breakBlock(worldIn, pos, state);
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Items.brewing_stand;
@@ -176,9 +152,6 @@ public class BlockBrewingStand extends BlockContainer
         return EnumWorldBlockLayer.CUTOUT;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState();
@@ -191,9 +164,6 @@ public class BlockBrewingStand extends BlockContainer
         return iblockstate;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

@@ -10,9 +10,6 @@ public class GuiButtonLanguage extends GuiButton
         super(buttonID, xPos, yPos, 20, 20, "");
     }
 
-    /**
-     * Draws this button to the screen.
-     */
     public void drawButton(Minecraft mc, int mouseX, int mouseY)
     {
         if (this.visible)

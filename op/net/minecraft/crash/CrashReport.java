@@ -24,21 +24,11 @@ import org.apache.logging.log4j.Logger;
 public class CrashReport
 {
     private static final Logger logger = LogManager.getLogger();
-
-    /** Description of the crash report. */
     private final String description;
-
-    /** The Throwable that is the "cause" for this crash and Crash Report. */
     private final Throwable cause;
-
-    /** Category of crash */
     private final CrashReportCategory theReportCategory = new CrashReportCategory(this, "System Details");
     private final List<CrashReportCategory> crashReportSections = Lists.<CrashReportCategory>newArrayList();
-
-    /** File of crash report. */
     private File crashReportFile;
-
-    /** Is true when the current category is the first in the crash report */
     private boolean firstCategoryInCrashReport = true;
     private StackTraceElement[] stacktrace = new StackTraceElement[0];
     private boolean reported = false;
@@ -50,10 +40,6 @@ public class CrashReport
         this.populateEnvironment();
     }
 
-    /**
-     * Populates this crash report with initial information about the running server and operating system / java
-     * environment
-     */
     private void populateEnvironment()
     {
         this.theReportCategory.addCrashSectionCallable("Minecraft Version", new Callable<String>()
@@ -138,25 +124,16 @@ public class CrashReport
         }
     }
 
-    /**
-     * Returns the description of the Crash Report.
-     */
     public String getDescription()
     {
         return this.description;
     }
 
-    /**
-     * Returns the Throwable object that is the cause for the crash and Crash Report.
-     */
     public Throwable getCrashCause()
     {
         return this.cause;
     }
 
-    /**
-     * Gets the various sections of the crash report into the given StringBuilder
-     */
     public void getSectionsInStringBuilder(StringBuilder builder)
     {
         if ((this.stacktrace == null || this.stacktrace.length <= 0) && this.crashReportSections.size() > 0)
@@ -187,9 +164,6 @@ public class CrashReport
         this.theReportCategory.appendToStringBuilder(builder);
     }
 
-    /**
-     * Gets the stack trace of the Throwable that caused this crash report, or if that fails, the cause .toString().
-     */
     public String getCauseStackTraceOrString()
     {
         StringWriter stringwriter = null;
@@ -232,9 +206,6 @@ public class CrashReport
         return s;
     }
 
-    /**
-     * Gets the complete report with headers, stack trace, and different sections as a string.
-     */
     public String getCompleteReport()
     {
         if (!this.reported)
@@ -269,17 +240,11 @@ public class CrashReport
         return stringbuilder.toString();
     }
 
-    /**
-     * Gets the file this crash report is saved into.
-     */
     public File getFile()
     {
         return this.crashReportFile;
     }
 
-    /**
-     * Saves this CrashReport to the given file and returns a value indicating whether we were successful at doing so.
-     */
     public boolean saveToFile(File toFile)
     {
         if (this.crashReportFile != null)
@@ -314,17 +279,11 @@ public class CrashReport
         return this.theReportCategory;
     }
 
-    /**
-     * Creates a CrashReportCategory
-     */
     public CrashReportCategory makeCategory(String name)
     {
         return this.makeCategoryDepth(name, 1);
     }
 
-    /**
-     * Creates a CrashReportCategory for the given stack trace depth
-     */
     public CrashReportCategory makeCategoryDepth(String categoryName, int stacktraceLength)
     {
         CrashReportCategory crashreportcategory = new CrashReportCategory(this, categoryName);
@@ -374,9 +333,6 @@ public class CrashReport
         return crashreportcategory;
     }
 
-    /**
-     * Gets a random witty comment for inclusion in this CrashReport
-     */
     private static String getWittyComment()
     {
         String[] astring = new String[] {"Who set us up the TNT?", "Everything\'s going to plan. No, really, that was supposed to happen.", "Uh... Did I do that?", "Oops.", "Why did you do that?", "I feel sad now :(", "My bad.", "I\'m sorry, Dave.", "I let you down. Sorry :(", "On the bright side, I bought you a teddy bear!", "Daisy, daisy...", "Oh - I know what I did wrong!", "Hey, that tickles! Hehehe!", "I blame Dinnerbone.", "You should try our sister game, Minceraft!", "Don\'t be sad. I\'ll do better next time, I promise!", "Don\'t be sad, have a hug! <3", "I just don\'t know what went wrong :(", "Shall we play a game?", "Quite honestly, I wouldn\'t worry myself about that.", "I bet Cylons wouldn\'t have this problem.", "Sorry :(", "Surprise! Haha. Well, this is awkward.", "Would you like a cupcake?", "Hi. I\'m Minecraft, and I\'m a crashaholic.", "Ooh. Shiny.", "This doesn\'t make any sense!", "Why is it breaking :(", "Don\'t do that.", "Ouch. That hurt :(", "You\'re mean.", "This is a token for 1 free hug. Redeem at your nearest Mojangsta: [~~HUG~~]", "There are four lights!", "But it works on my machine."};
@@ -391,9 +347,6 @@ public class CrashReport
         }
     }
 
-    /**
-     * Creates a crash report for the exception
-     */
     public static CrashReport makeCrashReport(Throwable causeIn, String descriptionIn)
     {
         CrashReport crashreport;

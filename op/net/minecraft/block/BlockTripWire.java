@@ -38,10 +38,6 @@ public class BlockTripWire extends Block
         this.setTickRandomly(true);
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         return state.withProperty(NORTH, Boolean.valueOf(isConnectedTo(worldIn, pos, state, EnumFacing.NORTH))).withProperty(EAST, Boolean.valueOf(isConnectedTo(worldIn, pos, state, EnumFacing.EAST))).withProperty(SOUTH, Boolean.valueOf(isConnectedTo(worldIn, pos, state, EnumFacing.SOUTH))).withProperty(WEST, Boolean.valueOf(isConnectedTo(worldIn, pos, state, EnumFacing.WEST)));
@@ -52,9 +48,6 @@ public class BlockTripWire extends Block
         return null;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -70,9 +63,6 @@ public class BlockTripWire extends Block
         return EnumWorldBlockLayer.TRANSLUCENT;
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Items.string;
@@ -83,9 +73,6 @@ public class BlockTripWire extends Block
         return Items.string;
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         boolean flag = ((Boolean)state.getValue(SUSPENDED)).booleanValue();
@@ -168,9 +155,6 @@ public class BlockTripWire extends Block
         }
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         if (!worldIn.isRemote)
@@ -182,9 +166,6 @@ public class BlockTripWire extends Block
         }
     }
 
-    /**
-     * Called randomly when setTickRandomly is set to true (used by e.g. crops to grow, etc.)
-     */
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
     {
     }
@@ -255,17 +236,11 @@ public class BlockTripWire extends Block
         }
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(POWERED, Boolean.valueOf((meta & 1) > 0)).withProperty(SUSPENDED, Boolean.valueOf((meta & 2) > 0)).withProperty(ATTACHED, Boolean.valueOf((meta & 4) > 0)).withProperty(DISARMED, Boolean.valueOf((meta & 8) > 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

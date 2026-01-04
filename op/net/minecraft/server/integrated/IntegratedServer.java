@@ -43,8 +43,6 @@ import org.apache.logging.log4j.Logger;
 public class IntegratedServer extends MinecraftServer
 {
     private static final Logger logger = LogManager.getLogger();
-
-    /** The Minecraft instance. */
     private final Minecraft mc;
     private final WorldSettings theWorldSettings;
     private boolean isGamePaused;
@@ -148,7 +146,7 @@ public class IntegratedServer extends MinecraftServer
 
             if (worldserver.getWorldInfo().getDifficulty() == null)
             {
-                this.setDifficultyForAllWorlds(this.mc.gameSettings.hideGUI);
+                this.setDifficultyForAllWorlds(this.mc.gameSettings.difficulty);
             }
         }
         else
@@ -192,16 +190,13 @@ public class IntegratedServer extends MinecraftServer
 
             if (this.worldServers[0].getWorldInfo().getDifficulty() == null)
             {
-                this.setDifficultyForAllWorlds(this.mc.gameSettings.hideGUI);
+                this.setDifficultyForAllWorlds(this.mc.gameSettings.difficulty);
             }
         }
 
         this.initialWorldChunkLoad();
     }
 
-    /**
-     * Initialises the server and starts it.
-     */
     protected boolean startServer() throws IOException
     {
         logger.info("Starting integrated minecraft server version 1.9");
@@ -241,9 +236,6 @@ public class IntegratedServer extends MinecraftServer
         return true;
     }
 
-    /**
-     * Main function called by run() every loop.
-     */
     public void tick()
     {
         this.onTick();
@@ -313,41 +305,26 @@ public class IntegratedServer extends MinecraftServer
         return this.theWorldSettings.getGameType();
     }
 
-    /**
-     * Get the server's difficulty
-     */
     public EnumDifficulty getDifficulty()
     {
-        return this.mc.theWorld == null ? this.mc.gameSettings.hideGUI : this.mc.theWorld.getWorldInfo().getDifficulty();
+        return this.mc.theWorld == null ? this.mc.gameSettings.difficulty : this.mc.theWorld.getWorldInfo().getDifficulty();
     }
 
-    /**
-     * Defaults to false.
-     */
     public boolean isHardcore()
     {
         return this.theWorldSettings.getHardcoreEnabled();
     }
 
-    /**
-     * Get if RCON command events should be broadcast to ops
-     */
     public boolean shouldBroadcastRconToOps()
     {
         return true;
     }
 
-    /**
-     * Get if console command events should be broadcast to ops
-     */
     public boolean shouldBroadcastConsoleToOps()
     {
         return true;
     }
 
-    /**
-     * par1 indicates if a log message should be output.
-     */
     public void saveAllWorlds(boolean dontLog)
     {
         if (dontLog)
@@ -376,26 +353,16 @@ public class IntegratedServer extends MinecraftServer
         return false;
     }
 
-    /**
-     * Get if native transport should be used. Native transport means linux server performance improvements and
-     * optimized packet sending/receiving on linux
-     */
     public boolean shouldUseNativeTransport()
     {
         return false;
     }
 
-    /**
-     * Called on exit from the main run() loop.
-     */
     protected void finalTick(CrashReport report)
     {
         this.mc.crashed(report);
     }
 
-    /**
-     * Adds the server info, including from theWorldServer, to the crash report.
-     */
     public CrashReport addServerInfoToCrashReport(CrashReport report)
     {
         report = super.addServerInfoToCrashReport(report);
@@ -442,17 +409,11 @@ public class IntegratedServer extends MinecraftServer
         playerSnooper.addClientStat("snooper_partner", this.mc.getPlayerUsageSnooper().getUniqueID());
     }
 
-    /**
-     * Returns whether snooping is enabled or not.
-     */
     public boolean isSnooperEnabled()
     {
         return Minecraft.getMinecraft().isSnooperEnabled();
     }
 
-    /**
-     * On dedicated does nothing. On integrated, sets commandsAllowedForAll, gameType and allows external connections.
-     */
     public String shareToLAN(WorldSettings.GameType type, boolean allowCheats)
     {
         try
@@ -488,9 +449,6 @@ public class IntegratedServer extends MinecraftServer
         }
     }
 
-    /**
-     * Saves all necessary data as preparation for stopping the server.
-     */
     public void stopServer()
     {
         super.stopServer();
@@ -502,9 +460,6 @@ public class IntegratedServer extends MinecraftServer
         }
     }
 
-    /**
-     * Sets the serverRunning variable to false, in order to get the server to shut down.
-     */
     public void initiateShutdown()
     {
         if (!Reflector.MinecraftForge.exists() || this.isServerRunning())
@@ -535,25 +490,16 @@ public class IntegratedServer extends MinecraftServer
         this.setInstance();
     }
 
-    /**
-     * Returns true if this integrated server is open to LAN
-     */
     public boolean getPublic()
     {
         return this.isPublic;
     }
 
-    /**
-     * Sets the game type for all worlds.
-     */
     public void setGameType(WorldSettings.GameType gameMode)
     {
         this.getConfigurationManager().setGameType(gameMode);
     }
 
-    /**
-     * Return whether command blocks are enabled.
-     */
     public boolean isCommandBlockEnabled()
     {
         return true;

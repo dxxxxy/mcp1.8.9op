@@ -19,42 +19,24 @@ import net.minecraft.world.World;
 
 public abstract class CommandBlockLogic implements ICommandSender
 {
-    /** The formatting for the timestamp on commands run. */
     private static final SimpleDateFormat timestampFormat = new SimpleDateFormat("HH:mm:ss");
-
-    /** The number of successful commands run. (used for redstone output) */
     private int successCount;
     private boolean trackOutput = true;
-
-    /** The previously run command. */
     private IChatComponent lastOutput = null;
-
-    /** The command stored in the command block. */
     private String commandStored = "";
-
-    /** The custom name of the command block. (defaults to "@") */
     private String customName = "@";
     private final CommandResultStats resultStats = new CommandResultStats();
 
-    /**
-     * returns the successCount int.
-     */
     public int getSuccessCount()
     {
         return this.successCount;
     }
 
-    /**
-     * Returns the lastOutput.
-     */
     public IChatComponent getLastOutput()
     {
         return this.lastOutput;
     }
 
-    /**
-     * Stores data to NBT format.
-     */
     public void writeDataToNBT(NBTTagCompound tagCompound)
     {
         tagCompound.setString("Command", this.commandStored);
@@ -70,9 +52,6 @@ public abstract class CommandBlockLogic implements ICommandSender
         this.resultStats.writeStatsToNBT(tagCompound);
     }
 
-    /**
-     * Reads NBT formatting and stored data into variables.
-     */
     public void readDataFromNBT(NBTTagCompound nbt)
     {
         this.commandStored = nbt.getString("Command");
@@ -96,26 +75,17 @@ public abstract class CommandBlockLogic implements ICommandSender
         this.resultStats.readStatsFromNBT(nbt);
     }
 
-    /**
-     * Returns {@code true} if the CommandSender is allowed to execute the command, {@code false} if not
-     */
     public boolean canCommandSenderUseCommand(int permLevel, String commandName)
     {
         return permLevel <= 2;
     }
 
-    /**
-     * Sets the command.
-     */
     public void setCommand(String command)
     {
         this.commandStored = command;
         this.successCount = 0;
     }
 
-    /**
-     * Returns the command of the command block.
-     */
     public String getCommand()
     {
         return this.commandStored;
@@ -166,17 +136,11 @@ public abstract class CommandBlockLogic implements ICommandSender
         }
     }
 
-    /**
-     * Get the name of this object. For players this returns their username
-     */
     public String getName()
     {
         return this.customName;
     }
 
-    /**
-     * Get the formatted ChatComponent that will be used for the sender's username in chat
-     */
     public IChatComponent getDisplayName()
     {
         return new ChatComponentText(this.getName());
@@ -187,9 +151,6 @@ public abstract class CommandBlockLogic implements ICommandSender
         this.customName = p_145754_1_;
     }
 
-    /**
-     * Send a chat message to the CommandSender
-     */
     public void addChatMessage(IChatComponent component)
     {
         if (this.trackOutput && this.getEntityWorld() != null && !this.getEntityWorld().isRemote)
@@ -199,9 +160,6 @@ public abstract class CommandBlockLogic implements ICommandSender
         }
     }
 
-    /**
-     * Returns true if the command sender should be sent feedback about executed commands
-     */
     public boolean sendCommandFeedback()
     {
         MinecraftServer minecraftserver = MinecraftServer.getServer();

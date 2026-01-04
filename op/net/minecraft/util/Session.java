@@ -54,9 +54,6 @@ public class Session
         }
     }
 
-    /**
-     * Returns either 'legacy' or 'mojang' whether the account is migrated or not
-     */
     public Session.Type getSessionType()
     {
         return this.sessionType;

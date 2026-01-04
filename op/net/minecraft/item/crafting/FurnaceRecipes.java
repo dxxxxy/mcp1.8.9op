@@ -18,9 +18,6 @@ public class FurnaceRecipes
     private Map<ItemStack, ItemStack> smeltingList = Maps.<ItemStack, ItemStack>newHashMap();
     private Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
 
-    /**
-     * Returns an instance of FurnaceRecipes.
-     */
     public static FurnaceRecipes instance()
     {
         return smeltingBase;
@@ -63,34 +60,22 @@ public class FurnaceRecipes
         this.addSmeltingRecipeForBlock(Blocks.quartz_ore, new ItemStack(Items.quartz), 0.2F);
     }
 
-    /**
-     * Adds a smelting recipe, where the input item is an instance of Block.
-     */
     public void addSmeltingRecipeForBlock(Block input, ItemStack stack, float experience)
     {
         this.addSmelting(Item.getItemFromBlock(input), stack, experience);
     }
 
-    /**
-     * Adds a smelting recipe using an Item as the input item.
-     */
     public void addSmelting(Item input, ItemStack stack, float experience)
     {
         this.addSmeltingRecipe(new ItemStack(input, 1, 32767), stack, experience);
     }
 
-    /**
-     * Adds a smelting recipe using an ItemStack as the input for the recipe.
-     */
     public void addSmeltingRecipe(ItemStack input, ItemStack stack, float experience)
     {
         this.smeltingList.put(input, stack);
         this.experienceList.put(stack, Float.valueOf(experience));
     }
 
-    /**
-     * Returns the smelting result of an item.
-     */
     public ItemStack getSmeltingResult(ItemStack stack)
     {
         for (Entry<ItemStack, ItemStack> entry : this.smeltingList.entrySet())
@@ -104,9 +89,6 @@ public class FurnaceRecipes
         return null;
     }
 
-    /**
-     * Compares two itemstacks to ensure that they are the same. This checks both the item and the metadata of the item.
-     */
     private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
     {
         return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());

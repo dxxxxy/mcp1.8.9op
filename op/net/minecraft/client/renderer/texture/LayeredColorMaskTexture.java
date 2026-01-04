@@ -18,10 +18,7 @@ import org.apache.logging.log4j.Logger;
 
 public class LayeredColorMaskTexture extends AbstractTexture
 {
-    /** Access to the Logger, for all your logging needs. */
     private static final Logger LOG = LogManager.getLogger();
-
-    /** The location of the texture. */
     private final ResourceLocation textureLocation;
     private final List<String> field_174949_h;
     private final List<EnumDyeColor> field_174950_i;

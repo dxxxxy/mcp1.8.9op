@@ -43,25 +43,16 @@ public class EntityCow extends EntityAnimal
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.20000000298023224D);
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return "mob.cow.say";
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.cow.hurt";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.cow.hurt";
@@ -72,9 +63,6 @@ public class EntityCow extends EntityAnimal
         this.playSound("mob.cow.step", 0.15F, 1.0F);
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
     protected float getSoundVolume()
     {
         return 0.4F;
@@ -85,13 +73,6 @@ public class EntityCow extends EntityAnimal
         return Items.leather;
     }
 
-    /**
-     * Drop 0-2 items of this living's type
-     *  
-     * @param wasRecentlyHit true if this this entity was recently hit by appropriate entity (generally only if player
-     * or tameable)
-     * @param lootingModifier level of enchanment to be applied to this drop
-     */
     protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
     {
         int i = this.rand.nextInt(3) + this.rand.nextInt(1 + lootingModifier);
@@ -116,9 +97,6 @@ public class EntityCow extends EntityAnimal
         }
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
     public boolean interact(EntityPlayer player)
     {
         ItemStack itemstack = player.inventory.getCurrentItem();

@@ -14,11 +14,7 @@ public class ChunkCache implements IBlockAccess
     protected int chunkX;
     protected int chunkZ;
     protected Chunk[][] chunkArray;
-
-    /** set by !chunk.getAreLevelsEmpty */
     protected boolean hasExtendedLevels;
-
-    /** Reference to the World object. */
     protected World worldObj;
 
     public ChunkCache(World worldIn, BlockPos posFromIn, BlockPos posToIn, int subIn)
@@ -53,9 +49,6 @@ public class ChunkCache implements IBlockAccess
         }
     }
 
-    /**
-     * set by !chunk.getAreLevelsEmpty
-     */
     public boolean extendedLevelsInChunkCache()
     {
         return this.hasExtendedLevels;
@@ -149,10 +142,6 @@ public class ChunkCache implements IBlockAccess
         }
     }
 
-    /**
-     * Checks to see if an air block exists at the provided location. Note that this only checks to see if the blocks
-     * material is set to air, meaning it is possible for non-vanilla blocks to still pass this check.
-     */
     public boolean isAirBlock(BlockPos pos)
     {
         return this.getBlockState(pos).getBlock().getMaterial() == Material.air;

@@ -66,9 +66,6 @@ public abstract class BlockSlab extends Block
         }
     }
 
-    /**
-     * Sets the block's bounds for rendering it as an item
-     */
     public void setBlockBoundsForItemRender()
     {
         if (this.isDouble())
@@ -81,36 +78,23 @@ public abstract class BlockSlab extends Block
         }
     }
 
-    /**
-     * Add all collision boxes of this Block to the list that intersect with the given mask.
-     */
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
         this.setBlockBoundsBasedOnState(worldIn, pos);
         super.addCollisionBoxesToList(worldIn, pos, state, mask, list, collidingEntity);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return this.isDouble();
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState iblockstate = super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
         return this.isDouble() ? iblockstate : (facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockSlab.EnumBlockHalf.TOP));
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return this.isDouble() ? 2 : 1;
@@ -147,14 +131,8 @@ public abstract class BlockSlab extends Block
         return blockIn == Blocks.stone_slab || blockIn == Blocks.wooden_slab || blockIn == Blocks.stone_slab2;
     }
 
-    /**
-     * Returns the slab block name with the type associated with it
-     */
     public abstract String getUnlocalizedName(int meta);
 
-    /**
-     * Gets the meta to use for the Pick Block ItemStack result
-     */
     public int getDamageValue(World worldIn, BlockPos pos)
     {
         return super.getDamageValue(worldIn, pos) & 7;

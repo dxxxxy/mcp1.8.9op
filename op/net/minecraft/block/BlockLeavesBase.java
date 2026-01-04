@@ -15,9 +15,6 @@ public class BlockLeavesBase extends Block
         this.fancyGraphics = fancyGraphics;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;

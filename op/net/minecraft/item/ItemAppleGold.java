@@ -20,9 +20,6 @@ public class ItemAppleGold extends ItemFood
         return stack.getMetadata() > 0;
     }
 
-    /**
-     * Return an item rarity from EnumRarity
-     */
     public EnumRarity getRarity(ItemStack stack)
     {
         return stack.getMetadata() == 0 ? EnumRarity.RARE : EnumRarity.EPIC;
@@ -50,9 +47,6 @@ public class ItemAppleGold extends ItemFood
         }
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
         subItems.add(new ItemStack(itemIn, 1, 0));

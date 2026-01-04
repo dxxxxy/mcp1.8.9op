@@ -18,9 +18,6 @@ public class BiomeGenEnd extends BiomeGenBase
         this.theBiomeDecorator = new BiomeEndDecorator();
     }
 
-    /**
-     * takes temperature, returns color
-     */
     public int getSkyColorByTemp(float p_76731_1_)
     {
         return 0;

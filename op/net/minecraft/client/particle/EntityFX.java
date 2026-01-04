@@ -18,24 +18,10 @@ public class EntityFX extends Entity
     protected int particleMaxAge;
     protected float particleScale;
     protected float particleGravity;
-
-    /** The red amount of color. Used as a percentage, 1.0 = 255 and 0.0 = 0. */
     protected float particleRed;
-
-    /**
-     * The green amount of color. Used as a percentage, 1.0 = 255 and 0.0 = 0.
-     */
     protected float particleGreen;
-
-    /**
-     * The blue amount of color. Used as a percentage, 1.0 = 255 and 0.0 = 0.
-     */
     protected float particleBlue;
-
-    /** Particle alpha */
     protected float particleAlpha;
-
-    /** The icon field from which the given particle pulls its texture. */
     protected TextureAtlasSprite particleIcon;
     public static double interpPosX;
     public static double interpPosY;
@@ -93,9 +79,6 @@ public class EntityFX extends Entity
         this.particleBlue = particleBlueIn;
     }
 
-    /**
-     * Sets the particle alpha (float)
-     */
     public void setAlphaF(float alpha)
     {
         if (this.particleAlpha == 1.0F && alpha < 1.0F)
@@ -130,10 +113,6 @@ public class EntityFX extends Entity
         return this.particleAlpha;
     }
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
     protected boolean canTriggerWalking()
     {
         return false;
@@ -143,9 +122,6 @@ public class EntityFX extends Entity
     {
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;
@@ -170,9 +146,6 @@ public class EntityFX extends Entity
         }
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         float f = (float)this.particleTextureIndexX / 16.0F;
@@ -206,23 +179,14 @@ public class EntityFX extends Entity
         return 0;
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
     }
 
-    /**
-     * Sets the particle's icon.
-     */
     public void setParticleIcon(TextureAtlasSprite icon)
     {
         int i = this.getFXLayer();
@@ -237,9 +201,6 @@ public class EntityFX extends Entity
         }
     }
 
-    /**
-     * Public method to set private field particleTextureIndex.
-     */
     public void setParticleTextureIndex(int particleTextureIndex)
     {
         if (this.getFXLayer() != 0)
@@ -258,9 +219,6 @@ public class EntityFX extends Entity
         ++this.particleTextureIndexX;
     }
 
-    /**
-     * If returns false, the item will not inflict any damage against entities.
-     */
     public boolean canAttackWithItem()
     {
         return false;

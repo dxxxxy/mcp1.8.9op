@@ -22,9 +22,6 @@ public class JsonSerializableSet extends ForwardingSet<String> implements IJsonS
         }
     }
 
-    /**
-     * Gets the JsonElement that can be serialized.
-     */
     public JsonElement getSerializableElement()
     {
         JsonArray jsonarray = new JsonArray();

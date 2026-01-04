@@ -20,10 +20,6 @@ public class GuiPerformanceSettingsOF extends GuiScreen
         this.settings = gamesettings;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         this.title = I18n.format("of.options.performanceTitle", new Object[0]);
@@ -48,9 +44,6 @@ public class GuiPerformanceSettingsOF extends GuiScreen
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 168 + 11, I18n.format("gui.done", new Object[0])));
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton guibutton)
     {
         if (guibutton.enabled)
@@ -69,9 +62,6 @@ public class GuiPerformanceSettingsOF extends GuiScreen
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int x, int y, float f)
     {
         this.drawDefaultBackground();

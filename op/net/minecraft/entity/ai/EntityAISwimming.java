@@ -14,17 +14,11 @@ public class EntityAISwimming extends EntityAIBase
         ((PathNavigateGround)entitylivingIn.getNavigator()).setCanSwim(true);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
         return this.theEntity.isInWater() || this.theEntity.isInLava();
     }
 
-    /**
-     * Updates the task
-     */
     public void updateTask()
     {
         if (this.theEntity.getRNG().nextFloat() < 0.8F)

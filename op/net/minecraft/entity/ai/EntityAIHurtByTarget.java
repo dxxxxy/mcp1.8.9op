@@ -7,8 +7,6 @@ import net.minecraft.util.AxisAlignedBB;
 public class EntityAIHurtByTarget extends EntityAITarget
 {
     private boolean entityCallsForHelp;
-
-    /** Store the previous revengeTimer value */
     private int revengeTimerOld;
     private final Class[] targetClasses;
 
@@ -20,18 +18,12 @@ public class EntityAIHurtByTarget extends EntityAITarget
         this.setMutexBits(1);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
         int i = this.taskOwner.getRevengeTimer();
         return i != this.revengeTimerOld && this.isSuitableTarget(this.taskOwner.getAITarget(), false);
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
     public void startExecuting()
     {
         this.taskOwner.setAttackTarget(this.taskOwner.getAITarget());

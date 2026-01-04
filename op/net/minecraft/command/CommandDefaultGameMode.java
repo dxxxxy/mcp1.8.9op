@@ -7,25 +7,16 @@ import net.minecraft.world.WorldSettings;
 
 public class CommandDefaultGameMode extends CommandGameMode
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "defaultgamemode";
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.defaultgamemode.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length <= 0)

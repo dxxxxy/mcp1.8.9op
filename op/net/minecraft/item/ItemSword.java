@@ -26,9 +26,6 @@ public class ItemSword extends Item
         this.attackDamage = 4.0F + material.getDamageVsEntity();
     }
 
-    /**
-     * Returns the amount of damage this item will deal. One heart of damage is equal to 2 damage points.
-     */
     public float getDamageVsEntity()
     {
         return this.material.getDamageVsEntity();
@@ -47,19 +44,12 @@ public class ItemSword extends Item
         }
     }
 
-    /**
-     * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-     * the damage on the stack.
-     */
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
         stack.damageItem(1, attacker);
         return true;
     }
 
-    /**
-     * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
-     */
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos, EntityLivingBase playerIn)
     {
         if ((double)blockIn.getBlockHardness(worldIn, pos) != 0.0D)
@@ -70,66 +60,42 @@ public class ItemSword extends Item
         return true;
     }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
     public boolean isFull3D()
     {
         return true;
     }
 
-    /**
-     * returns the action that specifies what animation to play when the items is being used
-     */
     public EnumAction getItemUseAction(ItemStack stack)
     {
         return EnumAction.BLOCK;
     }
 
-    /**
-     * How long it takes to use or consume an item
-     */
     public int getMaxItemUseDuration(ItemStack stack)
     {
         return 72000;
     }
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
     public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
     {
         playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
         return itemStackIn;
     }
 
-    /**
-     * Check whether this Item can harvest the given Block
-     */
     public boolean canHarvestBlock(Block blockIn)
     {
         return blockIn == Blocks.web;
     }
 
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
     public int getItemEnchantability()
     {
         return this.material.getEnchantability();
     }
 
-    /**
-     * Return the name for this tool's material.
-     */
     public String getToolMaterialName()
     {
         return this.material.toString();
     }
 
-    /**
-     * Return whether this item is repairable in an anvil.
-     */
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
         return this.material.getRepairItem() == repair.getItem() ? true : super.getIsRepairable(toRepair, repair);

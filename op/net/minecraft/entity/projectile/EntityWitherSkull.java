@@ -27,9 +27,6 @@ public class EntityWitherSkull extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    /**
-     * Return the motion factor for this projectile. The factor is multiplied by the original motion.
-     */
     protected float getMotionFactor()
     {
         return this.isInvulnerable() ? 0.73F : super.getMotionFactor();
@@ -41,17 +38,11 @@ public class EntityWitherSkull extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    /**
-     * Returns true if the entity is on fire. Used by render to add the fire effect on rendering.
-     */
     public boolean isBurning()
     {
         return false;
     }
 
-    /**
-     * Explosion resistance of a block relative to this entity
-     */
     public float getExplosionResistance(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn)
     {
         float f = super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
@@ -65,9 +56,6 @@ public class EntityWitherSkull extends EntityFireball
         return f;
     }
 
-    /**
-     * Called when this EntityFireball hits a block or entity.
-     */
     protected void onImpact(MovingObjectPosition movingObject)
     {
         if (!this.worldObj.isRemote)
@@ -118,17 +106,11 @@ public class EntityWitherSkull extends EntityFireball
         }
     }
 
-    /**
-     * Returns true if other Entities should be prevented from moving through this Entity.
-     */
     public boolean canBeCollidedWith()
     {
         return false;
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         return false;
@@ -139,17 +121,11 @@ public class EntityWitherSkull extends EntityFireball
         this.dataWatcher.addObject(10, Byte.valueOf((byte)0));
     }
 
-    /**
-     * Return whether this skull comes from an invulnerable (aura) wither boss.
-     */
     public boolean isInvulnerable()
     {
         return this.dataWatcher.getWatchableObjectByte(10) == 1;
     }
 
-    /**
-     * Set whether this skull comes from an invulnerable (aura) wither boss.
-     */
     public void setInvulnerable(boolean invulnerable)
     {
         this.dataWatcher.updateObject(10, Byte.valueOf((byte)(invulnerable ? 1 : 0)));

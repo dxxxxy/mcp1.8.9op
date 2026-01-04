@@ -6,8 +6,6 @@ public class BlockEventData
 {
     private BlockPos position;
     private Block blockType;
-
-    /** Different for each blockID */
     private int eventID;
     private int eventParameter;
 
@@ -24,9 +22,6 @@ public class BlockEventData
         return this.position;
     }
 
-    /**
-     * Get the Event ID (different for each BlockID)
-     */
     public int getEventID()
     {
         return this.eventID;

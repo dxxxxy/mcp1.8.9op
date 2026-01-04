@@ -22,23 +22,13 @@ import net.minecraft.world.WorldSettings;
 
 public class ItemInWorldManager
 {
-    /** The world object that this object is connected to. */
     public World theWorld;
-
-    /** The EntityPlayerMP object that this object is connected to. */
     public EntityPlayerMP thisPlayerMP;
     private WorldSettings.GameType gameType = WorldSettings.GameType.NOT_SET;
-
-    /** True if the player is destroying a block */
     private boolean isDestroyingBlock;
     private int initialDamage;
     private BlockPos field_180240_f = BlockPos.ORIGIN;
     private int curblockDamage;
-
-    /**
-     * Set to true when the "finished destroying block" packet is received but the block wasn't fully damaged yet. The
-     * block will not be destroyed while this is false.
-     */
     private boolean receivedFinishDiggingPacket;
     private BlockPos field_180241_i = BlockPos.ORIGIN;
     private int initialBlockDamage;
@@ -67,17 +57,11 @@ public class ItemInWorldManager
         return this.gameType.isSurvivalOrAdventure();
     }
 
-    /**
-     * Get if we are in creative game mode.
-     */
     public boolean isCreative()
     {
         return this.gameType.isCreative();
     }
 
-    /**
-     * if the gameType is currently NOT_SET then change it to par1
-     */
     public void initializeGameType(WorldSettings.GameType type)
     {
         if (this.gameType == WorldSettings.GameType.NOT_SET)
@@ -144,10 +128,6 @@ public class ItemInWorldManager
         }
     }
 
-    /**
-     * If not creative, it calls sendBlockBreakProgress until the block is broken first. tryHarvestBlock can also be the
-     * result of this call.
-     */
     public void onBlockClicked(BlockPos pos, EnumFacing side)
     {
         if (this.isCreative())
@@ -237,18 +217,12 @@ public class ItemInWorldManager
         }
     }
 
-    /**
-     * Stops the block breaking process
-     */
     public void cancelDestroyingBlock()
     {
         this.isDestroyingBlock = false;
         this.theWorld.sendBlockBreakProgress(this.thisPlayerMP.getEntityId(), this.field_180240_f, -1);
     }
 
-    /**
-     * Removes a block and triggers the appropriate events
-     */
     private boolean removeBlock(BlockPos pos)
     {
         IBlockState iblockstate = this.theWorld.getBlockState(pos);
@@ -263,9 +237,6 @@ public class ItemInWorldManager
         return flag;
     }
 
-    /**
-     * Attempts to harvest a block
-     */
     public boolean tryHarvestBlock(BlockPos pos)
     {
         if (this.gameType.isCreative() && this.thisPlayerMP.getHeldItem() != null && this.thisPlayerMP.getHeldItem().getItem() instanceof ItemSword)
@@ -332,9 +303,6 @@ public class ItemInWorldManager
         }
     }
 
-    /**
-     * Attempts to right-click use an item by the given EntityPlayer in the given World
-     */
     public boolean tryUseItem(EntityPlayer player, World worldIn, ItemStack stack)
     {
         if (this.gameType == WorldSettings.GameType.SPECTATOR)
@@ -380,9 +348,6 @@ public class ItemInWorldManager
         }
     }
 
-    /**
-     * Activate the clicked on block, otherwise use the held item.
-     */
     public boolean activateBlockOrUseItem(EntityPlayer player, World worldIn, ItemStack stack, BlockPos pos, EnumFacing side, float offsetX, float offsetY, float offsetZ)
     {
         if (this.gameType == WorldSettings.GameType.SPECTATOR)
@@ -445,9 +410,6 @@ public class ItemInWorldManager
         }
     }
 
-    /**
-     * Sets the world instance.
-     */
     public void setWorld(WorldServer serverWorld)
     {
         this.theWorld = serverWorld;

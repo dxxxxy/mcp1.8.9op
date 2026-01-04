@@ -10,33 +10,21 @@ import net.minecraft.util.BlockPos;
 
 public class CommandEnchant extends CommandBase
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "enchant";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 2;
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.enchant.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length < 2)
@@ -132,9 +120,6 @@ public class CommandEnchant extends CommandBase
         return MinecraftServer.getServer().getAllUsernames();
     }
 
-    /**
-     * Return whether the specified command parameter index is a username parameter.
-     */
     public boolean isUsernameIndex(String[] args, int index)
     {
         return index == 0;

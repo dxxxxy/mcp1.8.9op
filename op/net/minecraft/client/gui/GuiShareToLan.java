@@ -20,10 +20,6 @@ public class GuiShareToLan extends GuiScreen
         this.field_146598_a = p_i1055_1_;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         this.buttonList.clear();
@@ -49,9 +45,6 @@ public class GuiShareToLan extends GuiScreen
         }
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.id == 102)
@@ -103,9 +96,6 @@ public class GuiShareToLan extends GuiScreen
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();

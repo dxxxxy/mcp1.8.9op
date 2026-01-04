@@ -23,10 +23,6 @@ public class RenderHorse extends RenderLiving<EntityHorse>
         super(rendermanagerIn, model, shadowSizeIn);
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityHorse entitylivingbaseIn, float partialTickTime)
     {
         float f = 1.0F;
@@ -45,9 +41,6 @@ public class RenderHorse extends RenderLiving<EntityHorse>
         super.preRenderCallback(entitylivingbaseIn, partialTickTime);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityHorse entity)
     {
         if (!entity.func_110239_cn())

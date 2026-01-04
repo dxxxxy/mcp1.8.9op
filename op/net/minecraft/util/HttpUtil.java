@@ -31,14 +31,9 @@ import org.apache.logging.log4j.Logger;
 public class HttpUtil
 {
     public static final ListeningExecutorService field_180193_a = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool((new ThreadFactoryBuilder()).setDaemon(true).setNameFormat("Downloader %d").build()));
-
-    /** The number of download threads that we have started so far. */
     private static final AtomicInteger downloadThreadsStarted = new AtomicInteger(0);
     private static final Logger logger = LogManager.getLogger();
 
-    /**
-     * Builds an encoded HTTP POST content string from a string map
-     */
     public static String buildPostString(Map<String, Object> data)
     {
         StringBuilder stringbuilder = new StringBuilder();
@@ -77,17 +72,11 @@ public class HttpUtil
         return stringbuilder.toString();
     }
 
-    /**
-     * Sends a POST to the given URL using the map as the POST args
-     */
     public static String postMap(URL url, Map<String, Object> data, boolean skipLoggingErrors)
     {
         return post(url, buildPostString(data), skipLoggingErrors);
     }
 
-    /**
-     * Sends a POST to the given URL
-     */
     private static String post(URL url, String content, boolean skipLoggingErrors)
     {
         try
@@ -319,9 +308,6 @@ public class HttpUtil
         return i;
     }
 
-    /**
-     * Send a GET request to the given URL.
-     */
     public static String get(URL url) throws IOException
     {
         HttpURLConnection httpurlconnection = (HttpURLConnection)url.openConnection();

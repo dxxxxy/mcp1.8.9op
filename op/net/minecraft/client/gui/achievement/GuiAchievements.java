@@ -56,10 +56,6 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         this.field_146568_t = this.field_146566_v = this.field_146573_x = (double)(AchievementList.openInventory.displayRow * 24 - j / 2);
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         this.mc.getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.REQUEST_STATS));
@@ -67,9 +63,6 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 74, 80, 20, I18n.format("gui.done", new Object[0])));
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (!this.loadingAchievements)
@@ -81,13 +74,9 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         }
     }
 
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
-        if (keyCode == this.mc.gameSettings.keyBindUseItem.getKeyCode())
+        if (keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode())
         {
             this.mc.displayGuiScreen((GuiScreen)null);
             this.mc.setIngameFocus();
@@ -98,9 +87,6 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         if (this.loadingAchievements)
@@ -206,9 +192,6 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         }
     }
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
     public void updateScreen()
     {
         if (!this.loadingAchievements)
@@ -558,9 +541,6 @@ public class GuiAchievements extends GuiScreen implements IProgressMeter
         return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(p_175371_1_.getDefaultState());
     }
 
-    /**
-     * Returns true if this GUI should pause the game when it is displayed in single-player
-     */
     public boolean doesGuiPauseGame()
     {
         return !this.loadingAchievements;

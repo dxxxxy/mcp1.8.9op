@@ -473,9 +473,9 @@ public class ConnectedProperties
 
     public static IProperty getProperty(String key, Collection properties)
     {
-        for (Object iproperty0 : properties)
+        for (Object o : properties)
         {
-            IProperty iproperty = (IProperty) iproperty0;
+            IProperty iproperty = (IProperty) o;
             if (key.equals(iproperty.getName()))
             {
                 return iproperty;

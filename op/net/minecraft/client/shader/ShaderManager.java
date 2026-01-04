@@ -250,25 +250,16 @@ public class ShaderManager
         this.isDirty = true;
     }
 
-    /**
-     * gets a shader uniform for the name given. null if not found.
-     */
     public ShaderUniform getShaderUniform(String p_147991_1_)
     {
         return this.mappedShaderUniforms.containsKey(p_147991_1_) ? (ShaderUniform)this.mappedShaderUniforms.get(p_147991_1_) : null;
     }
 
-    /**
-     * gets a shader uniform for the name given. if not found, returns a default not-null value
-     */
     public ShaderUniform getShaderUniformOrDefault(String p_147984_1_)
     {
         return (ShaderUniform)(this.mappedShaderUniforms.containsKey(p_147984_1_) ? (ShaderUniform)this.mappedShaderUniforms.get(p_147984_1_) : defaultShaderUniform);
     }
 
-    /**
-     * goes through the parsed uniforms and samplers and connects them to their GL counterparts.
-     */
     private void setupUniforms()
     {
         int i = 0;
@@ -327,9 +318,6 @@ public class ShaderManager
         }
     }
 
-    /**
-     * adds a shader sampler texture. if it already exists, replaces it.
-     */
     public void addSamplerTexture(String p_147992_1_, Object p_147992_2_)
     {
         if (this.shaderSamplers.containsKey(p_147992_1_))

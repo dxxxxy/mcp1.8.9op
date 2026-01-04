@@ -29,9 +29,6 @@ public class EntityCloudFX extends EntityFX
         this.noClip = false;
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         float f = ((float)this.particleAge + partialTicks) / (float)this.particleMaxAge * 32.0F;
@@ -40,9 +37,6 @@ public class EntityCloudFX extends EntityFX
         super.renderParticle(worldRendererIn, entityIn, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;

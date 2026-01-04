@@ -20,9 +20,6 @@ public class MovingSoundMinecartRiding extends MovingSound
         this.repeatDelay = 0;
     }
 
-    /**
-     * Like the old updateEntity(), except more generic.
-     */
     public void update()
     {
         if (!this.minecart.isDead && this.player.isRiding() && this.player.ridingEntity == this.minecart)

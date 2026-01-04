@@ -52,19 +52,12 @@ public class GuiScreenAddServer extends GuiScreen
         this.serverData = p_i1033_2_;
     }
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
     public void updateScreen()
     {
         this.serverNameField.updateCursorCounter();
         this.serverIPField.updateCursorCounter();
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         Keyboard.enableRepeatEvents(true);
@@ -82,17 +75,11 @@ public class GuiScreenAddServer extends GuiScreen
         ((GuiButton)this.buttonList.get(0)).enabled = this.serverIPField.getText().length() > 0 && this.serverIPField.getText().split(":").length > 0 && this.serverNameField.getText().length() > 0;
     }
 
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
     public void onGuiClosed()
     {
         Keyboard.enableRepeatEvents(false);
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.enabled)
@@ -115,10 +102,6 @@ public class GuiScreenAddServer extends GuiScreen
         }
     }
 
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
         this.serverNameField.textboxKeyTyped(typedChar, keyCode);
@@ -138,9 +121,6 @@ public class GuiScreenAddServer extends GuiScreen
         ((GuiButton)this.buttonList.get(0)).enabled = this.serverIPField.getText().length() > 0 && this.serverIPField.getText().split(":").length > 0 && this.serverNameField.getText().length() > 0;
     }
 
-    /**
-     * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
-     */
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
     {
         super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -148,9 +128,6 @@ public class GuiScreenAddServer extends GuiScreen
         this.serverNameField.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();

@@ -63,9 +63,6 @@ public class RenderGuardian extends RenderLiving<EntityGuardian>
         return new Vec3(d0, d1, d2);
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityGuardian entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         if (this.field_177115_a != ((ModelGuardian)this.mainModel).func_178706_a())
@@ -159,10 +156,6 @@ public class RenderGuardian extends RenderLiving<EntityGuardian>
         }
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityGuardian entitylivingbaseIn, float partialTickTime)
     {
         if (entitylivingbaseIn.isElder())
@@ -171,9 +164,6 @@ public class RenderGuardian extends RenderLiving<EntityGuardian>
         }
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityGuardian entity)
     {
         return entity.isElder() ? GUARDIAN_ELDER_TEXTURE : GUARDIAN_TEXTURE;

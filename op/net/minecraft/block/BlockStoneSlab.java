@@ -40,9 +40,6 @@ public abstract class BlockStoneSlab extends BlockSlab
         this.setCreativeTab(CreativeTabs.tabBlock);
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(Blocks.stone_slab);
@@ -53,9 +50,6 @@ public abstract class BlockStoneSlab extends BlockSlab
         return Item.getItemFromBlock(Blocks.stone_slab);
     }
 
-    /**
-     * Returns the slab block name with the type associated with it
-     */
     public String getUnlocalizedName(int meta)
     {
         return super.getUnlocalizedName() + "." + BlockStoneSlab.EnumType.byMetadata(meta).getUnlocalizedName();
@@ -71,9 +65,6 @@ public abstract class BlockStoneSlab extends BlockSlab
         return BlockStoneSlab.EnumType.byMetadata(stack.getMetadata() & 7);
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         if (itemIn != Item.getItemFromBlock(Blocks.double_stone_slab))
@@ -88,9 +79,6 @@ public abstract class BlockStoneSlab extends BlockSlab
         }
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState().withProperty(VARIANT, BlockStoneSlab.EnumType.byMetadata(meta & 7));
@@ -107,9 +95,6 @@ public abstract class BlockStoneSlab extends BlockSlab
         return iblockstate;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
@@ -135,18 +120,11 @@ public abstract class BlockStoneSlab extends BlockSlab
         return this.isDouble() ? new BlockState(this, new IProperty[] {SEAMLESS, VARIANT}): new BlockState(this, new IProperty[] {HALF, VARIANT});
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         return ((BlockStoneSlab.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         return ((BlockStoneSlab.EnumType)state.getValue(VARIANT)).func_181074_c();

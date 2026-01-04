@@ -43,18 +43,11 @@ public class BlockAnvil extends BlockFalling
         return false;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         EnumFacing enumfacing = placer.getHorizontalFacing().rotateY();
@@ -71,10 +64,6 @@ public class BlockAnvil extends BlockFalling
         return true;
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         return ((Integer)state.getValue(DAMAGE)).intValue();
@@ -94,9 +83,6 @@ public class BlockAnvil extends BlockFalling
         }
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         list.add(new ItemStack(itemIn, 1, 0));
@@ -119,25 +105,16 @@ public class BlockAnvil extends BlockFalling
         return true;
     }
 
-    /**
-     * Possibly modify the given BlockState before rendering it on an Entity (Minecarts, Endermen, ...)
-     */
     public IBlockState getStateForEntityRender(IBlockState state)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.SOUTH);
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(DAMAGE, Integer.valueOf((meta & 15) >> 2));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

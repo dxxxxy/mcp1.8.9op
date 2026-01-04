@@ -6,8 +6,5 @@ public interface IPlayerUsage
 
     void addServerTypeToSnooper(PlayerUsageSnooper playerSnooper);
 
-    /**
-     * Returns whether snooping is enabled or not.
-     */
     boolean isSnooperEnabled();
 }

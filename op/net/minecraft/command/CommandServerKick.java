@@ -7,33 +7,21 @@ import net.minecraft.util.BlockPos;
 
 public class CommandServerKick extends CommandBase
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "kick";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 3;
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.kick.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length > 0 && args[0].length() > 1)

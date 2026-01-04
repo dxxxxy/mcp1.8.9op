@@ -4,30 +4,13 @@ import net.minecraft.client.renderer.WorldRenderer;
 
 public class ModelBox
 {
-    /**
-     * The (x,y,z) vertex positions and (u,v) texture coordinates for each of the 8 points on a cube
-     */
     private PositionTextureVertex[] vertexPositions;
-
-    /** An array of 6 TexturedQuads, one for each face of a cube */
     private TexturedQuad[] quadList;
-
-    /** X vertex coordinate of lower box corner */
     public final float posX1;
-
-    /** Y vertex coordinate of lower box corner */
     public final float posY1;
-
-    /** Z vertex coordinate of lower box corner */
     public final float posZ1;
-
-    /** X vertex coordinate of upper box corner */
     public final float posX2;
-
-    /** Y vertex coordinate of upper box corner */
     public final float posY2;
-
-    /** Z vertex coordinate of upper box corner */
     public final float posZ2;
     public String boxName;
 

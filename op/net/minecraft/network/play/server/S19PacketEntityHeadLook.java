@@ -22,27 +22,18 @@ public class S19PacketEntityHeadLook implements Packet<INetHandlerPlayClient>
         this.yaw = p_i45214_2_;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityId = buf.readVarIntFromBuffer();
         this.yaw = buf.readByte();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.entityId);
         buf.writeByte(this.yaw);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleEntityHeadLook(this);

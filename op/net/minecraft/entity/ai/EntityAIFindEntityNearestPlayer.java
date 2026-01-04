@@ -18,15 +18,9 @@ import org.apache.logging.log4j.Logger;
 public class EntityAIFindEntityNearestPlayer extends EntityAIBase
 {
     private static final Logger LOGGER = LogManager.getLogger();
-
-    /** The entity that use this AI */
     private EntityLiving entityLiving;
     private final Predicate<Entity> predicate;
-
-    /** Used to compare two entities */
     private final EntityAINearestAttackableTarget.Sorter sorter;
-
-    /** The current target */
     private EntityLivingBase entityTarget;
 
     public EntityAIFindEntityNearestPlayer(EntityLiving entityLivingIn)
@@ -78,9 +72,6 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
         this.sorter = new EntityAINearestAttackableTarget.Sorter(entityLivingIn);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
         double d0 = this.maxTargetRange();
@@ -98,9 +89,6 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
         }
     }
 
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
     public boolean continueExecuting()
     {
         EntityLivingBase entitylivingbase = this.entityLiving.getAttackTarget();
@@ -134,27 +122,18 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
         }
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
     public void startExecuting()
     {
         this.entityLiving.setAttackTarget(this.entityTarget);
         super.startExecuting();
     }
 
-    /**
-     * Resets the task
-     */
     public void resetTask()
     {
         this.entityLiving.setAttackTarget((EntityLivingBase)null);
         super.startExecuting();
     }
 
-    /**
-     * Return the max target range of the entiity (16 by default)
-     */
     protected double maxTargetRange()
     {
         IAttributeInstance iattributeinstance = this.entityLiving.getEntityAttribute(SharedMonsterAttributes.followRange);

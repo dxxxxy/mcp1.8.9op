@@ -44,9 +44,6 @@ public class ModelCreeper extends ModelBase
         this.leg4.setRotationPoint(2.0F, (float)(12 + i), -4.0F);
     }
 
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
     public void render(Entity entityIn, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float scale)
     {
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entityIn);
@@ -58,11 +55,6 @@ public class ModelCreeper extends ModelBase
         this.leg4.render(scale);
     }
 
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         this.head.rotateAngleY = netHeadYaw / (180F / (float)Math.PI);

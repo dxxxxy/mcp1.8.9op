@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class NBTTagShort extends NBTBase.NBTPrimitive
 {
-    /** The short value for the tag. */
     private short data;
 
     public NBTTagShort()
@@ -18,9 +17,6 @@ public class NBTTagShort extends NBTBase.NBTPrimitive
         this.data = data;
     }
 
-    /**
-     * Write the actual data contents of the tag, implemented in NBT extension classes
-     */
     void write(DataOutput output) throws IOException
     {
         output.writeShort(this.data);
@@ -32,9 +28,6 @@ public class NBTTagShort extends NBTBase.NBTPrimitive
         this.data = input.readShort();
     }
 
-    /**
-     * Gets the type byte for the tag.
-     */
     public byte getId()
     {
         return (byte)2;
@@ -45,9 +38,6 @@ public class NBTTagShort extends NBTBase.NBTPrimitive
         return "" + this.data + "s";
     }
 
-    /**
-     * Creates a clone of the tag.
-     */
     public NBTBase copy()
     {
         return new NBTTagShort(this.data);

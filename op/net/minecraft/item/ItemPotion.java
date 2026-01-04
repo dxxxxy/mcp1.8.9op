@@ -84,10 +84,6 @@ public class ItemPotion extends Item
         return list;
     }
 
-    /**
-     * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
-     * the Item before the action is complete.
-     */
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
     {
         if (!playerIn.capabilities.isCreativeMode)
@@ -123,25 +119,16 @@ public class ItemPotion extends Item
         return stack;
     }
 
-    /**
-     * How long it takes to use or consume an item
-     */
     public int getMaxItemUseDuration(ItemStack stack)
     {
         return 32;
     }
 
-    /**
-     * returns the action that specifies what animation to play when the items is being used
-     */
     public EnumAction getItemUseAction(ItemStack stack)
     {
         return EnumAction.DRINK;
     }
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
     public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
     {
         if (isSplash(itemStackIn.getMetadata()))
@@ -168,9 +155,6 @@ public class ItemPotion extends Item
         }
     }
 
-    /**
-     * returns wether or not a potion is a throwable splash potion based on damage value
-     */
     public static boolean isSplash(int meta)
     {
         return (meta & 16384) != 0;
@@ -239,9 +223,6 @@ public class ItemPotion extends Item
         }
     }
 
-    /**
-     * allows items to add custom lines of information to the mouseover description
-     */
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
     {
         if (stack.getMetadata() != 0)
@@ -333,9 +314,6 @@ public class ItemPotion extends Item
         return list != null && !list.isEmpty();
     }
 
-    /**
-     * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
-     */
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
         super.getSubItems(itemIn, tab, subItems);

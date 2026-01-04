@@ -20,13 +20,9 @@ import org.apache.commons.lang3.ObjectUtils;
 public class DataWatcher
 {
     private final Entity owner;
-
-    /** When isBlank is true the DataWatcher is not watching any objects */
     private boolean isBlank = true;
     private static final Map < Class<?>, Integer > dataTypes = Maps. < Class<?>, Integer > newHashMap();
     private final Map<Integer, DataWatcher.WatchableObject> watchedObjects = Maps.<Integer, DataWatcher.WatchableObject>newHashMap();
-
-    /** true if one or more object was changed */
     private boolean objectChanged;
     private ReadWriteLock lock = new ReentrantReadWriteLock();
     public BiomeGenBase spawnBiome = BiomeGenBase.plains;
@@ -63,9 +59,6 @@ public class DataWatcher
         }
     }
 
-    /**
-     * Add a new object for the DataWatcher to watch, using the specified data type.
-     */
     public void addObjectByDataType(int id, int type)
     {
         DataWatcher.WatchableObject datawatcher$watchableobject = new DataWatcher.WatchableObject(type, id, (Object)null);
@@ -75,9 +68,6 @@ public class DataWatcher
         this.isBlank = false;
     }
 
-    /**
-     * gets the bytevalue of a watchable object
-     */
     public byte getWatchableObjectByte(int id)
     {
         return ((Byte)this.getWatchedObject(id).getObject()).byteValue();
@@ -88,9 +78,6 @@ public class DataWatcher
         return ((Short)this.getWatchedObject(id).getObject()).shortValue();
     }
 
-    /**
-     * gets a watchable object and returns it as a Integer
-     */
     public int getWatchableObjectInt(int id)
     {
         return ((Integer)this.getWatchedObject(id).getObject()).intValue();
@@ -101,25 +88,16 @@ public class DataWatcher
         return ((Float)this.getWatchedObject(id).getObject()).floatValue();
     }
 
-    /**
-     * gets a watchable object and returns it as a String
-     */
     public String getWatchableObjectString(int id)
     {
         return (String)this.getWatchedObject(id).getObject();
     }
 
-    /**
-     * Get a watchable object as an ItemStack.
-     */
     public ItemStack getWatchableObjectItemStack(int id)
     {
         return (ItemStack)this.getWatchedObject(id).getObject();
     }
 
-    /**
-     * is threadsafe, unless it throws an exception, then
-     */
     private DataWatcher.WatchableObject getWatchedObject(int id)
     {
         this.lock.readLock().lock();
@@ -165,18 +143,11 @@ public class DataWatcher
         this.objectChanged = true;
     }
 
-    /**
-     * true if one or more object was changed
-     */
     public boolean hasObjectChanged()
     {
         return this.objectChanged;
     }
 
-    /**
-     * Writes the list of watched objects (entity attribute of type {byte, short, int, float, string, ItemStack,
-     * ChunkCoordinates}) to the specified PacketBuffer
-     */
     public static void writeWatchedListToPacketBuffer(List<DataWatcher.WatchableObject> objectsList, PacketBuffer buffer) throws IOException
     {
         if (objectsList != null)
@@ -252,10 +223,6 @@ public class DataWatcher
         return list;
     }
 
-    /**
-     * Writes a watchable object (entity attribute of type {byte, short, int, float, string, ItemStack,
-     * ChunkCoordinates}) to the specified PacketBuffer
-     */
     private static void writeWatchableObjectToPacketBuffer(PacketBuffer buffer, DataWatcher.WatchableObject object) throws IOException
     {
         int i = (object.getObjectType() << 5 | object.getDataValueId() & 31) & 255;

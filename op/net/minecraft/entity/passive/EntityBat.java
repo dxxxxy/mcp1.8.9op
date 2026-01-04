@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 
 public class EntityBat extends EntityAmbientCreature
 {
-    /** Coordinates of where the bat spawned. */
     private BlockPos spawnPosition;
 
     public EntityBat(World worldIn)
@@ -29,49 +28,31 @@ public class EntityBat extends EntityAmbientCreature
         this.dataWatcher.addObject(16, new Byte((byte)0));
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
     protected float getSoundVolume()
     {
         return 0.1F;
     }
 
-    /**
-     * Gets the pitch of living sounds in living entities.
-     */
     protected float getSoundPitch()
     {
         return super.getSoundPitch() * 0.95F;
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return this.getIsBatHanging() && this.rand.nextInt(4) != 0 ? null : "mob.bat.idle";
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.bat.hurt";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.bat.death";
     }
 
-    /**
-     * Returns true if this entity should push and be pushed by other entities when colliding.
-     */
     public boolean canBePushed()
     {
         return false;
@@ -110,9 +91,6 @@ public class EntityBat extends EntityAmbientCreature
         }
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         super.onUpdate();
@@ -185,10 +163,6 @@ public class EntityBat extends EntityAmbientCreature
         }
     }
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
     protected boolean canTriggerWalking()
     {
         return false;
@@ -202,17 +176,11 @@ public class EntityBat extends EntityAmbientCreature
     {
     }
 
-    /**
-     * Return whether this entity should NOT trigger a pressure plate or a tripwire.
-     */
     public boolean doesEntityNotTriggerPressurePlate()
     {
         return true;
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         if (this.isEntityInvulnerable(source))
@@ -230,27 +198,18 @@ public class EntityBat extends EntityAmbientCreature
         }
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
         this.dataWatcher.updateObject(16, Byte.valueOf(tagCompund.getByte("BatFlags")));
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
         tagCompound.setByte("BatFlags", this.dataWatcher.getWatchableObjectByte(16));
     }
 
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
     public boolean getCanSpawnHere()
     {
         BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);

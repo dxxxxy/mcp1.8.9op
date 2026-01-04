@@ -20,18 +20,11 @@ public class GuiSliderShaderOption extends GuiButtonShaderOption
         this.displayString = GuiShaderOptions.getButtonText(shaderOption, this.width);
     }
 
-    /**
-     * Returns 0 if the button is disabled, 1 if the mouse is NOT hovering over this button and 2 if it IS hovering over
-     * this button.
-     */
     protected int getHoverState(boolean mouseOver)
     {
         return 0;
     }
 
-    /**
-     * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
-     */
     protected void mouseDragged(Minecraft mc, int mouseX, int mouseY)
     {
         if (this.visible)
@@ -52,10 +45,6 @@ public class GuiSliderShaderOption extends GuiButtonShaderOption
         }
     }
 
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
     {
         if (super.mousePressed(mc, mouseX, mouseY))
@@ -73,9 +62,6 @@ public class GuiSliderShaderOption extends GuiButtonShaderOption
         }
     }
 
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
     public void mouseReleased(int mouseX, int mouseY)
     {
         this.dragging = false;

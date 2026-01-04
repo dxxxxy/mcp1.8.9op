@@ -17,9 +17,6 @@ public class EntityAIFollowGolem extends EntityAIBase
         this.setMutexBits(3);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
         if (this.theVillager.getGrowingAge() >= 0)
@@ -54,17 +51,11 @@ public class EntityAIFollowGolem extends EntityAIBase
         }
     }
 
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
     public boolean continueExecuting()
     {
         return this.theGolem.getHoldRoseTick() > 0;
     }
 
-    /**
-     * Execute a one shot task or start executing a continuous task
-     */
     public void startExecuting()
     {
         this.takeGolemRoseTick = this.theVillager.getRNG().nextInt(320);
@@ -72,18 +63,12 @@ public class EntityAIFollowGolem extends EntityAIBase
         this.theGolem.getNavigator().clearPathEntity();
     }
 
-    /**
-     * Resets the task
-     */
     public void resetTask()
     {
         this.theGolem = null;
         this.theVillager.getNavigator().clearPathEntity();
     }
 
-    /**
-     * Updates the task
-     */
     public void updateTask()
     {
         this.theVillager.getLookHelper().setLookPositionWithEntity(this.theGolem, 30.0F, 30.0F);

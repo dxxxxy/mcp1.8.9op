@@ -123,9 +123,6 @@ public class BlockBed extends BlockDirectional
         return false;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -136,9 +133,6 @@ public class BlockBed extends BlockDirectional
         this.setBedBounds();
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
@@ -161,9 +155,6 @@ public class BlockBed extends BlockDirectional
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return state.getValue(PART) == BlockBed.EnumPartType.HEAD ? null : Items.bed;
@@ -174,9 +165,6 @@ public class BlockBed extends BlockDirectional
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5625F, 1.0F);
     }
 
-    /**
-     * Returns a safe BlockPos to disembark the bed
-     */
     public static BlockPos getSafeExitLocation(World worldIn, BlockPos pos, int tries)
     {
         EnumFacing enumfacing = (EnumFacing)worldIn.getBlockState(pos).getValue(FACING);
@@ -218,9 +206,6 @@ public class BlockBed extends BlockDirectional
         return World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && !worldIn.getBlockState(pos).getBlock().getMaterial().isSolid() && !worldIn.getBlockState(pos.up()).getBlock().getMaterial().isSolid();
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         if (state.getValue(PART) == BlockBed.EnumPartType.FOOT)
@@ -257,19 +242,12 @@ public class BlockBed extends BlockDirectional
         }
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         EnumFacing enumfacing = EnumFacing.getHorizontal(meta);
         return (meta & 8) > 0 ? this.getDefaultState().withProperty(PART, BlockBed.EnumPartType.HEAD).withProperty(FACING, enumfacing).withProperty(OCCUPIED, Boolean.valueOf((meta & 4) > 0)) : this.getDefaultState().withProperty(PART, BlockBed.EnumPartType.FOOT).withProperty(FACING, enumfacing);
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         if (state.getValue(PART) == BlockBed.EnumPartType.FOOT)
@@ -285,9 +263,6 @@ public class BlockBed extends BlockDirectional
         return state;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

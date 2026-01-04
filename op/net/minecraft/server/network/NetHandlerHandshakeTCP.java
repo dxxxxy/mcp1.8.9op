@@ -20,11 +20,6 @@ public class NetHandlerHandshakeTCP implements INetHandlerHandshakeServer
         this.networkManager = netManager;
     }
 
-    /**
-     * There are two recognized intentions for initiating a handshake: logging in and acquiring server status. The
-     * NetworkManager's protocol will be reconfigured according to the specified intention, although a login-intention
-     * must pass a versioncheck or receive a disconnect otherwise
-     */
     public void processHandshake(C00Handshake packetIn)
     {
         switch (packetIn.getRequestedState())
@@ -61,9 +56,6 @@ public class NetHandlerHandshakeTCP implements INetHandlerHandshakeServer
         }
     }
 
-    /**
-     * Invoked when disconnecting, the parameter is a ChatComponent describing the reason for termination
-     */
     public void onDisconnect(IChatComponent reason)
     {
     }

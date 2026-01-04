@@ -93,9 +93,6 @@ public class BlockJukebox extends BlockContainer
         super.breakBlock(worldIn, pos, state);
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         if (!worldIn.isRemote)
@@ -104,9 +101,6 @@ public class BlockJukebox extends BlockContainer
         }
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new BlockJukebox.TileEntityJukebox();
@@ -134,25 +128,16 @@ public class BlockJukebox extends BlockContainer
         return 0;
     }
 
-    /**
-     * The type of render function called. 3 for standard block models, 2 for TESR's, 1 for liquids, -1 is no render
-     */
     public int getRenderType()
     {
         return 3;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(HAS_RECORD, Boolean.valueOf(meta > 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Boolean)state.getValue(HAS_RECORD)).booleanValue() ? 1 : 0;

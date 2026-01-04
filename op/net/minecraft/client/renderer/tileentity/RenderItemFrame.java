@@ -50,9 +50,6 @@ public class RenderItemFrame extends Render<EntityItemFrame>
         this.itemRenderer = itemRendererIn;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityItemFrame entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -86,9 +83,6 @@ public class RenderItemFrame extends Render<EntityItemFrame>
         this.renderName(entity, x + (double)((float)entity.facingDirection.getFrontOffsetX() * 0.3F), y - 0.25D, z + (double)((float)entity.facingDirection.getFrontOffsetZ() * 0.3F));
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityItemFrame entity)
     {
         return null;
@@ -277,7 +271,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
     public static void updateItemRenderDistance()
     {
         Minecraft minecraft = Config.getMinecraft();
-        double d0 = (double)Config.limit(minecraft.gameSettings.gammaSetting, 1.0F, 120.0F);
+        double d0 = (double)Config.limit(minecraft.gameSettings.fovSetting, 1.0F, 120.0F);
         double d1 = Math.max(6.0D * (double)minecraft.displayHeight / d0, 16.0D);
         itemRenderDistanceSq = d1 * d1;
     }

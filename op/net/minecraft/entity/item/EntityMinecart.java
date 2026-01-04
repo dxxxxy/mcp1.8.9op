@@ -34,11 +34,7 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
 {
     private boolean isInReverse;
     private String entityName;
-
-    /** Minecart rotational logic matrix */
     private static final int[][][] matrix = new int[][][] {{{0, 0, -1}, {0, 0, 1}}, {{ -1, 0, 0}, {1, 0, 0}}, {{ -1, -1, 0}, {1, 0, 0}}, {{ -1, 0, 0}, {1, -1, 0}}, {{0, 0, -1}, {0, -1, 1}}, {{0, -1, -1}, {0, 0, 1}}, {{0, 0, 1}, {1, 0, 0}}, {{0, 0, 1}, { -1, 0, 0}}, {{0, 0, -1}, { -1, 0, 0}}, {{0, 0, -1}, {1, 0, 0}}};
-
-    /** appears to be the progress of the turn */
     private int turnProgress;
     private double minecartX;
     private double minecartY;
@@ -83,10 +79,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
-     * prevent them from trampling crops
-     */
     protected boolean canTriggerWalking()
     {
         return false;
@@ -102,26 +94,16 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         this.dataWatcher.addObject(22, Byte.valueOf((byte)0));
     }
 
-    /**
-     * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
-     * pushable on contact, like boats or minecarts.
-     */
     public AxisAlignedBB getCollisionBox(Entity entityIn)
     {
         return entityIn.canBePushed() ? entityIn.getEntityBoundingBox() : null;
     }
 
-    /**
-     * Returns the collision bounding box for this entity
-     */
     public AxisAlignedBB getCollisionBoundingBox()
     {
         return null;
     }
 
-    /**
-     * Returns true if this entity should push and be pushed by other entities when colliding.
-     */
     public boolean canBePushed()
     {
         return true;
@@ -139,17 +121,11 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         this.prevPosZ = z;
     }
 
-    /**
-     * Returns the Y offset from the entity's position for any entity riding this one.
-     */
     public double getMountedYOffset()
     {
         return 0.0D;
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         if (!this.worldObj.isRemote && !this.isDead)
@@ -209,9 +185,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
-     */
     public void performHurtAnimation()
     {
         this.setRollingDirection(-this.getRollingDirection());
@@ -219,25 +192,16 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         this.setDamage(this.getDamage() + this.getDamage() * 10.0F);
     }
 
-    /**
-     * Returns true if other Entities should be prevented from moving through this Entity.
-     */
     public boolean canBeCollidedWith()
     {
         return !this.isDead;
     }
 
-    /**
-     * Will get destroyed next tick.
-     */
     public void setDead()
     {
         super.setDead();
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         if (this.getRollingAmplitude() > 0)
@@ -406,24 +370,15 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * Get's the maximum speed for a minecart
-     */
     protected double getMaximumSpeed()
     {
         return 0.4D;
     }
 
-    /**
-     * Called every tick the minecart is on an activator rail. Args: x, y, z, is the rail receiving power
-     */
     public void onActivatorRailPass(int x, int y, int z, boolean receivingPower)
     {
     }
 
-    /**
-     * Moves a minecart that is not attached to a rail
-     */
     protected void moveDerailedMinecart()
     {
         double d0 = this.getMaximumSpeed();
@@ -676,9 +631,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * Sets the x,y,z of the entity from the given parameters. Also seems to set up a bounding box.
-     */
     public void setPosition(double x, double y, double z)
     {
         this.posX = x;
@@ -805,9 +757,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     protected void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         if (tagCompund.getBoolean("CustomDisplayTile"))
@@ -850,9 +799,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     protected void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         if (this.hasDisplayTile())
@@ -871,9 +817,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         }
     }
 
-    /**
-     * Applies a velocity to each of the entities pushing them away from each other. Args: entity
-     */
     public void applyEntityCollision(Entity entityIn)
     {
         if (!this.worldObj.isRemote)
@@ -980,9 +923,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         this.motionZ = this.velocityZ;
     }
 
-    /**
-     * Sets the velocity to the args. Args: x, y, z
-     */
     public void setVelocity(double x, double y, double z)
     {
         this.velocityX = this.motionX = x;
@@ -990,51 +930,31 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         this.velocityZ = this.motionZ = z;
     }
 
-    /**
-     * Sets the current amount of damage the minecart has taken. Decreases over time. The cart breaks when this is over
-     * 40.
-     */
     public void setDamage(float p_70492_1_)
     {
         this.dataWatcher.updateObject(19, Float.valueOf(p_70492_1_));
     }
 
-    /**
-     * Gets the current amount of damage the minecart has taken. Decreases over time. The cart breaks when this is over
-     * 40.
-     */
     public float getDamage()
     {
         return this.dataWatcher.getWatchableObjectFloat(19);
     }
 
-    /**
-     * Sets the rolling amplitude the cart rolls while being attacked.
-     */
     public void setRollingAmplitude(int p_70497_1_)
     {
         this.dataWatcher.updateObject(17, Integer.valueOf(p_70497_1_));
     }
 
-    /**
-     * Gets the rolling amplitude the cart rolls while being attacked.
-     */
     public int getRollingAmplitude()
     {
         return this.dataWatcher.getWatchableObjectInt(17);
     }
 
-    /**
-     * Sets the rolling direction the cart rolls while being attacked. Can be 1 or -1.
-     */
     public void setRollingDirection(int p_70494_1_)
     {
         this.dataWatcher.updateObject(18, Integer.valueOf(p_70494_1_));
     }
 
-    /**
-     * Gets the rolling direction the cart rolls while being attacked. Can be 1 or -1.
-     */
     public int getRollingDirection()
     {
         return this.dataWatcher.getWatchableObjectInt(18);
@@ -1084,25 +1004,16 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         this.getDataWatcher().updateObject(22, Byte.valueOf((byte)(p_94096_1_ ? 1 : 0)));
     }
 
-    /**
-     * Sets the custom name tag for this entity
-     */
     public void setCustomNameTag(String name)
     {
         this.entityName = name;
     }
 
-    /**
-     * Get the name of this object. For players this returns their username
-     */
     public String getName()
     {
         return this.entityName != null ? this.entityName : super.getName();
     }
 
-    /**
-     * Returns true if this thing is named
-     */
     public boolean hasCustomName()
     {
         return this.entityName != null;
@@ -1113,9 +1024,6 @@ public abstract class EntityMinecart extends Entity implements IWorldNameable
         return this.entityName;
     }
 
-    /**
-     * Get the formatted ChatComponent that will be used for the sender's username in chat
-     */
     public IChatComponent getDisplayName()
     {
         if (this.hasCustomName())

@@ -24,11 +24,6 @@ public class EntityDamageSourceIndirect extends EntityDamageSource
         return this.indirectEntity;
     }
 
-    /**
-     * Gets the death message that is displayed when the player dies
-     *  
-     * @param entityLivingBaseIn The EntityLivingBase that died
-     */
     public IChatComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
     {
         IChatComponent ichatcomponent = this.indirectEntity == null ? this.damageSourceEntity.getDisplayName() : this.indirectEntity.getDisplayName();

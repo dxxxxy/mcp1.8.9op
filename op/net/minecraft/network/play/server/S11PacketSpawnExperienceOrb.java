@@ -28,9 +28,6 @@ public class S11PacketSpawnExperienceOrb implements Packet<INetHandlerPlayClient
         this.xpValue = xpOrb.getXpValue();
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityID = buf.readVarIntFromBuffer();
@@ -40,9 +37,6 @@ public class S11PacketSpawnExperienceOrb implements Packet<INetHandlerPlayClient
         this.xpValue = buf.readShort();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.entityID);
@@ -52,9 +46,6 @@ public class S11PacketSpawnExperienceOrb implements Packet<INetHandlerPlayClient
         buf.writeShort(this.xpValue);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleSpawnExperienceOrb(this);

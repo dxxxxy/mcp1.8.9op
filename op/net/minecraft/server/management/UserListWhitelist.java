@@ -29,17 +29,11 @@ public class UserListWhitelist extends UserList<GameProfile, UserListWhitelistEn
         return astring;
     }
 
-    /**
-     * Gets the key value for the given object
-     */
     protected String getObjectKey(GameProfile obj)
     {
         return obj.getId().toString();
     }
 
-    /**
-     * Gets the GameProfile for the UserListBanEntry with the specified username, if present
-     */
     public GameProfile getBannedProfile(String name)
     {
         for (UserListWhitelistEntry userlistwhitelistentry : this.getValues().values())

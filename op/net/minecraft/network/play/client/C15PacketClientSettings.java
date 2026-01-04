@@ -27,9 +27,6 @@ public class C15PacketClientSettings implements Packet<INetHandlerPlayServer>
         this.modelPartFlags = modelPartFlagsIn;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.lang = buf.readStringFromBuffer(7);
@@ -39,9 +36,6 @@ public class C15PacketClientSettings implements Packet<INetHandlerPlayServer>
         this.modelPartFlags = buf.readUnsignedByte();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeString(this.lang);
@@ -51,9 +45,6 @@ public class C15PacketClientSettings implements Packet<INetHandlerPlayServer>
         buf.writeByte(this.modelPartFlags);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayServer handler)
     {
         handler.processClientSettings(this);

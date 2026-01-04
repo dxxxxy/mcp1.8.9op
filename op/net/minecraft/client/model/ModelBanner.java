@@ -18,9 +18,6 @@ public class ModelBanner extends ModelBase
         this.bannerTop.addBox(-10.0F, -32.0F, -1.0F, 20, 2, 2, 0.0F);
     }
 
-    /**
-     * Renders the banner model in.
-     */
     public void renderBanner()
     {
         this.bannerSlate.rotationPointY = -32.0F;

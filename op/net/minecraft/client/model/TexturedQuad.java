@@ -42,10 +42,6 @@ public class TexturedQuad
         this.vertexPositions = apositiontexturevertex;
     }
 
-    /**
-     * Draw this primitve. This is typically called only once as the generated drawing instructions are saved by the
-     * renderer and reused later.
-     */
     public void draw(WorldRenderer renderer, float scale)
     {
         Vec3 vec3 = this.vertexPositions[1].vector3D.subtractReverse(this.vertexPositions[0].vector3D);

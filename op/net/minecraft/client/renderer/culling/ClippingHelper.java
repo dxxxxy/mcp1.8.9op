@@ -13,9 +13,6 @@ public class ClippingHelper
         return p_dot_1_[0] * p_dot_2_ + p_dot_1_[1] * p_dot_3_ + p_dot_1_[2] * p_dot_4_ + p_dot_1_[3];
     }
 
-    /**
-     * Returns true if the box is inside all 6 clipping planes, otherwise returns false.
-     */
     public boolean isBoxInFrustum(double p_78553_1_, double p_78553_3_, double p_78553_5_, double p_78553_7_, double p_78553_9_, double p_78553_11_)
     {
         if (this.disabled)

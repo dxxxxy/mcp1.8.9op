@@ -11,9 +11,6 @@ public abstract class ChatComponentStyle implements IChatComponent
     protected List<IChatComponent> siblings = Lists.<IChatComponent>newArrayList();
     private ChatStyle style;
 
-    /**
-     * Appends the given component to the end of this one.
-     */
     public IChatComponent appendSibling(IChatComponent component)
     {
         component.getChatStyle().setParentStyle(this.getChatStyle());
@@ -26,9 +23,6 @@ public abstract class ChatComponentStyle implements IChatComponent
         return this.siblings;
     }
 
-    /**
-     * Appends the given text to the end of this component.
-     */
     public IChatComponent appendText(String text)
     {
         return this.appendSibling(new ChatComponentText(text));
@@ -66,9 +60,6 @@ public abstract class ChatComponentStyle implements IChatComponent
         return Iterators.<IChatComponent>concat(Iterators.<IChatComponent>forArray(new ChatComponentStyle[] {this}), createDeepCopyIterator(this.siblings));
     }
 
-    /**
-     * Get the text of this component, <em>and all child components</em>, with all special formatting codes removed.
-     */
     public final String getUnformattedText()
     {
         StringBuilder stringbuilder = new StringBuilder();
@@ -81,9 +72,6 @@ public abstract class ChatComponentStyle implements IChatComponent
         return stringbuilder.toString();
     }
 
-    /**
-     * Gets the text of this component, with formatting codes added for rendering.
-     */
     public final String getFormattedText()
     {
         StringBuilder stringbuilder = new StringBuilder();

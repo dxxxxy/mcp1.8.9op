@@ -1,11 +1,5 @@
 package net.minecraft.client.resources.model;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Queues;
-import com.google.common.collect.Sets;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +12,26 @@ import java.util.Comparator;
 import java.util.Deque;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
+
+import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Queues;
+import com.google.common.collect.Sets;
+import net.minecraftforge.client.model.ITransformation;
+import net.minecraftforge.client.model.TRSRTransformation;
+import net.minecraftforge.fml.common.registry.RegistryDelegate;
+import net.optifine.CustomItems;
+import net.optifine.reflect.Reflector;
+import net.optifine.util.StrUtils;
+import net.optifine.util.TextureUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockPart;
@@ -40,16 +52,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IRegistry;
 import net.minecraft.util.RegistrySimple;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ITransformation;
-import net.minecraftforge.client.model.TRSRTransformation;
-import net.minecraftforge.fml.common.registry.RegistryDelegate;
-import net.optifine.CustomItems;
-import net.optifine.reflect.Reflector;
-import net.optifine.util.StrUtils;
-import net.optifine.util.TextureUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class ModelBakery
 {
@@ -516,20 +518,20 @@ public class ModelBakery
 
     public IBakedModel bakeModel(ModelBlock modelBlockIn, ModelRotation modelRotationIn, boolean uvLocked)
     {
-        return this.bakeModel(modelBlockIn, (ITransformation)modelRotationIn, uvLocked);
+        return this.bakeModel(modelBlockIn, (ITransformation) modelRotationIn, uvLocked);
     }
 
     protected IBakedModel bakeModel(ModelBlock p_bakeModel_1_, ITransformation p_bakeModel_2_, boolean p_bakeModel_3_)
     {
-        TextureAtlasSprite textureatlassprite = this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureName("particle")));
+        TextureAtlasSprite textureatlassprite = (TextureAtlasSprite)this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureName("particle")));
         SimpleBakedModel.Builder simplebakedmodel$builder = (new SimpleBakedModel.Builder(p_bakeModel_1_)).setTexture(textureatlassprite);
 
         for (BlockPart blockpart : p_bakeModel_1_.getElements())
         {
             for (EnumFacing enumfacing : blockpart.mapFaces.keySet())
             {
-                BlockPartFace blockpartface = blockpart.mapFaces.get(enumfacing);
-                TextureAtlasSprite textureatlassprite1 = this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureName(blockpartface.texture)));
+                BlockPartFace blockpartface = (BlockPartFace)blockpart.mapFaces.get(enumfacing);
+                TextureAtlasSprite textureatlassprite1 = (TextureAtlasSprite)this.sprites.get(new ResourceLocation(p_bakeModel_1_.resolveTextureName(blockpartface.texture)));
                 boolean flag = true;
 
                 if (Reflector.ForgeHooksClient.exists())

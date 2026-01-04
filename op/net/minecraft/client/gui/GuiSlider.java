@@ -52,18 +52,11 @@ public class GuiSlider extends GuiButton
         return this.formatHelper == null ? I18n.format(this.name, new Object[0]) + ": " + this.func_175220_c() : this.formatHelper.getText(this.id, I18n.format(this.name, new Object[0]), this.func_175220_c());
     }
 
-    /**
-     * Returns 0 if the button is disabled, 1 if the mouse is NOT hovering over this button and 2 if it IS hovering over
-     * this button.
-     */
     protected int getHoverState(boolean mouseOver)
     {
         return 0;
     }
 
-    /**
-     * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
-     */
     protected void mouseDragged(Minecraft mc, int mouseX, int mouseY)
     {
         if (this.visible)
@@ -99,10 +92,6 @@ public class GuiSlider extends GuiButton
         this.responder.onTick(this.id, this.func_175220_c());
     }
 
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
     public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
     {
         if (super.mousePressed(mc, mouseX, mouseY))
@@ -130,9 +119,6 @@ public class GuiSlider extends GuiButton
         }
     }
 
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
     public void mouseReleased(int mouseX, int mouseY)
     {
         this.isMouseDown = false;

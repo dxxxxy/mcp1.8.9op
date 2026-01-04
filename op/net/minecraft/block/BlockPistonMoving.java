@@ -32,9 +32,6 @@ public class BlockPistonMoving extends BlockContainer
         this.setHardness(-1.0F);
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return null;
@@ -64,17 +61,11 @@ public class BlockPistonMoving extends BlockContainer
         return false;
     }
 
-    /**
-     * Check whether this Block can be placed on the given side
-     */
     public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
     {
         return false;
     }
 
-    /**
-     * Called when a player destroys this Block
-     */
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
         BlockPos blockpos = pos.offset(((EnumFacing)state.getValue(FACING)).getOpposite());
@@ -86,9 +77,6 @@ public class BlockPistonMoving extends BlockContainer
         }
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -112,17 +100,11 @@ public class BlockPistonMoving extends BlockContainer
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return null;
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         if (!worldIn.isRemote)
@@ -137,17 +119,11 @@ public class BlockPistonMoving extends BlockContainer
         }
     }
 
-    /**
-     * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit.
-     */
     public MovingObjectPosition collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end)
     {
         return null;
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!worldIn.isRemote)
@@ -281,17 +257,11 @@ public class BlockPistonMoving extends BlockContainer
         return null;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, BlockPistonExtension.getFacing(meta)).withProperty(TYPE, (meta & 8) > 0 ? BlockPistonExtension.EnumPistonType.STICKY : BlockPistonExtension.EnumPistonType.DEFAULT);
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;

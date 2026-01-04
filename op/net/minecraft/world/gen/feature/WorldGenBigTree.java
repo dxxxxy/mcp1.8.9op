@@ -26,10 +26,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
     double leafDensity = 1.0D;
     int trunkSize = 1;
     int heightLimitLimit = 12;
-
-    /**
-     * Sets the distance limit for how far away the generator will populate leaves from the base leaf node.
-     */
     int leafDistanceLimit = 4;
     List<WorldGenBigTree.FoliageCoordinates> field_175948_j;
 
@@ -38,9 +34,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         super(p_i2008_1_);
     }
 
-    /**
-     * Generates a list of leaf nodes for the tree, to be populated by generateLeaves.
-     */
     void generateLeafNodeList()
     {
         this.height = (int)((double)this.heightLimit * this.heightAttenuation);
@@ -117,9 +110,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         }
     }
 
-    /**
-     * Gets the rough size of a layer of the tree.
-     */
     float layerSize(int p_76490_1_)
     {
         if ((float)p_76490_1_ < (float)this.heightLimit * 0.3F)
@@ -150,9 +140,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         return p_76495_1_ >= 0 && p_76495_1_ < this.leafDistanceLimit ? (p_76495_1_ != 0 && p_76495_1_ != this.leafDistanceLimit - 1 ? 3.0F : 2.0F) : -1.0F;
     }
 
-    /**
-     * Generates the leaves surrounding an individual entry in the leafNodes list.
-     */
     void generateLeafNode(BlockPos pos)
     {
         for (int i = 0; i < this.leafDistanceLimit; ++i)
@@ -177,9 +164,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         }
     }
 
-    /**
-     * Returns the absolute greatest distance in the BlockPos object.
-     */
     private int getGreatestDistance(BlockPos posIn)
     {
         int i = MathHelper.abs_int(posIn.getX());
@@ -210,9 +194,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         return blocklog$enumaxis;
     }
 
-    /**
-     * Generates the leaf portion of the tree as specified by the leafNodes list.
-     */
     void generateLeaves()
     {
         for (WorldGenBigTree.FoliageCoordinates worldgenbigtree$foliagecoordinates : this.field_175948_j)
@@ -221,18 +202,11 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         }
     }
 
-    /**
-     * Indicates whether or not a leaf node requires additional wood to be added to preserve integrity.
-     */
     boolean leafNodeNeedsBase(int p_76493_1_)
     {
         return (double)p_76493_1_ >= (double)this.heightLimit * 0.2D;
     }
 
-    /**
-     * Places the trunk for the big tree that is being generated. Able to generate double-sized trunks by changing a
-     * field that is always 1 to 2.
-     */
     void generateTrunk()
     {
         BlockPos blockpos = this.basePos;
@@ -248,9 +222,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         }
     }
 
-    /**
-     * Generates additional wood blocks to fill out the bases of different leaf nodes that would otherwise degrade.
-     */
     void generateLeafNodeBases()
     {
         for (WorldGenBigTree.FoliageCoordinates worldgenbigtree$foliagecoordinates : this.field_175948_j)
@@ -265,10 +236,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         }
     }
 
-    /**
-     * Checks a line of blocks in the world from the first coordinate to triplet to the second, returning the distance
-     * (in blocks) before a non-air, non-leaf block is encountered and/or the end is encountered.
-     */
     int checkBlockLine(BlockPos posOne, BlockPos posTwo)
     {
         BlockPos blockpos = posTwo.add(-posOne.getX(), -posOne.getY(), -posOne.getZ());
@@ -327,10 +294,6 @@ public class WorldGenBigTree extends WorldGenAbstractTree
         }
     }
 
-    /**
-     * Returns a boolean indicating whether or not the current location for the tree, spanning basePos to to the height
-     * limit, is valid.
-     */
     private boolean validTreeLocation()
     {
         Block block = this.world.getBlockState(this.basePos.down()).getBlock();

@@ -8,10 +8,7 @@ import net.optifine.gui.GuiScreenCapeOF;
 
 public class GuiCustomizeSkin extends GuiScreen
 {
-    /** The parent GUI for this GUI */
     private final GuiScreen parentScreen;
-
-    /** The title of the GUI. */
     private String title;
 
     public GuiCustomizeSkin(GuiScreen parentScreenIn)
@@ -19,10 +16,6 @@ public class GuiCustomizeSkin extends GuiScreen
         this.parentScreen = parentScreenIn;
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         int i = 0;
@@ -44,9 +37,6 @@ public class GuiCustomizeSkin extends GuiScreen
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height / 6 + 24 * (i >> 1), I18n.format("gui.done", new Object[0])));
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.enabled)
@@ -70,9 +60,6 @@ public class GuiCustomizeSkin extends GuiScreen
         }
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();

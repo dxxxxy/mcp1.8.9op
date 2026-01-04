@@ -16,33 +16,21 @@ public class CommandTitle extends CommandBase
 {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "title";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 2;
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.title.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length < 2)
@@ -127,9 +115,6 @@ public class CommandTitle extends CommandBase
         return args.length == 1 ? getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames()) : (args.length == 2 ? getListOfStringsMatchingLastWord(args, S45PacketTitle.Type.getNames()) : null);
     }
 
-    /**
-     * Return whether the specified command parameter index is a username parameter.
-     */
     public boolean isUsernameIndex(String[] args, int index)
     {
         return index == 0;

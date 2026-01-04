@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 
 public abstract class BlockRedstoneDiode extends BlockDirectional
 {
-    /** Tells whether the repeater is powered or not */
     protected final boolean isRepeaterPowered;
 
     protected BlockRedstoneDiode(boolean powered)
@@ -39,9 +38,6 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         return World.doesBlockHaveSolidTopSurface(worldIn, pos.down());
     }
 
-    /**
-     * Called randomly when setTickRandomly is set to true (used by e.g. crops to grow, etc.)
-     */
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
     {
     }
@@ -88,9 +84,6 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         return !this.isPowered(state) ? 0 : (state.getValue(FACING) == side ? this.getActiveSignal(worldIn, pos, state) : 0);
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (this.canBlockStay(worldIn, pos))
@@ -175,26 +168,16 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         return this.canPowerSide(block) ? (block == Blocks.redstone_wire ? ((Integer)iblockstate.getValue(BlockRedstoneWire.POWER)).intValue() : worldIn.getStrongPower(pos, side)) : 0;
     }
 
-    /**
-     * Can this block provide power. Only wire currently seems to have this change based on its state.
-     */
     public boolean canProvidePower()
     {
         return true;
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
-    /**
-     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
-     */
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         if (this.shouldBePowered(worldIn, pos, state))
@@ -216,9 +199,6 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         worldIn.notifyNeighborsOfStateExcept(blockpos, this, enumfacing);
     }
 
-    /**
-     * Called when a player destroys this Block
-     */
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
         if (this.isRepeaterPowered)
@@ -232,9 +212,6 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         super.onBlockDestroyedByPlayer(worldIn, pos, state);
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;

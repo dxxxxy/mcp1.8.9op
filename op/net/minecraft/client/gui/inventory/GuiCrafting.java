@@ -22,18 +22,12 @@ public class GuiCrafting extends GuiContainer
         super(new ContainerWorkbench(playerInv, worldIn, blockPosition));
     }
 
-    /**
-     * Draw the foreground layer for the GuiContainer (everything in front of the items). Args : mouseX, mouseY
-     */
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
         this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 28, 6, 4210752);
         this.fontRendererObj.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
     }
 
-    /**
-     * Args : renderPartialTicks, mouseX, mouseY
-     */
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

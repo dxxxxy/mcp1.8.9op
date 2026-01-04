@@ -70,11 +70,7 @@ import net.optifine.shaders.ShadersRender;
 public class RenderItem implements IResourceManagerReloadListener
 {
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-
-    /** False when the renderer is rendering the item's effects into a GUI */
     private boolean notRenderingEffectsInGUI = true;
-
-    /** Defines the zLevel of rendering of item on GUI. */
     public float zLevel;
     private final ItemModelMesher itemModelMesher;
     private final TextureManager textureManager;
@@ -101,11 +97,6 @@ public class RenderItem implements IResourceManagerReloadListener
         this.registerItems();
     }
 
-    /**
-     * False when the renderer is rendering the item's effects into a GUI
-     *  
-     * @param isNot If the renderer is not rendering the effects in a GUI
-     */
     public void isNotRenderingEffectsInGUI(boolean isNot)
     {
         this.notRenderingEffectsInGUI = isNot;
@@ -464,11 +455,6 @@ public class RenderItem implements IResourceManagerReloadListener
         this.textureManager.getTexture(TextureMap.locationBlocksTexture).restoreLastBlurMipmap();
     }
 
-    /**
-     * Return true if only one scale is negative
-     *  
-     * @param itemTranformVec The ItemTransformVec3f instance
-     */
     private boolean isThereOneNegativeScale(ItemTransformVec3f itemTranformVec)
     {
         return itemTranformVec.scale.x < 0.0F ^ itemTranformVec.scale.y < 0.0F ^ itemTranformVec.scale.z < 0.0F;
@@ -584,9 +570,6 @@ public class RenderItem implements IResourceManagerReloadListener
         this.renderItemOverlayIntoGUI(fr, stack, xPosition, yPosition, (String)null);
     }
 
-    /**
-     * Renders the stack size and/or damage bar for the given ItemStack.
-     */
     public void renderItemOverlayIntoGUI(FontRenderer fr, ItemStack stack, int xPosition, int yPosition, String text)
     {
         if (stack != null)
@@ -656,19 +639,6 @@ public class RenderItem implements IResourceManagerReloadListener
         }
     }
 
-    /**
-     * Draw with the WorldRenderer
-     *  
-     * @param renderer The WorldRenderer's instance
-     * @param x X position where the render begin
-     * @param y Y position where the render begin
-     * @param width The width of the render
-     * @param height The height of the render
-     * @param red Red component of the color
-     * @param green Green component of the color
-     * @param blue Blue component of the color
-     * @param alpha Alpha component of the color
-     */
     private void draw(WorldRenderer renderer, int x, int y, int width, int height, int red, int green, int blue, int alpha)
     {
         renderer.begin(7, DefaultVertexFormats.POSITION_COLOR);

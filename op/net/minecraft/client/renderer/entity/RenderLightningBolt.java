@@ -15,9 +15,6 @@ public class RenderLightningBolt extends Render<EntityLightningBolt>
         super(renderManagerIn);
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(EntityLightningBolt entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         Tessellator tessellator = Tessellator.getInstance();
@@ -139,9 +136,6 @@ public class RenderLightningBolt extends Render<EntityLightningBolt>
         GlStateManager.enableTexture2D();
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityLightningBolt entity)
     {
         return null;

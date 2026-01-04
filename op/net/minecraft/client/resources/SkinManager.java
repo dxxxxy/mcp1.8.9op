@@ -46,17 +46,11 @@ public class SkinManager
         });
     }
 
-    /**
-     * Used in the Skull renderer to fetch a skin. May download the skin if it's not in the cache
-     */
     public ResourceLocation loadSkin(MinecraftProfileTexture profileTexture, Type p_152792_2_)
     {
         return this.loadSkin(profileTexture, p_152792_2_, (SkinManager.SkinAvailableCallback)null);
     }
 
-    /**
-     * May download the skin if its not in the cache, can be passed a SkinManager#SkinAvailableCallback for handling
-     */
     public ResourceLocation loadSkin(final MinecraftProfileTexture profileTexture, final Type p_152789_2_, final SkinManager.SkinAvailableCallback skinAvailableCallback)
     {
         final ResourceLocation resourcelocation = new ResourceLocation("skins/" + profileTexture.getHash());

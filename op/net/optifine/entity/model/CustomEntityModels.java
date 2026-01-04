@@ -114,7 +114,7 @@ public class CustomEntityModels
 
         if (originalTileEntityRenderMap == null)
         {
-            originalTileEntityRenderMap = new HashMap(map);
+            originalTileEntityRenderMap = new HashMap<>(map);
         }
 
         return map;

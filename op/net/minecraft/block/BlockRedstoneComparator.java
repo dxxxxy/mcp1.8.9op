@@ -38,17 +38,11 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         this.isBlockContainer = true;
     }
 
-    /**
-     * Gets the localized name of this block. Used for the statistics page.
-     */
     public String getLocalizedName()
     {
         return StatCollector.translateToLocal("item.comparator.name");
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Items.comparator;
@@ -253,9 +247,6 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         this.notifyNeighbors(worldIn, pos, state);
     }
 
-    /**
-     * Called on both Client and Server when World#addBlockEvent is called
-     */
     public boolean onBlockEventReceived(World worldIn, BlockPos pos, IBlockState state, int eventID, int eventParam)
     {
         super.onBlockEventReceived(worldIn, pos, state, eventID, eventParam);
@@ -263,25 +254,16 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         return tileentity == null ? false : tileentity.receiveClientEvent(eventID, eventParam);
     }
 
-    /**
-     * Returns a new instance of a block's tile entity class. Called on placing the block.
-     */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
         return new TileEntityComparator();
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta)).withProperty(POWERED, Boolean.valueOf((meta & 8) > 0)).withProperty(MODE, (meta & 4) > 0 ? BlockRedstoneComparator.Mode.SUBTRACT : BlockRedstoneComparator.Mode.COMPARE);
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
@@ -305,10 +287,6 @@ public class BlockRedstoneComparator extends BlockRedstoneDiode implements ITile
         return new BlockState(this, new IProperty[] {FACING, MODE, POWERED});
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(POWERED, Boolean.valueOf(false)).withProperty(MODE, BlockRedstoneComparator.Mode.COMPARE);

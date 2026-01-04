@@ -53,7 +53,7 @@ public class RealmsScreen
 
     public void drawString(String p_drawString_1_, int p_drawString_2_, int p_drawString_3_, int p_drawString_4_, boolean p_drawString_5_)
     {
-        this.proxy.a(p_drawString_1_, p_drawString_2_, p_drawString_3_, p_drawString_4_, false);
+        this.proxy.func_154322_b(p_drawString_1_, p_drawString_2_, p_drawString_3_, p_drawString_4_, false);
     }
 
     public void blit(int p_blit_1_, int p_blit_2_, int p_blit_3_, int p_blit_4_, int p_blit_5_, int p_blit_6_)
@@ -159,7 +159,7 @@ public class RealmsScreen
 
     public void fontDrawShadow(String p_fontDrawShadow_1_, int p_fontDrawShadow_2_, int p_fontDrawShadow_3_, int p_fontDrawShadow_4_)
     {
-        this.proxy.func_154322_b(p_fontDrawShadow_1_, p_fontDrawShadow_2_, p_fontDrawShadow_3_, p_fontDrawShadow_4_);
+        this.proxy.func_154319_c(p_fontDrawShadow_1_, p_fontDrawShadow_2_, p_fontDrawShadow_3_, p_fontDrawShadow_4_);
     }
 
     public List<String> fontSplit(String p_fontSplit_1_, int p_fontSplit_2_)

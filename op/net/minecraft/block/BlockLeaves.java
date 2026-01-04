@@ -206,25 +206,16 @@ public abstract class BlockLeaves extends BlockLeavesBase
         worldIn.setBlockToAir(pos);
     }
 
-    /**
-     * Returns the quantity of items to drop on block destruction.
-     */
     public int quantityDropped(Random random)
     {
         return random.nextInt(20) == 0 ? 1 : 0;
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(Blocks.sapling);
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         if (!worldIn.isRemote)
@@ -272,17 +263,11 @@ public abstract class BlockLeaves extends BlockLeavesBase
         return 20;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return !this.fancyGraphics;
     }
 
-    /**
-     * Pass true to draw this block using fancy graphics, or false for fast graphics.
-     */
     public void setGraphicsLevel(boolean fancy)
     {
         this.isTransparent = fancy;

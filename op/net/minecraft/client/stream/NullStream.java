@@ -13,9 +13,6 @@ public class NullStream implements IStream
         this.field_152938_a = p_i1006_1_;
     }
 
-    /**
-     * Shuts down a steam
-     */
     public void shutdownStream()
     {
     }
@@ -60,16 +57,10 @@ public class NullStream implements IStream
     {
     }
 
-    /**
-     * pauses a stream
-     */
     public void pause()
     {
     }
 
-    /**
-     * unpauses a stream
-     */
     public void unpause()
     {
     }
@@ -144,9 +135,6 @@ public class NullStream implements IStream
         return false;
     }
 
-    /**
-     * mutes or unmutes the microphone based on the boolean parameter passed into the method
-     */
     public void muteMicrophone(boolean p_152910_1_)
     {
     }

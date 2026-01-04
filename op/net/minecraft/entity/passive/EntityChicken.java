@@ -28,8 +28,6 @@ public class EntityChicken extends EntityAnimal
     public float field_70884_g;
     public float field_70888_h;
     public float wingRotDelta = 1.0F;
-
-    /** The time until the next egg is spawned. */
     public int timeUntilNextEgg;
     public boolean chickenJockey;
 
@@ -60,10 +58,6 @@ public class EntityChicken extends EntityAnimal
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
@@ -98,25 +92,16 @@ public class EntityChicken extends EntityAnimal
     {
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return "mob.chicken.say";
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.chicken.hurt";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.chicken.hurt";
@@ -132,13 +117,6 @@ public class EntityChicken extends EntityAnimal
         return Items.feather;
     }
 
-    /**
-     * Drop 0-2 items of this living's type
-     *  
-     * @param wasRecentlyHit true if this this entity was recently hit by appropriate entity (generally only if player
-     * or tameable)
-     * @param lootingModifier level of enchanment to be applied to this drop
-     */
     protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier)
     {
         int i = this.rand.nextInt(3) + this.rand.nextInt(1 + lootingModifier);
@@ -163,18 +141,11 @@ public class EntityChicken extends EntityAnimal
         return new EntityChicken(this.worldObj);
     }
 
-    /**
-     * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
-     * the animal type)
-     */
     public boolean isBreedingItem(ItemStack stack)
     {
         return stack != null && stack.getItem() == Items.wheat_seeds;
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
@@ -186,17 +157,11 @@ public class EntityChicken extends EntityAnimal
         }
     }
 
-    /**
-     * Get the experience points the entity currently has.
-     */
     protected int getExperiencePoints(EntityPlayer player)
     {
         return this.isChickenJockey() ? 10 : super.getExperiencePoints(player);
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
@@ -204,9 +169,6 @@ public class EntityChicken extends EntityAnimal
         tagCompound.setInteger("EggLayTime", this.timeUntilNextEgg);
     }
 
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
     protected boolean canDespawn()
     {
         return this.isChickenJockey() && this.riddenByEntity == null;
@@ -227,17 +189,11 @@ public class EntityChicken extends EntityAnimal
         }
     }
 
-    /**
-     * Determines if this chicken is a jokey with a zombie riding it.
-     */
     public boolean isChickenJockey()
     {
         return this.chickenJockey;
     }
 
-    /**
-     * Sets whether this chicken is a jockey or not.
-     */
     public void setChickenJockey(boolean jockey)
     {
         this.chickenJockey = jockey;

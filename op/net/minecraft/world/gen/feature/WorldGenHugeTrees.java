@@ -10,13 +10,8 @@ import net.minecraft.world.World;
 
 public abstract class WorldGenHugeTrees extends WorldGenAbstractTree
 {
-    /** The base height of the tree */
     protected final int baseHeight;
-
-    /** Sets the metadata for the wood blocks used */
     protected final IBlockState woodMetadata;
-
-    /** Sets the metadata for the leaves used in huge trees */
     protected final IBlockState leavesMetadata;
     protected int extraRandomHeight;
 

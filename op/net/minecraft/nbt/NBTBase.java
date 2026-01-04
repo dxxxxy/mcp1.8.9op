@@ -8,23 +8,14 @@ public abstract class NBTBase
 {
     public static final String[] NBT_TYPES = new String[] {"END", "BYTE", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "BYTE[]", "STRING", "LIST", "COMPOUND", "INT[]"};
 
-    /**
-     * Write the actual data contents of the tag, implemented in NBT extension classes
-     */
     abstract void write(DataOutput output) throws IOException;
 
     abstract void read(DataInput input, int depth, NBTSizeTracker sizeTracker) throws IOException;
 
     public abstract String toString();
 
-    /**
-     * Gets the type byte for the tag.
-     */
     public abstract byte getId();
 
-    /**
-     * Creates a new NBTBase object that corresponds with the passed in id.
-     */
     protected static NBTBase createNewByType(byte id)
     {
         switch (id)
@@ -70,14 +61,8 @@ public abstract class NBTBase
         }
     }
 
-    /**
-     * Creates a clone of the tag.
-     */
     public abstract NBTBase copy();
 
-    /**
-     * Return whether this compound has no tags.
-     */
     public boolean hasNoTags()
     {
         return false;

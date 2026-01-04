@@ -7,9 +7,6 @@ import net.minecraft.item.ItemStack;
 
 public class RecipesFood
 {
-    /**
-     * Adds the food recipes to the CraftingManager.
-     */
     public void addRecipes(CraftingManager p_77608_1_)
     {
         p_77608_1_.addShapelessRecipe(new ItemStack(Items.mushroom_stew), new Object[] {Blocks.brown_mushroom, Blocks.red_mushroom, Items.bowl});

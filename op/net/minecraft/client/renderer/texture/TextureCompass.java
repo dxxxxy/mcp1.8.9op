@@ -7,10 +7,7 @@ import net.minecraft.world.World;
 
 public class TextureCompass extends TextureAtlasSprite
 {
-    /** Current compass heading in radians */
     public double currentAngle;
-
-    /** Speed and direction of compass rotation */
     public double angleDelta;
     public static String locationSprite;
 
@@ -34,9 +31,6 @@ public class TextureCompass extends TextureAtlasSprite
         }
     }
 
-    /**
-     * Updates the compass based on the given x,z coords and camera direction
-     */
     public void updateCompass(World worldIn, double p_94241_2_, double p_94241_4_, double p_94241_6_, boolean p_94241_8_, boolean p_94241_9_)
     {
         if (!this.framesTextureData.isEmpty())

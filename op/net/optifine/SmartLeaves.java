@@ -140,9 +140,9 @@ public class SmartLeaves
                         }
                         else
                         {
-                            for (Object bakedquad0 : list)
+                            for (Object o : list)
                             {
-                                BakedQuad bakedquad = (BakedQuad) bakedquad0;
+                                BakedQuad bakedquad = (BakedQuad) o;
                                 List list1 = ibakedmodel.getFaceQuads(bakedquad.getFace());
 
                                 if (list1.size() > 0)

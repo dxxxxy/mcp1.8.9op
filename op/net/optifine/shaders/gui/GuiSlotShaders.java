@@ -35,9 +35,6 @@ class GuiSlotShaders extends GuiSlot
         }
     }
 
-    /**
-     * Gets the width of the list
-     */
     public int getListWidth()
     {
         return this.width - 20;
@@ -64,9 +61,6 @@ class GuiSlotShaders extends GuiSlot
         return this.shaderslist.size();
     }
 
-    /**
-     * The element in the slot that was clicked, boolean for whether it was double clicked or not
-     */
     protected void elementClicked(int index, boolean doubleClicked, int mouseX, int mouseY)
     {
         if (index != this.selectedIndex || this.lastClicked != this.lastClickedCached)
@@ -117,7 +111,7 @@ class GuiSlotShaders extends GuiSlot
                 else
                 {
                     s1 = s1.trim();
-                    String s2 = "M5";
+                    String s2 = "M6_pre2";
                     int i = Config.compareRelease(s2, s1);
 
                     if (i >= 0)
@@ -150,9 +144,6 @@ class GuiSlotShaders extends GuiSlot
         }
     }
 
-    /**
-     * Returns true if the element passed in is currently selected
-     */
     protected boolean isSelected(int index)
     {
         return index == this.selectedIndex;
@@ -163,9 +154,6 @@ class GuiSlotShaders extends GuiSlot
         return this.width - 6;
     }
 
-    /**
-     * Return the height of the content being scrolled
-     */
     protected int getContentHeight()
     {
         return this.getSize() * 18;

@@ -29,9 +29,6 @@ public class S39PacketPlayerAbilities implements Packet<INetHandlerPlayClient>
         this.setWalkSpeed(capabilities.getWalkSpeed());
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         byte b0 = buf.readByte();
@@ -43,9 +40,6 @@ public class S39PacketPlayerAbilities implements Packet<INetHandlerPlayClient>
         this.setWalkSpeed(buf.readFloat());
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         byte b0 = 0;
@@ -75,9 +69,6 @@ public class S39PacketPlayerAbilities implements Packet<INetHandlerPlayClient>
         buf.writeFloat(this.walkSpeed);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handlePlayerAbilities(this);

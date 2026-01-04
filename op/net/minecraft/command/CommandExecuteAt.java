@@ -12,33 +12,21 @@ import net.minecraft.world.World;
 
 public class CommandExecuteAt extends CommandBase
 {
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "execute";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 2;
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.execute.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(final ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length < 5)
@@ -141,9 +129,6 @@ public class CommandExecuteAt extends CommandBase
         return args.length == 1 ? getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames()) : (args.length > 1 && args.length <= 4 ? func_175771_a(args, 1, pos) : (args.length > 5 && args.length <= 8 && "detect".equals(args[4]) ? func_175771_a(args, 5, pos) : (args.length == 9 && "detect".equals(args[4]) ? getListOfStringsMatchingLastWord(args, Block.blockRegistry.getKeys()) : null)));
     }
 
-    /**
-     * Return whether the specified command parameter index is a username parameter.
-     */
     public boolean isUsernameIndex(String[] args, int index)
     {
         return index == 0;

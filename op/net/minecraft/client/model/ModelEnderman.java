@@ -4,10 +4,7 @@ import net.minecraft.entity.Entity;
 
 public class ModelEnderman extends ModelBiped
 {
-    /** Is the enderman carrying a block? */
     public boolean isCarrying;
-
-    /** Is the enderman attacking an entity? */
     public boolean isAttacking;
 
     public ModelEnderman(float p_i46305_1_)
@@ -36,11 +33,6 @@ public class ModelEnderman extends ModelBiped
         this.bipedLeftLeg.setRotationPoint(2.0F, 12.0F + f, 0.0F);
     }
 
-    /**
-     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
-     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
-     * "far" arms and legs can swing at most.
-     */
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);

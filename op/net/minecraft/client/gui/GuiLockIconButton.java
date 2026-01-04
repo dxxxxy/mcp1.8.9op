@@ -22,9 +22,6 @@ public class GuiLockIconButton extends GuiButton
         this.field_175231_o = p_175229_1_;
     }
 
-    /**
-     * Draws this button to the screen.
-     */
     public void drawButton(Minecraft mc, int mouseX, int mouseY)
     {
         if (this.visible)

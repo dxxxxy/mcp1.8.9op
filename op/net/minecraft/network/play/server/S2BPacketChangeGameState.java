@@ -21,27 +21,18 @@ public class S2BPacketChangeGameState implements Packet<INetHandlerPlayClient>
         this.field_149141_c = p_i45194_2_;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.state = buf.readUnsignedByte();
         this.field_149141_c = buf.readFloat();
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeByte(this.state);
         buf.writeFloat(this.field_149141_c);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleChangeGameState(this);

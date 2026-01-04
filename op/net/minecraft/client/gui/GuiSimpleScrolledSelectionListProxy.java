@@ -23,17 +23,11 @@ public class GuiSimpleScrolledSelectionListProxy extends GuiSlot
         return this.field_178050_u.getItemCount();
     }
 
-    /**
-     * The element in the slot that was clicked, boolean for whether it was double clicked or not
-     */
     protected void elementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY)
     {
         this.field_178050_u.selectItem(slotIndex, isDoubleClick, mouseX, mouseY);
     }
 
-    /**
-     * Returns true if the element passed in is currently selected
-     */
     protected boolean isSelected(int slotIndex)
     {
         return this.field_178050_u.isSelectedItem(slotIndex);
@@ -64,9 +58,6 @@ public class GuiSimpleScrolledSelectionListProxy extends GuiSlot
         return super.mouseX;
     }
 
-    /**
-     * Return the height of the content being scrolled
-     */
     protected int getContentHeight()
     {
         return this.field_178050_u.getMaxPosition();

@@ -30,9 +30,6 @@ public class CryptManager
 {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * Generate a new shared secret AES key from a secure random source
-     */
     public static SecretKey createNewSharedKey()
     {
         try
@@ -47,9 +44,6 @@ public class CryptManager
         }
     }
 
-    /**
-     * Generates RSA KeyPair
-     */
     public static KeyPair generateKeyPair()
     {
         try
@@ -66,9 +60,6 @@ public class CryptManager
         }
     }
 
-    /**
-     * Compute a serverId hash for use by sendSessionRequest()
-     */
     public static byte[] getServerIdHash(String serverId, PublicKey publicKey, SecretKey secretKey)
     {
         try
@@ -82,9 +73,6 @@ public class CryptManager
         }
     }
 
-    /**
-     * Compute a message digest on arbitrary byte[] data
-     */
     private static byte[] digestOperation(String algorithm, byte[]... data)
     {
         try
@@ -105,9 +93,6 @@ public class CryptManager
         }
     }
 
-    /**
-     * Create a new PublicKey from encoded X.509 data
-     */
     public static PublicKey decodePublicKey(byte[] encodedKey)
     {
         try
@@ -129,33 +114,21 @@ public class CryptManager
         return null;
     }
 
-    /**
-     * Decrypt shared secret AES key using RSA private key
-     */
     public static SecretKey decryptSharedKey(PrivateKey key, byte[] secretKeyEncrypted)
     {
         return new SecretKeySpec(decryptData(key, secretKeyEncrypted), "AES");
     }
 
-    /**
-     * Encrypt byte[] data with RSA public key
-     */
     public static byte[] encryptData(Key key, byte[] data)
     {
         return cipherOperation(1, key, data);
     }
 
-    /**
-     * Decrypt byte[] data with RSA private key
-     */
     public static byte[] decryptData(Key key, byte[] data)
     {
         return cipherOperation(2, key, data);
     }
 
-    /**
-     * Encrypt or decrypt byte[] data using the specified key
-     */
     private static byte[] cipherOperation(int opMode, Key key, byte[] data)
     {
         try
@@ -175,9 +148,6 @@ public class CryptManager
         return null;
     }
 
-    /**
-     * Creates the Cipher Instance.
-     */
     private static Cipher createTheCipherInstance(int opMode, String transformation, Key key)
     {
         try
@@ -203,9 +173,6 @@ public class CryptManager
         return null;
     }
 
-    /**
-     * Creates an Cipher instance using the AES/CFB8/NoPadding algorithm. Used for protocol encryption.
-     */
     public static Cipher createNetCipherInstance(int opMode, Key key)
     {
         try

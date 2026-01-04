@@ -2,7 +2,6 @@ package net.minecraft.world;
 
 public class ColorizerFoliage
 {
-    /** Color buffer for foliage */
     private static int[] foliageBuffer = new int[65536];
 
     public static void setFoliageBiomeColorizer(int[] p_77467_0_)
@@ -10,9 +9,6 @@ public class ColorizerFoliage
         foliageBuffer = p_77467_0_;
     }
 
-    /**
-     * Gets foliage color from temperature and humidity. Args: temperature, humidity
-     */
     public static int getFoliageColor(double p_77470_0_, double p_77470_2_)
     {
         p_77470_2_ = p_77470_2_ * p_77470_0_;
@@ -21,17 +17,11 @@ public class ColorizerFoliage
         return foliageBuffer[j << 8 | i];
     }
 
-    /**
-     * Gets the foliage color for pine type (metadata 1) trees
-     */
     public static int getFoliageColorPine()
     {
         return 6396257;
     }
 
-    /**
-     * Gets the foliage color for birch type (metadata 2) trees
-     */
     public static int getFoliageColorBirch()
     {
         return 8431445;

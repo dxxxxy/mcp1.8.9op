@@ -19,41 +19,26 @@ public class CommandBanIp extends CommandBase
 {
     public static final Pattern field_147211_a = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
-    /**
-     * Gets the name of the command
-     */
     public String getCommandName()
     {
         return "ban-ip";
     }
 
-    /**
-     * Return the required permission level for this command.
-     */
     public int getRequiredPermissionLevel()
     {
         return 3;
     }
 
-    /**
-     * Returns true if the given command sender is allowed to use this command.
-     */
     public boolean canCommandSenderUseCommand(ICommandSender sender)
     {
         return MinecraftServer.getServer().getConfigurationManager().getBannedIPs().isLanServer() && super.canCommandSenderUseCommand(sender);
     }
 
-    /**
-     * Gets the usage string for the command.
-     */
     public String getCommandUsage(ICommandSender sender)
     {
         return "commands.banip.usage";
     }
 
-    /**
-     * Callback when the command is invoked
-     */
     public void processCommand(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length >= 1 && args[0].length() > 1)

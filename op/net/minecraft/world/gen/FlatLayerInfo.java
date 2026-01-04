@@ -8,8 +8,6 @@ public class FlatLayerInfo
 {
     private final int field_175902_a;
     private IBlockState layerMaterial;
-
-    /** Amount of layers for this set of layers. */
     private int layerCount;
     private int layerMinimumY;
 
@@ -32,9 +30,6 @@ public class FlatLayerInfo
         this.layerMaterial = p_i45628_3_.getStateFromMeta(p_i45628_4_);
     }
 
-    /**
-     * Return the amount of layers for this set of layers.
-     */
     public int getLayerCount()
     {
         return this.layerCount;
@@ -50,25 +45,16 @@ public class FlatLayerInfo
         return this.layerMaterial.getBlock();
     }
 
-    /**
-     * Return the block metadata used on this set of layers.
-     */
     private int getFillBlockMeta()
     {
         return this.layerMaterial.getBlock().getMetaFromState(this.layerMaterial);
     }
 
-    /**
-     * Return the minimum Y coordinate for this layer, set during generation.
-     */
     public int getMinY()
     {
         return this.layerMinimumY;
     }
 
-    /**
-     * Set the minimum Y coordinate for this layer.
-     */
     public void setMinY(int minY)
     {
         this.layerMinimumY = minY;

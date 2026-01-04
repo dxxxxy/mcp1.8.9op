@@ -63,9 +63,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
     }
 
-    /**
-     * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
-     */
     public boolean isReplaceable(World worldIn, BlockPos pos)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
@@ -121,9 +118,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         if (state.getValue(HALF) == BlockDoublePlant.EnumBlockHalf.UPPER)
@@ -137,10 +131,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         return state.getValue(HALF) != BlockDoublePlant.EnumBlockHalf.UPPER && state.getValue(VARIANT) != BlockDoublePlant.EnumPlantType.GRASS ? ((BlockDoublePlant.EnumPlantType)state.getValue(VARIANT)).getMeta() : 0;
@@ -158,9 +148,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         worldIn.setBlockState(lowerPos.up(), this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER), flags);
     }
 
-    /**
-     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
-     */
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER), 2);
@@ -237,9 +224,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         for (BlockDoublePlant.EnumPlantType blockdoubleplant$enumplanttype : BlockDoublePlant.EnumPlantType.values())
@@ -248,17 +232,11 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * Gets the meta to use for the Pick Block ItemStack result
-     */
     public int getDamageValue(World worldIn, BlockPos pos)
     {
         return this.getVariant(worldIn, pos).getMeta();
     }
 
-    /**
-     * Whether this IGrowable can grow
-     */
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
         BlockDoublePlant.EnumPlantType blockdoubleplant$enumplanttype = this.getVariant(worldIn, pos);
@@ -275,18 +253,11 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         spawnAsEntity(worldIn, pos, new ItemStack(this, 1, this.getVariant(worldIn, pos).getMeta()));
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return (meta & 8) > 0 ? this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER) : this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER).withProperty(VARIANT, BlockDoublePlant.EnumPlantType.byMetadata(meta & 7));
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         if (state.getValue(HALF) == BlockDoublePlant.EnumBlockHalf.UPPER)
@@ -302,9 +273,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         return state;
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(HALF) == BlockDoublePlant.EnumBlockHalf.UPPER ? 8 | ((EnumFacing)state.getValue(FACING)).getHorizontalIndex() : ((BlockDoublePlant.EnumPlantType)state.getValue(VARIANT)).getMeta();
@@ -315,9 +283,6 @@ public class BlockDoublePlant extends BlockBush implements IGrowable
         return new BlockState(this, new IProperty[] {HALF, VARIANT, FACING});
     }
 
-    /**
-     * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
-     */
     public Block.EnumOffsetType getOffsetType()
     {
         return Block.EnumOffsetType.XZ;

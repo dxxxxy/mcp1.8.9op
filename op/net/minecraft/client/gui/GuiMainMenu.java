@@ -42,40 +42,18 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     private static final AtomicInteger field_175373_f = new AtomicInteger(0);
     private static final Logger logger = LogManager.getLogger();
     private static final Random RANDOM = new Random();
-
-    /** Counts the number of screen updates. */
     private float updateCounter;
-
-    /** The splash message. */
     private String splashText;
     private GuiButton buttonResetDemo;
-
-    /** Timer used to rotate the panorama, increases every tick. */
     private int panoramaTimer;
-
-    /**
-     * Texture allocated for the current viewport of the main menu's panorama background.
-     */
     private DynamicTexture viewportTexture;
     private boolean field_175375_v = true;
-
-    /**
-     * The Object object utilized as a thread lock when performing non thread-safe operations
-     */
     private final Object threadLock = new Object();
-
-    /** OpenGL graphics card warning. */
     private String openGLWarning1;
-
-    /** OpenGL graphics card warning. */
     private String openGLWarning2;
-
-    /** Link to the Mojang Support about minimum requirements */
     private String openGLWarningLink;
     private static final ResourceLocation splashTexts = new ResourceLocation("texts/splashes.txt");
     private static final ResourceLocation minecraftTitleTextures = new ResourceLocation("textures/gui/title/minecraft.png");
-
-    /** An array of all the paths to the panorama pictures. */
     private static final ResourceLocation[] titlePanoramaPaths = new ResourceLocation[] {new ResourceLocation("textures/gui/title/background/panorama_0.png"), new ResourceLocation("textures/gui/title/background/panorama_1.png"), new ResourceLocation("textures/gui/title/background/panorama_2.png"), new ResourceLocation("textures/gui/title/background/panorama_3.png"), new ResourceLocation("textures/gui/title/background/panorama_4.png"), new ResourceLocation("textures/gui/title/background/panorama_5.png")};
     public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
     private int field_92024_r;
@@ -85,18 +63,16 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     private int field_92020_v;
     private int field_92019_w;
     private ResourceLocation backgroundTexture;
-
-    /** Minecraft Realms button. */
     private GuiButton realmsButton;
-    private boolean L;
-    private GuiScreen M;
+    private boolean field_183502_L;
+    private GuiScreen field_183503_M;
     private GuiButton modButton;
     private GuiScreen modUpdateNotification;
 
     public GuiMainMenu()
     {
         this.openGLWarning2 = field_96138_a;
-        this.L = false;
+        this.field_183502_L = false;
         this.splashText = "missingno";
         BufferedReader bufferedreader = null;
 
@@ -159,44 +135,30 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    private boolean a()
+    private boolean func_183501_a()
     {
-        return Minecraft.getMinecraft().gameSettings.getOptionOrdinalValue(GameSettings.Options.enumFloat) && this.M != null;
+        return Minecraft.getMinecraft().gameSettings.getOptionOrdinalValue(GameSettings.Options.REALMS_NOTIFICATIONS) && this.field_183503_M != null;
     }
 
-    /**
-     * Called from the main game loop to update the screen.
-     */
     public void updateScreen()
     {
         ++this.panoramaTimer;
 
-        if (this.a())
+        if (this.func_183501_a())
         {
-            this.M.updateScreen();
+            this.field_183503_M.updateScreen();
         }
     }
 
-    /**
-     * Returns true if this GUI should pause the game when it is displayed in single-player
-     */
     public boolean doesGuiPauseGame()
     {
         return false;
     }
 
-    /**
-     * Fired when a key is typed (except F11 which toggles full screen). This is the equivalent of
-     * KeyListener.keyTyped(KeyEvent e). Args : character (character on the key), keyCode (lwjgl Keyboard key code)
-     */
     protected void keyTyped(char typedChar, int keyCode) throws IOException
     {
     }
 
-    /**
-     * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
-     * window resizes, the buttonList is cleared beforehand.
-     */
     public void initGui()
     {
         this.viewportTexture = new DynamicTexture(256, 256);
@@ -246,23 +208,20 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
         this.mc.setConnectedToRealms(false);
 
-        if (Minecraft.getMinecraft().gameSettings.getOptionOrdinalValue(GameSettings.Options.enumFloat) && !this.L)
+        if (Minecraft.getMinecraft().gameSettings.getOptionOrdinalValue(GameSettings.Options.REALMS_NOTIFICATIONS) && !this.field_183502_L)
         {
             RealmsBridge realmsbridge = new RealmsBridge();
-            this.M = realmsbridge.getNotificationScreen(this);
-            this.L = true;
+            this.field_183503_M = realmsbridge.getNotificationScreen(this);
+            this.field_183502_L = true;
         }
 
-        if (this.a())
+        if (this.func_183501_a())
         {
-            this.M.a(this.width, this.height);
-            this.M.initGui();
+            this.field_183503_M.setGuiSize(this.width, this.height);
+            this.field_183503_M.initGui();
         }
     }
 
-    /**
-     * Adds Singleplayer and Multiplayer buttons on Main Menu for players who have bought the game.
-     */
     private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_)
     {
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer", new Object[0])));
@@ -279,9 +238,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    /**
-     * Adds Demo buttons on Main Menu for players who are playing Demo.
-     */
     private void addDemoButtons(int p_73972_1_, int p_73972_2_)
     {
         this.buttonList.add(new GuiButton(11, this.width / 2 - 100, p_73972_1_, I18n.format("menu.playdemo", new Object[0])));
@@ -295,9 +251,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    /**
-     * Called by the controls from the buttonList when activated. (Mouse pressed for buttons)
-     */
     protected void actionPerformed(GuiButton button) throws IOException
     {
         if (button.id == 0)
@@ -322,7 +275,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
         if (button.id == 14 && this.realmsButton.visible)
         {
-            this.f();
+            this.switchToRealms();
         }
 
         if (button.id == 4)
@@ -353,7 +306,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    private void f()
+    private void switchToRealms()
     {
         RealmsBridge realmsbridge = new RealmsBridge();
         realmsbridge.switchToRealms(this);
@@ -388,9 +341,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    /**
-     * Draws the main menu panorama
-     */
     private void drawPanorama(int p_73970_1_, int p_73970_2_, float p_73970_3_)
     {
         Tessellator tessellator = Tessellator.getInstance();
@@ -492,9 +442,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         GlStateManager.enableDepth();
     }
 
-    /**
-     * Rotate and blurs the skybox view in the main menu
-     */
     private void rotateAndBlurSkybox(float p_73968_1_)
     {
         this.mc.getTextureManager().bindTexture(this.backgroundTexture);
@@ -534,9 +481,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         GlStateManager.colorMask(true, true, true, true);
     }
 
-    /**
-     * Renders the skybox in the main menu
-     */
     private void renderSkybox(int p_73971_1_, int p_73971_2_, float p_73971_3_)
     {
         this.mc.getFramebuffer().unbindFramebuffer();
@@ -574,9 +518,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         tessellator.draw();
     }
 
-    /**
-     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         GlStateManager.disableAlpha();
@@ -680,9 +621,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        if (this.a())
+        if (this.func_183501_a())
         {
-            this.M.drawScreen(mouseX, mouseY, partialTicks);
+            this.field_183503_M.drawScreen(mouseX, mouseY, partialTicks);
         }
 
         if (this.modUpdateNotification != null)
@@ -691,9 +632,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
     }
 
-    /**
-     * Called when the mouse is clicked. Args : mouseX, mouseY, clickedButton
-     */
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
     {
         super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -708,20 +646,17 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
             }
         }
 
-        if (this.a())
+        if (this.func_183501_a())
         {
-            this.M.mouseClicked(mouseX, mouseY, mouseButton);
+            this.field_183503_M.mouseClicked(mouseX, mouseY, mouseButton);
         }
     }
 
-    /**
-     * Called when the screen is unloaded. Used to disable keyboard repeat events
-     */
     public void onGuiClosed()
     {
-        if (this.M != null)
+        if (this.field_183503_M != null)
         {
-            this.M.onGuiClosed();
+            this.field_183503_M.onGuiClosed();
         }
     }
 }

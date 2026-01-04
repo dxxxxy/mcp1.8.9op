@@ -176,9 +176,6 @@ public class EntityTracker
         this.addEntityToTracker(entityIn, trackingRange, updateFrequency, false);
     }
 
-    /**
-     * Args : Entity, trackingRange, updateFrequency, sendVelocityUpdates
-     */
     public void addEntityToTracker(Entity entityIn, int trackingRange, final int updateFrequency, boolean sendVelocityUpdates)
     {
         if (trackingRange > this.maxTrackingDistanceThreshold)

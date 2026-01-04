@@ -29,20 +29,9 @@ public class ChunkProviderServer implements IChunkProvider
 {
     private static final Logger logger = LogManager.getLogger();
     private Set<Long> droppedChunksSet = Collections.<Long>newSetFromMap(new ConcurrentHashMap());
-
-    /** a dummy chunk, returned in place of an actual chunk. */
     private Chunk dummyChunk;
-
-    /**
-     * chunk generator object. Calls to load nonexistent chunks are forwarded to this object.
-     */
     private IChunkProvider serverChunkGenerator;
     private IChunkLoader chunkLoader;
-
-    /**
-     * if set, this flag forces a request to load a chunk to load the chunk rather than defaulting to the dummy if
-     * possible
-     */
     public boolean chunkLoadOverride = true;
     private LongHashMap<Chunk> id2ChunkMap = new LongHashMap();
     private List<Chunk> loadedChunks = Lists.<Chunk>newArrayList();
@@ -56,9 +45,6 @@ public class ChunkProviderServer implements IChunkProvider
         this.serverChunkGenerator = p_i1520_3_;
     }
 
-    /**
-     * Checks to see if a chunk exists at x, z
-     */
     public boolean chunkExists(int x, int z)
     {
         return this.id2ChunkMap.containsItem(ChunkCoordIntPair.chunkXZ2Int(x, z));
@@ -84,9 +70,6 @@ public class ChunkProviderServer implements IChunkProvider
         }
     }
 
-    /**
-     * marks all chunks for unload, ignoring those near the spawn
-     */
     public void unloadAllChunks()
     {
         for (Chunk chunk : this.loadedChunks)
@@ -95,12 +78,6 @@ public class ChunkProviderServer implements IChunkProvider
         }
     }
 
-    /**
-     * loads or generates the chunk at the chunk location specified
-     *  
-     * @param chunkX x coord of the chunk to load (block coord >> 4)
-     * @param chunkZ z coord of the chunk to load (block coord >> 4)
-     */
     public Chunk loadChunk(int chunkX, int chunkZ)
     {
         long i = ChunkCoordIntPair.chunkXZ2Int(chunkX, chunkZ);
@@ -144,10 +121,6 @@ public class ChunkProviderServer implements IChunkProvider
         return chunk;
     }
 
-    /**
-     * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
-     * specified chunk from the map seed and chunk seed
-     */
     public Chunk provideChunk(int x, int z)
     {
         Chunk chunk = (Chunk)this.id2ChunkMap.getValueByKey(ChunkCoordIntPair.chunkXZ2Int(x, z));
@@ -221,9 +194,6 @@ public class ChunkProviderServer implements IChunkProvider
         }
     }
 
-    /**
-     * Populates chunk with ores etc etc
-     */
     public void populate(IChunkProvider chunkProvider, int x, int z)
     {
         Chunk chunk = this.provideChunk(x, z);
@@ -254,10 +224,6 @@ public class ChunkProviderServer implements IChunkProvider
         }
     }
 
-    /**
-     * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
-     * Return true if all chunks have been saved.
-     */
     public boolean saveChunks(boolean saveAllChunks, IProgressUpdate progressCallback)
     {
         int i = 0;
@@ -288,10 +254,6 @@ public class ChunkProviderServer implements IChunkProvider
         return true;
     }
 
-    /**
-     * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
-     * unimplemented.
-     */
     public void saveExtraData()
     {
         if (this.chunkLoader != null)
@@ -300,9 +262,6 @@ public class ChunkProviderServer implements IChunkProvider
         }
     }
 
-    /**
-     * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
-     */
     public boolean unloadQueuedChunks()
     {
         if (!this.worldObj.disableLevelSaving)
@@ -336,17 +295,11 @@ public class ChunkProviderServer implements IChunkProvider
         return this.serverChunkGenerator.unloadQueuedChunks();
     }
 
-    /**
-     * Returns if the IChunkProvider supports saving.
-     */
     public boolean canSave()
     {
         return !this.worldObj.disableLevelSaving;
     }
 
-    /**
-     * Converts the instance data to a readable string.
-     */
     public String makeString()
     {
         return "ServerChunkCache: " + this.id2ChunkMap.getNumHashElements() + " Drop: " + this.droppedChunksSet.size();

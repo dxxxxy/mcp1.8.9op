@@ -11,41 +11,12 @@ import net.minecraft.util.StatCollector;
 
 public class Achievement extends StatBase
 {
-    /**
-     * Is the column (related to center of achievement gui, in 24 pixels unit) that the achievement will be displayed.
-     */
     public final int displayColumn;
-
-    /**
-     * Is the row (related to center of achievement gui, in 24 pixels unit) that the achievement will be displayed.
-     */
     public final int displayRow;
-
-    /**
-     * Holds the parent achievement, that must be taken before this achievement is avaiable.
-     */
     public final Achievement parentAchievement;
-
-    /**
-     * Holds the description of the achievement, ready to be formatted and/or displayed.
-     */
     private final String achievementDescription;
-
-    /**
-     * Holds a string formatter for the achievement, some of then needs extra dynamic info - like the key used to open
-     * the inventory.
-     */
     private IStatStringFormat statStringFormatter;
-
-    /**
-     * Holds the ItemStack that will be used to draw the achievement into the GUI.
-     */
     public final ItemStack theItemStack;
-
-    /**
-     * Special achievements have a 'spiked' (on normal texture pack) frame, special achievements are the hardest ones to
-     * achieve.
-     */
     private boolean isSpecial;
 
     public Achievement(String statIdIn, String unlocalizedName, int column, int row, Item itemIn, Achievement parent)
@@ -89,29 +60,18 @@ public class Achievement extends StatBase
         this.parentAchievement = parent;
     }
 
-    /**
-     * Initializes the current stat as independent (i.e., lacking prerequisites for being updated) and returns the
-     * current instance.
-     */
     public Achievement initIndependentStat()
     {
         this.isIndependent = true;
         return this;
     }
 
-    /**
-     * Special achievements have a 'spiked' (on normal texture pack) frame, special achievements are the hardest ones to
-     * achieve.
-     */
     public Achievement setSpecial()
     {
         this.isSpecial = true;
         return this;
     }
 
-    /**
-     * Register the stat into StatList.
-     */
     public Achievement registerStat()
     {
         super.registerStat();
@@ -119,9 +79,6 @@ public class Achievement extends StatBase
         return this;
     }
 
-    /**
-     * Returns whether or not the StatBase-derived class is a statistic (running counter) or an achievement (one-shot).
-     */
     public boolean isAchievement()
     {
         return true;
@@ -139,29 +96,17 @@ public class Achievement extends StatBase
         return (Achievement)super.func_150953_b(p_150953_1_);
     }
 
-    /**
-     * Returns the fully description of the achievement - ready to be displayed on screen.
-     */
     public String getDescription()
     {
         return this.statStringFormatter != null ? this.statStringFormatter.formatString(StatCollector.translateToLocal(this.achievementDescription)) : StatCollector.translateToLocal(this.achievementDescription);
     }
 
-    /**
-     * Defines a string formatter for the achievement.
-     *  
-     * @param statStringFormatterIn 1.8.9
-     */
     public Achievement setStatStringFormatter(IStatStringFormat statStringFormatterIn)
     {
         this.statStringFormatter = statStringFormatterIn;
         return this;
     }
 
-    /**
-     * Special achievements have a 'spiked' (on normal texture pack) frame, special achievements are the hardest ones to
-     * achieve.
-     */
     public boolean getSpecial()
     {
         return this.isSpecial;

@@ -7,16 +7,9 @@ import net.minecraft.world.World;
 
 public class ShapedRecipes implements IRecipe
 {
-    /** How many horizontal slots this recipe is wide. */
     private final int recipeWidth;
-
-    /** How many vertical slots this recipe uses. */
     private final int recipeHeight;
-
-    /** Is a array of ItemStack that composes the recipe. */
     private final ItemStack[] recipeItems;
-
-    /** Is the ItemStack that you get when craft the recipe. */
     private final ItemStack recipeOutput;
     private boolean copyIngredientNBT;
 
@@ -50,9 +43,6 @@ public class ShapedRecipes implements IRecipe
         return aitemstack;
     }
 
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     */
     public boolean matches(InventoryCrafting inv, World worldIn)
     {
         for (int i = 0; i <= 3 - this.recipeWidth; ++i)
@@ -74,9 +64,6 @@ public class ShapedRecipes implements IRecipe
         return false;
     }
 
-    /**
-     * Checks if the region of a crafting inventory is match for the recipe.
-     */
     private boolean checkMatch(InventoryCrafting p_77573_1_, int p_77573_2_, int p_77573_3_, boolean p_77573_4_)
     {
         for (int i = 0; i < 3; ++i)
@@ -124,9 +111,6 @@ public class ShapedRecipes implements IRecipe
         return true;
     }
 
-    /**
-     * Returns an Item that is the result of this recipe
-     */
     public ItemStack getCraftingResult(InventoryCrafting inv)
     {
         ItemStack itemstack = this.getRecipeOutput().copy();
@@ -147,9 +131,6 @@ public class ShapedRecipes implements IRecipe
         return itemstack;
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     public int getRecipeSize()
     {
         return this.recipeWidth * this.recipeHeight;

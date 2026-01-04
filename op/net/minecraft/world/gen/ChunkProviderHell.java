@@ -27,34 +27,17 @@ import net.minecraft.world.gen.structure.MapGenNetherBridge;
 
 public class ChunkProviderHell implements IChunkProvider
 {
-    /** Is the world that the nether is getting generated. */
     private final World worldObj;
     private final boolean field_177466_i;
     private final Random hellRNG;
-
-    /**
-     * Holds the noise used to determine whether slowsand can be generated at a location
-     */
     private double[] slowsandNoise = new double[256];
     private double[] gravelNoise = new double[256];
-
-    /**
-     * Holds the noise used to determine whether something other than netherrack can be generated at a location
-     */
     private double[] netherrackExclusivityNoise = new double[256];
     private double[] noiseField;
-
-    /** A NoiseGeneratorOctaves used in generating nether terrain */
     private final NoiseGeneratorOctaves netherNoiseGen1;
     private final NoiseGeneratorOctaves netherNoiseGen2;
     private final NoiseGeneratorOctaves netherNoiseGen3;
-
-    /** Determines whether slowsand or gravel can be generated at a location */
     private final NoiseGeneratorOctaves slowsandGravelNoiseGen;
-
-    /**
-     * Determines whether something other than nettherack can be generated at a location
-     */
     private final NoiseGeneratorOctaves netherrackExculsivityNoiseGen;
     public final NoiseGeneratorOctaves netherNoiseGen6;
     public final NoiseGeneratorOctaves netherNoiseGen7;
@@ -254,10 +237,6 @@ public class ChunkProviderHell implements IChunkProvider
         }
     }
 
-    /**
-     * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
-     * specified chunk from the map seed and chunk seed
-     */
     public Chunk provideChunk(int x, int z)
     {
         this.hellRNG.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
@@ -284,10 +263,6 @@ public class ChunkProviderHell implements IChunkProvider
         return chunk;
     }
 
-    /**
-     * generates a subset of the level's terrain data. Takes 7 arguments: the [empty] noise array, the position, and the
-     * size.
-     */
     private double[] initializeNoiseField(double[] p_73164_1_, int p_73164_2_, int p_73164_3_, int p_73164_4_, int p_73164_5_, int p_73164_6_, int p_73164_7_)
     {
         if (p_73164_1_ == null)
@@ -373,17 +348,11 @@ public class ChunkProviderHell implements IChunkProvider
         return p_73164_1_;
     }
 
-    /**
-     * Checks to see if a chunk exists at x, z
-     */
     public boolean chunkExists(int x, int z)
     {
         return true;
     }
 
-    /**
-     * Populates chunk with ores etc etc
-     */
     public void populate(IChunkProvider chunkProvider, int x, int z)
     {
         BlockFalling.fallInstantly = true;
@@ -439,42 +408,25 @@ public class ChunkProviderHell implements IChunkProvider
         return false;
     }
 
-    /**
-     * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
-     * Return true if all chunks have been saved.
-     */
     public boolean saveChunks(boolean saveAllChunks, IProgressUpdate progressCallback)
     {
         return true;
     }
 
-    /**
-     * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
-     * unimplemented.
-     */
     public void saveExtraData()
     {
     }
 
-    /**
-     * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
-     */
     public boolean unloadQueuedChunks()
     {
         return false;
     }
 
-    /**
-     * Returns if the IChunkProvider supports saving.
-     */
     public boolean canSave()
     {
         return true;
     }
 
-    /**
-     * Converts the instance data to a readable string.
-     */
     public String makeString()
     {
         return "HellRandomLevelSource";

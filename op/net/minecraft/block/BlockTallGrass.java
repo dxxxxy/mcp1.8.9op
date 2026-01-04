@@ -43,9 +43,6 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         return this.canPlaceBlockOn(worldIn.getBlockState(pos.down()).getBlock());
     }
 
-    /**
-     * Whether this Block can be replaced directly by other blocks (true for e.g. tall grass)
-     */
     public boolean isReplaceable(World worldIn, BlockPos pos)
     {
         return true;
@@ -69,17 +66,11 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         return worldIn.getBiomeGenForCoords(pos).getGrassColorAtPos(pos);
     }
 
-    /**
-     * Get the Item that this Block should drop when harvested.
-     */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return rand.nextInt(8) == 0 ? Items.wheat_seeds : null;
     }
 
-    /**
-     * Get the quantity dropped based on the given fortune level
-     */
     public int quantityDroppedWithBonus(int fortune, Random random)
     {
         return 1 + random.nextInt(fortune * 2 + 1);
@@ -98,18 +89,12 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * Gets the meta to use for the Pick Block ItemStack result
-     */
     public int getDamageValue(World worldIn, BlockPos pos)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         return iblockstate.getBlock().getMetaFromState(iblockstate);
     }
 
-    /**
-     * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-     */
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list)
     {
         for (int i = 1; i < 3; ++i)
@@ -118,9 +103,6 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * Whether this IGrowable can grow
-     */
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
         return state.getValue(TYPE) != BlockTallGrass.EnumType.DEAD_BUSH;
@@ -146,17 +128,11 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         }
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(TYPE, BlockTallGrass.EnumType.byMetadata(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((BlockTallGrass.EnumType)state.getValue(TYPE)).getMeta();
@@ -167,9 +143,6 @@ public class BlockTallGrass extends BlockBush implements IGrowable
         return new BlockState(this, new IProperty[] {TYPE});
     }
 
-    /**
-     * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
-     */
     public Block.EnumOffsetType getOffsetType()
     {
         return Block.EnumOffsetType.XYZ;

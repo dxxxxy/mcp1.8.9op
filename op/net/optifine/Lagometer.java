@@ -48,7 +48,7 @@ public class Lagometer
             profiler = mc.mcProfiler;
         }
 
-        if (gameSettings.showDebugProfilerChart && (gameSettings.ofLagometer || gameSettings.lastServer))
+        if (gameSettings.showDebugInfo && (gameSettings.ofLagometer || gameSettings.showLagometer))
         {
             active = true;
             long timeNowNano = System.nanoTime();
@@ -92,7 +92,7 @@ public class Lagometer
     {
         if (gameSettings != null)
         {
-            if (gameSettings.ofLagometer || gameSettings.lastServer)
+            if (gameSettings.ofLagometer || gameSettings.showLagometer)
             {
                 long i = System.nanoTime();
                 GlStateManager.clear(256);

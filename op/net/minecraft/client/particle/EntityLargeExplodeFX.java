@@ -18,8 +18,6 @@ public class EntityLargeExplodeFX extends EntityFX
     private static final VertexFormat field_181549_az = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
     private int field_70581_a;
     private int field_70584_aq;
-
-    /** The Rendering Engine. */
     private TextureManager theRenderEngine;
     private float field_70582_as;
 
@@ -32,9 +30,6 @@ public class EntityLargeExplodeFX extends EntityFX
         this.field_70582_as = 1.0F - (float)p_i1213_9_ * 0.5F;
     }
 
-    /**
-     * Renders the particle
-     */
     public void renderParticle(WorldRenderer worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         int i = (int)(((float)this.field_70581_a + partialTicks) * 15.0F / (float)this.field_70584_aq);
@@ -68,9 +63,6 @@ public class EntityLargeExplodeFX extends EntityFX
         return 61680;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;

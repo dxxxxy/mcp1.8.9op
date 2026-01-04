@@ -26,9 +26,6 @@ public class S3BPacketScoreboardObjective implements Packet<INetHandlerPlayClien
         this.field_149342_c = p_i45224_2_;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.objectiveName = buf.readStringFromBuffer(16);
@@ -41,9 +38,6 @@ public class S3BPacketScoreboardObjective implements Packet<INetHandlerPlayClien
         }
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeString(this.objectiveName);
@@ -56,9 +50,6 @@ public class S3BPacketScoreboardObjective implements Packet<INetHandlerPlayClien
         }
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayClient handler)
     {
         handler.handleScoreboardObjective(this);

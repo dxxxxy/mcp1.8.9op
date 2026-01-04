@@ -171,11 +171,11 @@ public class Mipmaps
         return k << 24 | j2 << 16 | k2 << 8 | l2;
     }
 
-    private int averageColor(int i1, int j1)
+    private int averageColor(int i, int j)
     {
-        int i = (i1 & -16777216) >> 24 & 255;
-        int j = (j1 & -16777216) >> 24 & 255;
-        return (i + j >> 1 << 24) + ((i1 & 16711422) + (j1 & 16711422) >> 1);
+        int k = (i & -16777216) >> 24 & 255;
+        int p = (j & -16777216) >> 24 & 255;
+        return (k + j >> 1 << 24) + ((k & 16711422) + (p & 16711422) >> 1);
     }
 
     public static IntBuffer[] makeMipmapBuffers(Dimension[] mipmapDimensions, int[][] mipmapDatas)

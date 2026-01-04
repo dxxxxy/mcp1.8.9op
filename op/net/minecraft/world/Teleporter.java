@@ -17,8 +17,6 @@ import net.minecraft.util.MathHelper;
 public class Teleporter
 {
     private final WorldServer worldServerInstance;
-
-    /** A private Random() function in Teleporter */
     private final Random random;
     private final LongHashMap<Teleporter.PortalPosition> destinationCoordinateCache = new LongHashMap();
     private final List<Long> destinationCoordinateKeys = Lists.<Long>newArrayList();
@@ -392,10 +390,6 @@ public class Teleporter
         return true;
     }
 
-    /**
-     * called periodically to remove out-of-date portal locations from the cache list. Argument par1 is a
-     * WorldServer.getTotalWorldTime() value.
-     */
     public void removeStalePortalLocations(long worldTime)
     {
         if (worldTime % 100L == 0L)

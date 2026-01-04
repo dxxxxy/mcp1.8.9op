@@ -2,10 +2,6 @@ package net.minecraft.world.chunk;
 
 public class NibbleArray
 {
-    /**
-     * Byte array of data stored in this holder. Possibly a light map or some chunk data. Data is accessed in 4-bit
-     * pieces.
-     */
     private final byte[] data;
 
     public NibbleArray()
@@ -23,17 +19,11 @@ public class NibbleArray
         }
     }
 
-    /**
-     * Returns the nibble of data corresponding to the passed in x, y, z. y is at most 6 bits, z is at most 4.
-     */
     public int get(int x, int y, int z)
     {
         return this.getFromIndex(this.getCoordinateIndex(x, y, z));
     }
 
-    /**
-     * Arguments are x, y, z, val. Sets the nibble of data at x << 11 | z << 7 | y to val.
-     */
     public void set(int x, int y, int z, int value)
     {
         this.setIndex(this.getCoordinateIndex(x, y, z), value);

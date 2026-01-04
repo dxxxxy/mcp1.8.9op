@@ -77,9 +77,6 @@ public class BlockCactus extends Block
         return false;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube()
     {
         return false;
@@ -90,9 +87,6 @@ public class BlockCactus extends Block
         return super.canPlaceBlockAt(worldIn, pos) ? this.canBlockStay(worldIn, pos) : false;
     }
 
-    /**
-     * Called when a neighboring block changes.
-     */
     public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock)
     {
         if (!this.canBlockStay(worldIn, pos))
@@ -115,9 +109,6 @@ public class BlockCactus extends Block
         return block == Blocks.cactus || block == Blocks.sand;
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         entityIn.attackEntityFrom(DamageSource.cactus, 1.0F);
@@ -128,17 +119,11 @@ public class BlockCactus extends Block
         return EnumWorldBlockLayer.CUTOUT;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(AGE, Integer.valueOf(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Integer)state.getValue(AGE)).intValue();

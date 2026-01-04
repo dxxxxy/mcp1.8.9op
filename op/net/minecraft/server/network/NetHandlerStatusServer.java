@@ -23,9 +23,6 @@ public class NetHandlerStatusServer implements INetHandlerStatusServer
         this.networkManager = netManager;
     }
 
-    /**
-     * Invoked when disconnecting, the parameter is a ChatComponent describing the reason for termination
-     */
     public void onDisconnect(IChatComponent reason)
     {
     }

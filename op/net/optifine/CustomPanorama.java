@@ -111,26 +111,26 @@ public class CustomPanorama
         return aproperties;
     }
 
-    private static int[] getWeights(Properties[] properties)
+    private static int[] getWeights(Properties[] propertiess)
     {
-        int[] aint = new int[properties.length];
+        int[] aint = new int[propertiess.length];
 
         for (int i = 0; i < aint.length; ++i)
         {
-            Properties property = properties[i];
+            Properties properties = propertiess[i];
 
-            if (property == null)
+            if (properties == null)
             {
-                property = properties[0];
+                properties = propertiess[0];
             }
 
-            if (property == null)
+            if (properties == null)
             {
                 aint[i] = 1;
             }
             else
             {
-                String s = property.getProperty("weight", (String)null);
+                String s = properties.getProperty("weight", (String)null);
                 aint[i] = Config.parseInt(s, 1);
             }
         }

@@ -55,14 +55,9 @@ import org.apache.logging.log4j.Logger;
 public class Bootstrap
 {
     private static final PrintStream SYSOUT = System.out;
-
-    /** Whether the blocks, items, etc have already been registered */
     private static boolean alreadyRegistered = false;
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * Is Bootstrap registration already done?
-     */
     public static boolean isRegistered()
     {
         return alreadyRegistered;
@@ -500,9 +495,6 @@ public class Bootstrap
         });
     }
 
-    /**
-     * Registers blocks, items, stats, etc.
-     */
     public static void register()
     {
         if (!alreadyRegistered)
@@ -522,9 +514,6 @@ public class Bootstrap
         }
     }
 
-    /**
-     * redirect standard streams to logger
-     */
     private static void redirectOutputToLog()
     {
         System.setErr(new LoggingPrintStream("STDERR", System.err));

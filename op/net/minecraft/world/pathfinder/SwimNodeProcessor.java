@@ -16,27 +16,16 @@ public class SwimNodeProcessor extends NodeProcessor
         super.initProcessor(iblockaccessIn, entityIn);
     }
 
-    /**
-     * This method is called when all nodes have been processed and PathEntity is created.
-     *  {@link net.minecraft.world.pathfinder.WalkNodeProcessor WalkNodeProcessor} uses this to change its field {@link
-     * net.minecraft.world.pathfinder.WalkNodeProcessor#avoidsWater avoidsWater}
-     */
     public void postProcess()
     {
         super.postProcess();
     }
 
-    /**
-     * Returns given entity's position as PathPoint
-     */
     public PathPoint getPathPointTo(Entity entityIn)
     {
         return this.openPoint(MathHelper.floor_double(entityIn.getEntityBoundingBox().minX), MathHelper.floor_double(entityIn.getEntityBoundingBox().minY + 0.5D), MathHelper.floor_double(entityIn.getEntityBoundingBox().minZ));
     }
 
-    /**
-     * Returns PathPoint for given coordinates
-     */
     public PathPoint getPathPointToCoords(Entity entityIn, double x, double y, double target)
     {
         return this.openPoint(MathHelper.floor_double(x - (double)(entityIn.width / 2.0F)), MathHelper.floor_double(y + 0.5D), MathHelper.floor_double(target - (double)(entityIn.width / 2.0F)));
@@ -59,9 +48,6 @@ public class SwimNodeProcessor extends NodeProcessor
         return i;
     }
 
-    /**
-     * Returns a point that the entity can safely move to
-     */
     private PathPoint getSafePoint(Entity entityIn, int x, int y, int z)
     {
         int i = this.func_176186_b(entityIn, x, y, z);

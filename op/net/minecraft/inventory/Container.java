@@ -17,21 +17,12 @@ public abstract class Container
     public List<Slot> inventorySlots = Lists.<Slot>newArrayList();
     public int windowId;
     private short transactionID;
-
-    /**
-     * The current drag mode (0 : evenly split, 1 : one item by slot, 2 : not used ?)
-     */
     private int dragMode = -1;
-
-    /** The current drag event (0 : start, 1 : add slot : 2 : end) */
     private int dragEvent;
     private final Set<Slot> dragSlots = Sets.<Slot>newHashSet();
     protected List<ICrafting> crafters = Lists.<ICrafting>newArrayList();
     private Set<EntityPlayer> playerList = Sets.<EntityPlayer>newHashSet();
 
-    /**
-     * Adds an item slot to this container
-     */
     protected Slot addSlotToContainer(Slot slotIn)
     {
         slotIn.slotNumber = this.inventorySlots.size();
@@ -54,9 +45,6 @@ public abstract class Container
         }
     }
 
-    /**
-     * Remove the given Listener. Method name is for legacy.
-     */
     public void removeCraftingFromCrafters(ICrafting listeners)
     {
         this.crafters.remove(listeners);
@@ -74,9 +62,6 @@ public abstract class Container
         return list;
     }
 
-    /**
-     * Looks for changes made in the container, sends them to every listener.
-     */
     public void detectAndSendChanges()
     {
         for (int i = 0; i < this.inventorySlots.size(); ++i)
@@ -97,9 +82,6 @@ public abstract class Container
         }
     }
 
-    /**
-     * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
-     */
     public boolean enchantItem(EntityPlayer playerIn, int id)
     {
         return false;
@@ -125,18 +107,12 @@ public abstract class Container
         return (Slot)this.inventorySlots.get(slotId);
     }
 
-    /**
-     * Take a stack from the specified inventory slot.
-     */
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
         Slot slot = (Slot)this.inventorySlots.get(index);
         return slot != null ? slot.getStack() : null;
     }
 
-    /**
-     * Handles slot click.
-     */
     public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer playerIn)
     {
         ItemStack itemstack = null;
@@ -493,26 +469,16 @@ public abstract class Container
         return itemstack;
     }
 
-    /**
-     * Called to determine if the current slot is valid for the stack merging (double-click) code. The stack passed in
-     * is null for the initial slot that was double-clicked.
-     */
     public boolean canMergeSlot(ItemStack stack, Slot slotIn)
     {
         return true;
     }
 
-    /**
-     * Retries slotClick() in case of failure
-     */
     protected void retrySlotClick(int slotId, int clickedButton, boolean mode, EntityPlayer playerIn)
     {
         this.slotClick(slotId, clickedButton, 1, playerIn);
     }
 
-    /**
-     * Called when the container is closed.
-     */
     public void onContainerClosed(EntityPlayer playerIn)
     {
         InventoryPlayer inventoryplayer = playerIn.inventory;
@@ -524,25 +490,16 @@ public abstract class Container
         }
     }
 
-    /**
-     * Callback for when the crafting matrix is changed.
-     */
     public void onCraftMatrixChanged(IInventory inventoryIn)
     {
         this.detectAndSendChanges();
     }
 
-    /**
-     * args: slotID, itemStack to put in slot
-     */
     public void putStackInSlot(int slotID, ItemStack stack)
     {
         this.getSlot(slotID).putStack(stack);
     }
 
-    /**
-     * places itemstacks in first x slots, x being aitemstack.lenght
-     */
     public void putStacksInSlots(ItemStack[] p_75131_1_)
     {
         for (int i = 0; i < p_75131_1_.length; ++i)
@@ -555,26 +512,17 @@ public abstract class Container
     {
     }
 
-    /**
-     * Gets a unique transaction ID. Parameter is unused.
-     */
     public short getNextTransactionID(InventoryPlayer p_75136_1_)
     {
         ++this.transactionID;
         return this.transactionID;
     }
 
-    /**
-     * gets whether or not the player can craft in this inventory or not
-     */
     public boolean getCanCraft(EntityPlayer p_75129_1_)
     {
         return !this.playerList.contains(p_75129_1_);
     }
 
-    /**
-     * sets whether the player can craft in this inventory or not
-     */
     public void setCanCraft(EntityPlayer p_75128_1_, boolean p_75128_2_)
     {
         if (p_75128_2_)
@@ -589,11 +537,6 @@ public abstract class Container
 
     public abstract boolean canInteractWith(EntityPlayer playerIn);
 
-    /**
-     * Merges provided ItemStack with the first avaliable one in the container/player inventor between minIndex
-     * (included) and maxIndex (excluded). Args : stack, minIndex, maxIndex, negativDirection. /!\ the Container
-     * implementation do not check if the item is valid for the slot
-     */
     protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection)
     {
         boolean flag = false;
@@ -681,17 +624,11 @@ public abstract class Container
         return flag;
     }
 
-    /**
-     * Extracts the drag mode. Args : eventButton. Return (0 : evenly split, 1 : one item by slot, 2 : not used ?)
-     */
     public static int extractDragMode(int p_94529_0_)
     {
         return p_94529_0_ >> 2 & 3;
     }
 
-    /**
-     * Args : clickedButton, Returns (0 : start drag, 1 : add slot, 2 : end drag)
-     */
     public static int getDragEvent(int p_94532_0_)
     {
         return p_94532_0_ & 3;
@@ -707,18 +644,12 @@ public abstract class Container
         return dragModeIn == 0 ? true : (dragModeIn == 1 ? true : dragModeIn == 2 && player.capabilities.isCreativeMode);
     }
 
-    /**
-     * Reset the drag fields
-     */
     protected void resetDrag()
     {
         this.dragEvent = 0;
         this.dragSlots.clear();
     }
 
-    /**
-     * Checks if it's possible to add the given itemstack to the given slot.
-     */
     public static boolean canAddItemToSlot(Slot slotIn, ItemStack stack, boolean stackSizeMatters)
     {
         boolean flag = slotIn == null || !slotIn.getHasStack();
@@ -731,10 +662,6 @@ public abstract class Container
         return flag;
     }
 
-    /**
-     * Compute the new stack size, Returns the stack with the new size. Args : dragSlots, dragMode, dragStack,
-     * slotStackSize
-     */
     public static void computeStackSize(Set<Slot> p_94525_0_, int p_94525_1_, ItemStack p_94525_2_, int p_94525_3_)
     {
         switch (p_94525_1_)
@@ -754,18 +681,11 @@ public abstract class Container
         p_94525_2_.stackSize += p_94525_3_;
     }
 
-    /**
-     * Returns true if the player can "drag-spilt" items into this slot,. returns true by default. Called to check if
-     * the slot can be added to a list of Slots to split the held ItemStack across.
-     */
     public boolean canDragIntoSlot(Slot p_94531_1_)
     {
         return true;
     }
 
-    /**
-     * Like the version that takes an inventory. If the given TileEntity is not an Inventory, 0 is returned instead.
-     */
     public static int calcRedstone(TileEntity te)
     {
         return te instanceof IInventory ? calcRedstoneFromInventory((IInventory)te) : 0;

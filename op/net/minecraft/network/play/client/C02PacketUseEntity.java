@@ -30,9 +30,6 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
         this.hitVec = hitVec;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityId = buf.readVarIntFromBuffer();
@@ -44,9 +41,6 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
         }
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeVarIntToBuffer(this.entityId);
@@ -60,9 +54,6 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
         }
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayServer handler)
     {
         handler.processUseEntity(this);

@@ -8,33 +8,14 @@ import net.minecraft.world.World;
 
 public class ItemFood extends Item
 {
-    /** Number of ticks to run while 'EnumAction'ing until result. */
     public final int itemUseDuration;
-
-    /** The amount this food item heals the player. */
     private final int healAmount;
     private final float saturationModifier;
-
-    /** Whether wolves like this food (true for raw and cooked porkchop). */
     private final boolean isWolfsFavoriteMeat;
-
-    /**
-     * If this field is true, the food can be consumed even if the player don't need to eat.
-     */
     private boolean alwaysEdible;
-
-    /**
-     * represents the potion effect that will occurr upon eating this food. Set by setPotionEffect
-     */
     private int potionId;
-
-    /** set by setPotionEffect */
     private int potionDuration;
-
-    /** set by setPotionEffect */
     private int potionAmplifier;
-
-    /** probably of the set potion effect occurring */
     private float potionEffectProbability;
 
     public ItemFood(int amount, float saturation, boolean isWolfFood)
@@ -51,10 +32,6 @@ public class ItemFood extends Item
         this(amount, 0.6F, isWolfFood);
     }
 
-    /**
-     * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
-     * the Item before the action is complete.
-     */
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn)
     {
         --stack.stackSize;
@@ -73,25 +50,16 @@ public class ItemFood extends Item
         }
     }
 
-    /**
-     * How long it takes to use or consume an item
-     */
     public int getMaxItemUseDuration(ItemStack stack)
     {
         return 32;
     }
 
-    /**
-     * returns the action that specifies what animation to play when the items is being used
-     */
     public EnumAction getItemUseAction(ItemStack stack)
     {
         return EnumAction.EAT;
     }
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
     public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
     {
         if (playerIn.canEat(this.alwaysEdible))
@@ -112,18 +80,11 @@ public class ItemFood extends Item
         return this.saturationModifier;
     }
 
-    /**
-     * Whether wolves like this food (true for raw and cooked porkchop).
-     */
     public boolean isWolfsFavoriteMeat()
     {
         return this.isWolfsFavoriteMeat;
     }
 
-    /**
-     * sets a potion effect on the item. Args: int potionId, int duration (will be multiplied by 20), int amplifier,
-     * float probability of effect happening
-     */
     public ItemFood setPotionEffect(int id, int duration, int amplifier, float probability)
     {
         this.potionId = id;
@@ -133,9 +94,6 @@ public class ItemFood extends Item
         return this;
     }
 
-    /**
-     * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
-     */
     public ItemFood setAlwaysEdible()
     {
         this.alwaysEdible = true;

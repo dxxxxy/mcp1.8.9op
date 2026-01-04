@@ -18,9 +18,6 @@ public class PathNavigateSwimmer extends PathNavigate
         return new PathFinder(new SwimNodeProcessor());
     }
 
-    /**
-     * If on ground or swimming and can swim
-     */
     protected boolean canNavigate()
     {
         return this.isInLiquid();
@@ -56,18 +53,11 @@ public class PathNavigateSwimmer extends PathNavigate
         this.checkForStuck(vec3);
     }
 
-    /**
-     * Trims path data from the end to the first sun covered block
-     */
     protected void removeSunnyPath()
     {
         super.removeSunnyPath();
     }
 
-    /**
-     * Returns true when an entity of specified size could safely walk in a straight line between the two points. Args:
-     * pos1, pos2, entityXSize, entityYSize, entityZSize
-     */
     protected boolean isDirectPathBetweenPoints(Vec3 posVec31, Vec3 posVec32, int sizeX, int sizeY, int sizeZ)
     {
         MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(posVec31, new Vec3(posVec32.xCoord, posVec32.yCoord + (double)this.theEntity.height * 0.5D, posVec32.zCoord), false, true, false);

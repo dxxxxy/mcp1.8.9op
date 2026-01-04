@@ -20,9 +20,6 @@ public class RenderSnowball<T extends Entity> extends Render<T>
         this.field_177083_e = p_i46137_3_;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -43,9 +40,6 @@ public class RenderSnowball<T extends Entity> extends Render<T>
         return new ItemStack(this.field_177084_a, 1, 0);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(Entity entity)
     {
         return TextureMap.locationBlocksTexture;

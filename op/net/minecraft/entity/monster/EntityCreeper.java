@@ -23,19 +23,9 @@ import net.minecraft.world.World;
 
 public class EntityCreeper extends EntityMob
 {
-    /**
-     * Time when this creeper was last in an active state (Messed up code here, probably causes creeper animation to go
-     * weird)
-     */
     private int lastActiveTime;
-
-    /**
-     * The amount of time since the creeper was close enough to the player to ignite
-     */
     private int timeSinceIgnited;
     private int fuseTime = 30;
-
-    /** Explosion radius for this creeper. */
     private int explosionRadius = 3;
     private int field_175494_bm = 0;
 
@@ -59,9 +49,6 @@ public class EntityCreeper extends EntityMob
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D);
     }
 
-    /**
-     * The maximum height from where the entity is alowed to jump (used in pathfinder)
-     */
     public int getMaxFallHeight()
     {
         return this.getAttackTarget() == null ? 3 : 3 + (int)(this.getHealth() - 1.0F);
@@ -86,9 +73,6 @@ public class EntityCreeper extends EntityMob
         this.dataWatcher.addObject(18, Byte.valueOf((byte)0));
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
@@ -103,9 +87,6 @@ public class EntityCreeper extends EntityMob
         tagCompound.setBoolean("ignited", this.hasIgnited());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
@@ -127,9 +108,6 @@ public class EntityCreeper extends EntityMob
         }
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         if (this.isEntityAlive())
@@ -165,25 +143,16 @@ public class EntityCreeper extends EntityMob
         super.onUpdate();
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.creeper.say";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.creeper.death";
     }
 
-    /**
-     * Called when the mob's health reaches 0.
-     */
     public void onDeath(DamageSource cause)
     {
         super.onDeath(cause);
@@ -207,17 +176,11 @@ public class EntityCreeper extends EntityMob
         return true;
     }
 
-    /**
-     * Returns true if the creeper is powered by a lightning bolt.
-     */
     public boolean getPowered()
     {
         return this.dataWatcher.getWatchableObjectByte(17) == 1;
     }
 
-    /**
-     * Params: (Float)Render tick. Returns the intensity of the creeper's flash when it is ignited.
-     */
     public float getCreeperFlashIntensity(float p_70831_1_)
     {
         return ((float)this.lastActiveTime + (float)(this.timeSinceIgnited - this.lastActiveTime) * p_70831_1_) / (float)(this.fuseTime - 2);
@@ -228,34 +191,22 @@ public class EntityCreeper extends EntityMob
         return Items.gunpowder;
     }
 
-    /**
-     * Returns the current state of creeper, -1 is idle, 1 is 'in fuse'
-     */
     public int getCreeperState()
     {
         return this.dataWatcher.getWatchableObjectByte(16);
     }
 
-    /**
-     * Sets the state of creeper, -1 to idle and 1 to be 'in fuse'
-     */
     public void setCreeperState(int state)
     {
         this.dataWatcher.updateObject(16, Byte.valueOf((byte)state));
     }
 
-    /**
-     * Called when a lightning bolt hits the entity.
-     */
     public void onStruckByLightning(EntityLightningBolt lightningBolt)
     {
         super.onStruckByLightning(lightningBolt);
         this.dataWatcher.updateObject(17, Byte.valueOf((byte)1));
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
     protected boolean interact(EntityPlayer player)
     {
         ItemStack itemstack = player.inventory.getCurrentItem();
@@ -276,9 +227,6 @@ public class EntityCreeper extends EntityMob
         return super.interact(player);
     }
 
-    /**
-     * Creates an explosion as determined by this creeper's power and explosion radius.
-     */
     private void explode()
     {
         if (!this.worldObj.isRemote)
@@ -300,9 +248,6 @@ public class EntityCreeper extends EntityMob
         this.dataWatcher.updateObject(18, Byte.valueOf((byte)1));
     }
 
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
     public boolean isAIEnabled()
     {
         return this.field_175494_bm < 1 && this.worldObj.getGameRules().getBoolean("doMobLoot");

@@ -29,9 +29,6 @@ public class PathNavigateGround extends PathNavigate
         return new PathFinder(this.nodeProcessor);
     }
 
-    /**
-     * If on ground or swimming and can swim
-     */
     protected boolean canNavigate()
     {
         return this.theEntity.onGround || this.getCanSwim() && this.isInLiquid() || this.theEntity.isRiding() && this.theEntity instanceof EntityZombie && this.theEntity.ridingEntity instanceof EntityChicken;
@@ -42,9 +39,6 @@ public class PathNavigateGround extends PathNavigate
         return new Vec3(this.theEntity.posX, (double)this.getPathablePosY(), this.theEntity.posZ);
     }
 
-    /**
-     * Gets the safe pathing Y position for the entity depending on if it can path swim or not
-     */
     private int getPathablePosY()
     {
         if (this.theEntity.isInWater() && this.getCanSwim())
@@ -73,9 +67,6 @@ public class PathNavigateGround extends PathNavigate
         }
     }
 
-    /**
-     * Trims path data from the end to the first sun covered block
-     */
     protected void removeSunnyPath()
     {
         super.removeSunnyPath();
@@ -100,10 +91,6 @@ public class PathNavigateGround extends PathNavigate
         }
     }
 
-    /**
-     * Returns true when an entity of specified size could safely walk in a straight line between the two points. Args:
-     * pos1, pos2, entityXSize, entityYSize, entityZSize
-     */
     protected boolean isDirectPathBetweenPoints(Vec3 posVec31, Vec3 posVec32, int sizeX, int sizeY, int sizeZ)
     {
         int i = MathHelper.floor_double(posVec31.xCoord);
@@ -182,9 +169,6 @@ public class PathNavigateGround extends PathNavigate
         }
     }
 
-    /**
-     * Returns true when an entity could stand at a position, including solid blocks under the entire entity.
-     */
     private boolean isSafeToStandAt(int x, int y, int z, int sizeX, int sizeY, int sizeZ, Vec3 vec31, double p_179683_8_, double p_179683_10_)
     {
         int i = x - sizeX / 2;
@@ -230,9 +214,6 @@ public class PathNavigateGround extends PathNavigate
         }
     }
 
-    /**
-     * Returns true if an entity does not collide with any solid blocks at the position.
-     */
     private boolean isPositionClear(int p_179692_1_, int p_179692_2_, int p_179692_3_, int p_179692_4_, int p_179692_5_, int p_179692_6_, Vec3 p_179692_7_, double p_179692_8_, double p_179692_10_)
     {
         for (BlockPos blockpos : BlockPos.getAllInBox(new BlockPos(p_179692_1_, p_179692_2_, p_179692_3_), new BlockPos(p_179692_1_ + p_179692_4_ - 1, p_179692_2_ + p_179692_5_ - 1, p_179692_3_ + p_179692_6_ - 1)))

@@ -23,18 +23,10 @@ public abstract class NodeProcessor
         this.entitySizeZ = MathHelper.floor_float(entityIn.width + 1.0F);
     }
 
-    /**
-     * This method is called when all nodes have been processed and PathEntity is created.
-     *  {@link net.minecraft.world.pathfinder.WalkNodeProcessor WalkNodeProcessor} uses this to change its field {@link
-     * net.minecraft.world.pathfinder.WalkNodeProcessor#avoidsWater avoidsWater}
-     */
     public void postProcess()
     {
     }
 
-    /**
-     * Returns a mapped point or creates and adds one
-     */
     protected PathPoint openPoint(int x, int y, int z)
     {
         int i = PathPoint.makeHash(x, y, z);
@@ -49,14 +41,8 @@ public abstract class NodeProcessor
         return pathpoint;
     }
 
-    /**
-     * Returns given entity's position as PathPoint
-     */
     public abstract PathPoint getPathPointTo(Entity entityIn);
 
-    /**
-     * Returns PathPoint for given coordinates
-     */
     public abstract PathPoint getPathPointToCoords(Entity entityIn, double x, double y, double target);
 
     public abstract int findPathOptions(PathPoint[] pathOptions, Entity entityIn, PathPoint currentPoint, PathPoint targetPoint, float maxDistance);

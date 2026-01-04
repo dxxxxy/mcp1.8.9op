@@ -6,10 +6,6 @@ import java.util.List;
 public class SoundList
 {
     private final List<SoundList.SoundEntry> soundList = Lists.<SoundList.SoundEntry>newArrayList();
-
-    /**
-     * if true it will override all the sounds from the resourcepacks loaded before
-     */
     private boolean replaceExisting;
     private SoundCategory category;
 

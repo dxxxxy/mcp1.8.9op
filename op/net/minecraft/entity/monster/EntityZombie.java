@@ -45,24 +45,13 @@ import net.minecraft.world.World;
 
 public class EntityZombie extends EntityMob
 {
-    /**
-     * The attribute which determines the chance that this mob will spawn reinforcements
-     */
     protected static final IAttribute reinforcementChance = (new RangedAttribute((IAttribute)null, "zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)).setDescription("Spawn Reinforcements Chance");
     private static final UUID babySpeedBoostUUID = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
     private static final AttributeModifier babySpeedBoostModifier = new AttributeModifier(babySpeedBoostUUID, "Baby speed boost", 0.5D, 1);
     private final EntityAIBreakDoor breakDoor = new EntityAIBreakDoor(this);
-
-    /**
-     * Ticker used to determine the time remaining for this zombie to convert into a villager when cured.
-     */
     private int conversionTime;
     private boolean isBreakDoorsTaskSet = false;
-
-    /** The width of the entity */
     private float zombieWidth = -1.0F;
-
-    /** The height of the the entity. */
     private float zombieHeight;
 
     public EntityZombie(World worldIn)
@@ -107,9 +96,6 @@ public class EntityZombie extends EntityMob
         this.getDataWatcher().addObject(14, Byte.valueOf((byte)0));
     }
 
-    /**
-     * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-     */
     public int getTotalArmorValue()
     {
         int i = super.getTotalArmorValue() + 2;
@@ -127,9 +113,6 @@ public class EntityZombie extends EntityMob
         return this.isBreakDoorsTaskSet;
     }
 
-    /**
-     * Sets or removes EntityAIBreakDoor task
-     */
     public void setBreakDoorsAItask(boolean par1)
     {
         if (this.isBreakDoorsTaskSet != par1)
@@ -147,17 +130,11 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * If Animal, checks if the age timer is negative
-     */
     public boolean isChild()
     {
         return this.getDataWatcher().getWatchableObjectByte(12) == 1;
     }
 
-    /**
-     * Get the experience points the entity currently has.
-     */
     protected int getExperiencePoints(EntityPlayer player)
     {
         if (this.isChild())
@@ -168,9 +145,6 @@ public class EntityZombie extends EntityMob
         return super.getExperiencePoints(player);
     }
 
-    /**
-     * Set whether this zombie is a child.
-     */
     public void setChild(boolean childZombie)
     {
         this.getDataWatcher().updateObject(12, Byte.valueOf((byte)(childZombie ? 1 : 0)));
@@ -189,26 +163,16 @@ public class EntityZombie extends EntityMob
         this.setChildSize(childZombie);
     }
 
-    /**
-     * Return whether this zombie is a villager.
-     */
     public boolean isVillager()
     {
         return this.getDataWatcher().getWatchableObjectByte(13) == 1;
     }
 
-    /**
-     * Set whether this zombie is a villager.
-     */
     public void setVillager(boolean villager)
     {
         this.getDataWatcher().updateObject(13, Byte.valueOf((byte)(villager ? 1 : 0)));
     }
 
-    /**
-     * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
-     * use this to react to sunlight and start to burn.
-     */
     public void onLivingUpdate()
     {
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote && !this.isChild())
@@ -252,9 +216,6 @@ public class EntityZombie extends EntityMob
         super.onLivingUpdate();
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         if (super.attackEntityFrom(source, amount))
@@ -304,9 +265,6 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         if (!this.worldObj.isRemote && this.isConverting())
@@ -340,25 +298,16 @@ public class EntityZombie extends EntityMob
         return flag;
     }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
     protected String getLivingSound()
     {
         return "mob.zombie.say";
     }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
     protected String getHurtSound()
     {
         return "mob.zombie.hurt";
     }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
     protected String getDeathSound()
     {
         return "mob.zombie.death";
@@ -374,17 +323,11 @@ public class EntityZombie extends EntityMob
         return Items.rotten_flesh;
     }
 
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
     public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    /**
-     * Causes this Entity to drop a random item.
-     */
     protected void addRandomDrop()
     {
         switch (this.rand.nextInt(3))
@@ -402,9 +345,6 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * Gives armor or weapon for entity based on given DifficultyInstance
-     */
     protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
     {
         super.setEquipmentBasedOnDifficulty(difficulty);
@@ -424,9 +364,6 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         super.writeEntityToNBT(tagCompound);
@@ -445,9 +382,6 @@ public class EntityZombie extends EntityMob
         tagCompound.setBoolean("CanBreakDoors", this.isBreakDoorsTaskSet());
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         super.readEntityFromNBT(tagCompund);
@@ -470,9 +404,6 @@ public class EntityZombie extends EntityMob
         this.setBreakDoorsAItask(tagCompund.getBoolean("CanBreakDoors"));
     }
 
-    /**
-     * This method gets called when the entity kills another one.
-     */
     public void onKillEntity(EntityLivingBase entityLivingIn)
     {
         super.onKillEntity(entityLivingIn);
@@ -526,10 +457,6 @@ public class EntityZombie extends EntityMob
         return stack.getItem() == Items.egg && this.isChild() && this.isRiding() ? false : super.func_175448_a(stack);
     }
 
-    /**
-     * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
-     * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
-     */
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata)
     {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
@@ -610,9 +537,6 @@ public class EntityZombie extends EntityMob
         return livingdata;
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
     public boolean interact(EntityPlayer player)
     {
         ItemStack itemstack = player.getCurrentEquippedItem();
@@ -642,10 +566,6 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * Starts converting this zombie into a villager. The zombie converts into a villager after the specified time in
-     * ticks.
-     */
     protected void startConversion(int ticks)
     {
         this.conversionTime = ticks;
@@ -670,25 +590,16 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
     protected boolean canDespawn()
     {
         return !this.isConverting();
     }
 
-    /**
-     * Returns whether this zombie is in the process of converting to a villager
-     */
     public boolean isConverting()
     {
         return this.getDataWatcher().getWatchableObjectByte(14) == 1;
     }
 
-    /**
-     * Convert this zombie into a villager.
-     */
     protected void convertToVillager()
     {
         EntityVillager entityvillager = new EntityVillager(this.worldObj);
@@ -715,9 +626,6 @@ public class EntityZombie extends EntityMob
         this.worldObj.playAuxSFXAtEntity((EntityPlayer)null, 1017, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
     }
 
-    /**
-     * Return the amount of time decremented from conversionTime every tick.
-     */
     protected int getConversionTimeBoost()
     {
         int i = 1;
@@ -752,17 +660,11 @@ public class EntityZombie extends EntityMob
         return i;
     }
 
-    /**
-     * sets the size of the entity to be half of its current size if true.
-     */
     public void setChildSize(boolean isChild)
     {
         this.multiplySize(isChild ? 0.5F : 1.0F);
     }
 
-    /**
-     * Sets the width and height of the entity. Args: width, height
-     */
     protected final void setSize(float width, float height)
     {
         boolean flag = this.zombieWidth > 0.0F && this.zombieHeight > 0.0F;
@@ -775,25 +677,16 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * Multiplies the height and width by the provided float.
-     */
     protected final void multiplySize(float size)
     {
         super.setSize(this.zombieWidth * size, this.zombieHeight * size);
     }
 
-    /**
-     * Returns the Y Offset of this entity.
-     */
     public double getYOffset()
     {
         return this.isChild() ? 0.0D : -0.35D;
     }
 
-    /**
-     * Called when the mob's health reaches 0.
-     */
     public void onDeath(DamageSource cause)
     {
         super.onDeath(cause);

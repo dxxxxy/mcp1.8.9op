@@ -18,17 +18,11 @@ public class ItemEnchantedBook extends Item
         return true;
     }
 
-    /**
-     * Checks isDamagable and if it cannot be stacked
-     */
     public boolean isItemTool(ItemStack stack)
     {
         return false;
     }
 
-    /**
-     * Return an item rarity from EnumRarity
-     */
     public EnumRarity getRarity(ItemStack stack)
     {
         return this.getEnchantments(stack).tagCount() > 0 ? EnumRarity.UNCOMMON : super.getRarity(stack);
@@ -40,9 +34,6 @@ public class ItemEnchantedBook extends Item
         return nbttagcompound != null && nbttagcompound.hasKey("StoredEnchantments", 9) ? (NBTTagList)nbttagcompound.getTag("StoredEnchantments") : new NBTTagList();
     }
 
-    /**
-     * allows items to add custom lines of information to the mouseover description
-     */
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
     {
         super.addInformation(stack, playerIn, tooltip, advanced);
@@ -63,9 +54,6 @@ public class ItemEnchantedBook extends Item
         }
     }
 
-    /**
-     * Adds an stored enchantment to an enchanted book ItemStack
-     */
     public void addEnchantment(ItemStack stack, EnchantmentData enchantment)
     {
         NBTTagList nbttaglist = this.getEnchantments(stack);
@@ -103,9 +91,6 @@ public class ItemEnchantedBook extends Item
         stack.getTagCompound().setTag("StoredEnchantments", nbttaglist);
     }
 
-    /**
-     * Returns the ItemStack of an enchanted version of this item.
-     */
     public ItemStack getEnchantedItemStack(EnchantmentData data)
     {
         ItemStack itemstack = new ItemStack(this);

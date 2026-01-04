@@ -19,8 +19,6 @@ public class VillageSiege
     private int field_75536_c = -1;
     private int field_75533_d;
     private int field_75534_e;
-
-    /** Instance of Village. */
     private Village theVillage;
     private int field_75532_g;
     private int field_75538_h;
@@ -31,9 +29,6 @@ public class VillageSiege
         this.worldObj = worldIn;
     }
 
-    /**
-     * Runs a single tick for the village siege
-     */
     public void tick()
     {
         if (this.worldObj.isDaytime())

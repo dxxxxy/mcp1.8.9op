@@ -196,9 +196,9 @@ public class CustomGuiProperties
 
         String s5 = property + ".";
 
-        for (Object s10 : props.keySet())
+        for (Object o : props.keySet())
         {
-            String s1 = (String) s10;
+            String s1 = (String) o;
             if (s1.startsWith(s5))
             {
                 String s2 = s1.substring(s5.length());

@@ -7,10 +7,7 @@ import net.minecraft.network.play.INetHandlerPlayServer;
 
 public class C0CPacketInput implements Packet<INetHandlerPlayServer>
 {
-    /** Positive for left strafe, negative for right */
     private float strafeSpeed;
-
-    /** Positive for forward, negative for backward */
     private float forwardSpeed;
     private boolean jumping;
     private boolean sneaking;
@@ -27,9 +24,6 @@ public class C0CPacketInput implements Packet<INetHandlerPlayServer>
         this.sneaking = sneaking;
     }
 
-    /**
-     * Reads the raw packet data from the data stream.
-     */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.strafeSpeed = buf.readFloat();
@@ -39,9 +33,6 @@ public class C0CPacketInput implements Packet<INetHandlerPlayServer>
         this.sneaking = (b0 & 2) > 0;
     }
 
-    /**
-     * Writes the raw packet data to the data stream.
-     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeFloat(this.strafeSpeed);
@@ -61,9 +52,6 @@ public class C0CPacketInput implements Packet<INetHandlerPlayServer>
         buf.writeByte(b0);
     }
 
-    /**
-     * Passes this Packet on to the NetHandler for processing.
-     */
     public void processPacket(INetHandlerPlayServer handler)
     {
         handler.processInput(this);

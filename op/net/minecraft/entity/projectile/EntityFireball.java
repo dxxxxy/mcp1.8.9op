@@ -40,10 +40,6 @@ public abstract class EntityFireball extends Entity
     {
     }
 
-    /**
-     * Checks if the entity is in range to render by using the past in distance and comparing it to its average edge
-     * length * 64 * renderDistanceWeight Args: distance
-     */
     public boolean isInRangeToRenderDist(double distance)
     {
         double d0 = this.getEntityBoundingBox().getAverageEdgeLength() * 4.0D;
@@ -86,9 +82,6 @@ public abstract class EntityFireball extends Entity
         this.accelerationZ = accelZ / d0 * 0.1D;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         if (this.worldObj.isRemote || (this.shootingEntity == null || !this.shootingEntity.isDead) && this.worldObj.isBlockLoaded(new BlockPos(this)))
@@ -226,22 +219,13 @@ public abstract class EntityFireball extends Entity
         }
     }
 
-    /**
-     * Return the motion factor for this projectile. The factor is multiplied by the original motion.
-     */
     protected float getMotionFactor()
     {
         return 0.95F;
     }
 
-    /**
-     * Called when this EntityFireball hits a block or entity.
-     */
     protected abstract void onImpact(MovingObjectPosition movingObject);
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
     public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         tagCompound.setShort("xTile", (short)this.xTile);
@@ -253,9 +237,6 @@ public abstract class EntityFireball extends Entity
         tagCompound.setTag("direction", this.newDoubleNBTList(new double[] {this.motionX, this.motionY, this.motionZ}));
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         this.xTile = tagCompund.getShort("xTile");
@@ -286,9 +267,6 @@ public abstract class EntityFireball extends Entity
         }
     }
 
-    /**
-     * Returns true if other Entities should be prevented from moving through this Entity.
-     */
     public boolean canBeCollidedWith()
     {
         return true;
@@ -299,9 +277,6 @@ public abstract class EntityFireball extends Entity
         return 1.0F;
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         if (this.isEntityInvulnerable(source))
@@ -340,9 +315,6 @@ public abstract class EntityFireball extends Entity
         }
     }
 
-    /**
-     * Gets how bright this entity is.
-     */
     public float getBrightness(float partialTicks)
     {
         return 1.0F;

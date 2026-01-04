@@ -12,9 +12,6 @@ import net.minecraft.world.World;
 
 public class RecipesBanners
 {
-    /**
-     * Adds the banner recipes to the CraftingManager.
-     */
     void addRecipes(CraftingManager p_179534_1_)
     {
         for (EnumDyeColor enumdyecolor : EnumDyeColor.values())

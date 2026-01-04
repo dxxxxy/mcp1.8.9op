@@ -67,17 +67,11 @@ public class BlockPressurePlate extends BlockBasePressurePlate
         return 0;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(POWERED, Boolean.valueOf(meta == 1));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return ((Boolean)state.getValue(POWERED)).booleanValue() ? 1 : 0;

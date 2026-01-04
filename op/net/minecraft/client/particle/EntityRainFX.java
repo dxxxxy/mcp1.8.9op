@@ -25,9 +25,6 @@ public class EntityRainFX extends EntityFX
         this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     public void onUpdate()
     {
         this.prevPosX = this.posX;

@@ -15,18 +15,11 @@ public class RenderGhast extends RenderLiving<EntityGhast>
         super(renderManagerIn, new ModelGhast(), 0.5F);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(EntityGhast entity)
     {
         return entity.isAttacking() ? ghastShootingTextures : ghastTextures;
     }
 
-    /**
-     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-     * entityLiving, partialTickTime
-     */
     protected void preRenderCallback(EntityGhast entitylivingbaseIn, float partialTickTime)
     {
         float f = 1.0F;

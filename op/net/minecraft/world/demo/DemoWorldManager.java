@@ -69,9 +69,6 @@ public class DemoWorldManager extends ItemInWorldManager
         }
     }
 
-    /**
-     * Sends a message to the player reminding them that this is the demo version
-     */
     private void sendDemoReminder()
     {
         if (this.field_73104_e > 100)
@@ -81,10 +78,6 @@ public class DemoWorldManager extends ItemInWorldManager
         }
     }
 
-    /**
-     * If not creative, it calls sendBlockBreakProgress until the block is broken first. tryHarvestBlock can also be the
-     * result of this call.
-     */
     public void onBlockClicked(BlockPos pos, EnumFacing side)
     {
         if (this.demoTimeExpired)
@@ -105,17 +98,11 @@ public class DemoWorldManager extends ItemInWorldManager
         }
     }
 
-    /**
-     * Attempts to harvest a block
-     */
     public boolean tryHarvestBlock(BlockPos pos)
     {
         return this.demoTimeExpired ? false : super.tryHarvestBlock(pos);
     }
 
-    /**
-     * Attempts to right-click use an item by the given EntityPlayer in the given World
-     */
     public boolean tryUseItem(EntityPlayer player, World worldIn, ItemStack stack)
     {
         if (this.demoTimeExpired)
@@ -129,9 +116,6 @@ public class DemoWorldManager extends ItemInWorldManager
         }
     }
 
-    /**
-     * Activate the clicked on block, otherwise use the held item.
-     */
     public boolean activateBlockOrUseItem(EntityPlayer player, World worldIn, ItemStack stack, BlockPos pos, EnumFacing side, float offsetX, float offsetY, float offsetZ)
     {
         if (this.demoTimeExpired)

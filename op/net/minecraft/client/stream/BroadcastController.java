@@ -42,19 +42,13 @@ public class BroadcastController
     protected final int field_152865_a = 30;
     protected final int field_152866_b = 3;
     private static final ThreadSafeBoundList<String> field_152862_C = new ThreadSafeBoundList(String.class, 50);
-
-    /** The last error that ocurred */
     private String lastError = null;
     protected BroadcastController.BroadcastListener broadcastListener = null;
     protected String field_152868_d = "";
     protected String field_152869_e = "";
     protected String field_152870_f = "";
     protected boolean field_152871_g = true;
-
-    /** The stream's core */
     protected Core streamCore = null;
-
-    /** The Stream's instance */
     protected Stream theStream = null;
     protected List<FrameBuffer> field_152874_j = Lists.<FrameBuffer>newArrayList();
     protected List<FrameBuffer> field_152875_k = Lists.<FrameBuffer>newArrayList();
@@ -66,23 +60,15 @@ public class BroadcastController
     protected VideoParams videoParamaters = null;
     protected AudioParams audioParamaters = null;
     protected IngestList ingestList = new IngestList(new IngestServer[0]);
-
-    /** The IngestServer's instance */
     protected IngestServer ingestServ = null;
     protected AuthToken authenticationToken = new AuthToken();
     protected ChannelInfo channelInfo = new ChannelInfo();
     protected UserInfo userInfo = new UserInfo();
     protected StreamInfo streamInfo = new StreamInfo();
-
-    /** The current archiving state */
     protected ArchivingState archivingState = new ArchivingState();
     protected long field_152890_z = 0L;
-
-    /** Instance of the IngestServerTester */
     protected IngestServerTester ingestServTester = null;
     private ErrorCode errorCode;
-
-    /** The stream callback instance */
     protected IStreamCallbacks streamCallback = new IStreamCallbacks()
     {
         public void requestAuthTokenCallback(ErrorCode p_requestAuthTokenCallback_1_, AuthToken p_requestAuthTokenCallback_2_)
@@ -359,11 +345,6 @@ public class BroadcastController
         }
     };
 
-    /**
-     * Set a new BroadcastListener
-     *  
-     * @param broadcastListenerIn The BroadcastListener to set
-     */
     public void setBroadcastListener(BroadcastController.BroadcastListener broadcastListenerIn)
     {
         this.broadcastListener = broadcastListenerIn;
@@ -414,27 +395,16 @@ public class BroadcastController
         return this.field_152877_m;
     }
 
-    /**
-     * Return the IngestServer's instance
-     */
     public IngestServer getIngestServer()
     {
         return this.ingestServ;
     }
 
-    /**
-     * Set a new IngestServer
-     *  
-     * @param ingestServerSet The new IngestServer
-     */
     public void setIngestServer(IngestServer ingestServerSet)
     {
         this.ingestServ = ingestServerSet;
     }
 
-    /**
-     * Return the IngestList
-     */
     public IngestList getIngestList()
     {
         return this.ingestList;
@@ -455,9 +425,6 @@ public class BroadcastController
         return this.ingestServTester;
     }
 
-    /**
-     * Return the stream time
-     */
     public long getStreamTime()
     {
         return this.theStream.getStreamTime();
@@ -485,9 +452,6 @@ public class BroadcastController
         this.theStream = new Stream(new DesktopStreamAPI());
     }
 
-    /**
-     * Return the PixelFormat
-     */
     protected PixelFormat getPixelFormat()
     {
         return PixelFormat.TTV_PF_RGBA;
@@ -1075,9 +1039,6 @@ public class BroadcastController
         }
     }
 
-    /**
-     * caputres the current framebuffer
-     */
     public void captureFramebuffer(FrameBuffer p_152846_1_)
     {
         try
@@ -1096,11 +1057,6 @@ public class BroadcastController
         }
     }
 
-    /**
-     * passes the framebuffer on to the video stream
-     *  
-     * @param frame The FrameBuffer tu submit
-     */
     public ErrorCode submitStreamFrame(FrameBuffer frame)
     {
         if (this.isBroadcastPaused())
@@ -1150,11 +1106,6 @@ public class BroadcastController
         }
     }
 
-    /**
-     * Log an error
-     *  
-     * @param error The error to log
-     */
     protected void logError(String error)
     {
         this.lastError = error;
@@ -1162,11 +1113,6 @@ public class BroadcastController
         logger.error(TwitchStream.STREAM_MARKER, "[Broadcast controller] {}", new Object[] {error});
     }
 
-    /**
-     * Log an warning
-     *  
-     * @param warning The warning to log
-     */
     protected void logWarning(String warning)
     {
         field_152862_C.func_152757_a("<Warning> " + warning);

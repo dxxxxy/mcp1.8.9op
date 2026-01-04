@@ -121,7 +121,7 @@ import org.lwjgl.util.vector.Vector4f;
 
 public class Shaders
 {
-    static Minecraft mc;
+    static Minecraft mc = Minecraft.getMinecraft();
     static EntityRenderer entityRenderer;
     public static boolean isInitializedOnce = false;
     public static boolean isShaderPackInitialized = false;
@@ -1072,9 +1072,9 @@ public class Shaders
         Set set = props.keySet();
         List<ICustomTexture> list = new ArrayList();
 
-        for (Object e: set)
+        for (Object o : set)
         {
-            String s1 = (String) e;
+            String s1 = (String) o;
             if (s1.startsWith(s))
             {
                 String s2 = StrUtils.removePrefix(s1, s);
@@ -2020,10 +2020,10 @@ public class Shaders
         SMCLog.info(stringbuilder.toString());
     }
 
-    public static void startup(Minecraft mcIn)
+    public static void startup(Minecraft mc)
     {
         checkShadersModInstalled();
-        mc = mcIn;
+        mc = mc;
         mc = Minecraft.getMinecraft();
         capabilities = GLContext.getCapabilities();
         glVersionString = GL11.glGetString(GL11.GL_VERSION);
@@ -3478,8 +3478,8 @@ public class Shaders
                 setProgramUniform1i(uniform_isEyeInWater, isEyeInWater);
                 setProgramUniform1f(uniform_nightVision, nightVision);
                 setProgramUniform1f(uniform_blindness, blindness);
-                setProgramUniform1f(uniform_screenBrightness, mc.gameSettings.saturation);
-                setProgramUniform1i(uniform_hideGUI, mc.gameSettings.thirdPersonView ? 1 : 0);
+                setProgramUniform1f(uniform_screenBrightness, mc.gameSettings.gammaSetting);
+                setProgramUniform1i(uniform_hideGUI, mc.gameSettings.hideGUI ? 1 : 0);
                 setProgramUniform1f(uniform_centerDepthSmooth, centerDepthSmooth);
                 setProgramUniform2i(uniform_atlasSize, atlasSizeX, atlasSizeY);
 
@@ -4509,7 +4509,7 @@ public class Shaders
         setProgramUniformMatrix4ARB(uniform_shadowProjectionInverse, false, shadowProjectionInverse);
         setProgramUniformMatrix4ARB(uniform_shadowModelView, false, shadowModelView);
         setProgramUniformMatrix4ARB(uniform_shadowModelViewInverse, false, shadowModelViewInverse);
-        mc.gameSettings.showDebugInfo = 1;
+        mc.gameSettings.thirdPersonView = 1;
         checkGLError("setCamera");
     }
 
@@ -5652,9 +5652,9 @@ public class Shaders
             String s2 = ".lang";
             list.add(s + s1 + s2);
 
-            if (!Config.getGameSettings().forceUnicodeFont.equals(s1))
+            if (!Config.getGameSettings().language.equals(s1))
             {
-                list.add(s + Config.getGameSettings().forceUnicodeFont + s2);
+                list.add(s + Config.getGameSettings().language + s2);
             }
 
             try
@@ -5669,9 +5669,9 @@ public class Shaders
                         Lang.loadLocaleData(inputstream, properties);
                         inputstream.close();
 
-                        for (Object o  : properties.keySet())
+                        for (Object o: properties.keySet())
                         {
-                        	String s4 = (String)o;
+                            String s4 = (String) o;
                             String s5 = properties.getProperty(s4);
                             shaderPackResources.put(s4, s5);
                         }

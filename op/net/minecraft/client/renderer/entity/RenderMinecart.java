@@ -14,8 +14,6 @@ import net.minecraft.util.Vec3;
 public class RenderMinecart<T extends EntityMinecart> extends Render<T>
 {
     private static final ResourceLocation minecartTextures = new ResourceLocation("textures/entity/minecart.png");
-
-    /** instance of ModelMinecart for rendering */
     protected ModelBase modelMinecart = new ModelMinecart();
 
     public RenderMinecart(RenderManager renderManagerIn)
@@ -24,9 +22,6 @@ public class RenderMinecart<T extends EntityMinecart> extends Render<T>
         this.shadowSize = 0.5F;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -110,9 +105,6 @@ public class RenderMinecart<T extends EntityMinecart> extends Render<T>
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(T entity)
     {
         return minecartTextures;

@@ -23,9 +23,6 @@ public class BlockSoulSand extends Block
         return new AxisAlignedBB((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), (double)(pos.getX() + 1), (double)((float)(pos.getY() + 1) - f), (double)(pos.getZ() + 1));
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         entityIn.motionX *= 0.4D;
